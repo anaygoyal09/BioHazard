@@ -389,7 +389,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        // Scale start.jpg image
 	        ImageIcon originalIcon = new ImageIcon("start.jpg");
 	        Image startOriginalImage = originalIcon.getImage();
-	        Image startScaledImage = startOriginalImage.getScaledInstance(120, 50, Image.SCALE_SMOOTH);
+	        Image startScaledImage = startOriginalImage.getScaledInstance(150, 50, Image.SCALE_SMOOTH);
 	        ImageIcon startScaledIcon = new ImageIcon(startScaledImage);
 
 	        // Start button
