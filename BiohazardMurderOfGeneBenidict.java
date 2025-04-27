@@ -371,7 +371,7 @@ public class secondCard extends JPanel {
 
         // Main panel with overlay layout
         JPanel contentPanel = new JPanel() {
-            @Override
+            
             public Dimension getPreferredSize() {
                 return new Dimension(800, 1000);
             }
@@ -420,7 +420,7 @@ public class secondCard extends JPanel {
 
         // Add scrolling
         JScrollPane scrollPane = new JScrollPane(contentPanel);
-        scrollPane.setPreferredSize(new Dimension(800, 600));
+        scrollPane.setPreferredSize(new Dimension(1000, 600));
 
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
