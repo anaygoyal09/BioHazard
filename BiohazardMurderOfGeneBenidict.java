@@ -1,4 +1,4 @@
-//Code link: https://github.com/anaygoyal09/BioHazardProject
+//Code link: https://github.com/anaygoyal09/BioHazard
 //Arsh Abhinkar, Anay Goyal
 //BiohazardMurderOfGeneBenidict.java
 //4/12/25
