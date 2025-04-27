@@ -28,6 +28,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.OverlayLayout;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
@@ -359,65 +360,73 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		public void mouseDragged(MouseEvent e) {}
 	}
 
-	public class secondCard extends JPanel {
-	    BiohazardMurderOfGeneBenidictHolder panelCards;
-	    CardLayout cards;
-	    private JButton startButton;
+public class secondCard extends JPanel {
+    BiohazardMurderOfGeneBenidictHolder panelCards;
+    CardLayout cards;
+    private JButton startButton;
 
-	    public secondCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn) {
-	        panelCards = panelCardsIn;
-	        cards = cardsIn;
+    public secondCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn) {
+        panelCards = panelCardsIn;
+        cards = cardsIn;
 
-	        // Main vertical panel for image and button
-	        JPanel contentPanel = new JPanel();
-	        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-	        contentPanel.setBackground(Color.WHITE);
+        // Main panel with overlay layout
+        JPanel contentPanel = new JPanel() {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(800, 1000);
+            }
+        };
+        contentPanel.setLayout(new OverlayLayout(contentPanel));
+        contentPanel.setBackground(Color.WHITE);
 
-	        // Load and scale the long image
-	        ImageIcon imageIcon = new ImageIcon("longImage.jpg");
-	        Image originalImage = imageIcon.getImage();
-	        Image scaledImage = originalImage.getScaledInstance(800, 1000, Image.SCALE_SMOOTH); // <-- Adjust size here
-	        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        // Load and scale the long image
+        ImageIcon imageIcon = new ImageIcon("longImage.jpg");
+        Image originalImage = imageIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(800, 1000, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel imageLabel = new JLabel(scaledIcon);
 
-	        JLabel imageLabel = new JLabel(scaledIcon);
+        // Button panel (transparent)
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        buttonPanel.setOpaque(false);
 
-	        // Wrapper to center image
-	        JPanel imageWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
-	        imageWrapper.setBackground(Color.WHITE);
-	        imageWrapper.add(imageLabel);
+        // Scale start.jpg image
+        ImageIcon originalIcon = new ImageIcon("start.jpg");
+        Image startOriginalImage = originalIcon.getImage();
+        Image startScaledImage = startOriginalImage.getScaledInstance(150, 50, Image.SCALE_SMOOTH);
+        ImageIcon startScaledIcon = new ImageIcon(startScaledImage);
 
-	        contentPanel.add(imageWrapper);
+        // Start button
+        startButton = new JButton(startScaledIcon);
+        startButton.setBorderPainted(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setFocusPainted(false);
 
-	        // Scale start.jpg image
-	        ImageIcon originalIcon = new ImageIcon("start.jpg");
-	        Image startOriginalImage = originalIcon.getImage();
-	        Image startScaledImage = startOriginalImage.getScaledInstance(150, 50, Image.SCALE_SMOOTH);
-	        ImageIcon startScaledIcon = new ImageIcon(startScaledImage);
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cards.show(panelCards, "third");
+            }
+        });
 
-	        // Start button
-	        startButton = new JButton(startScaledIcon);
-	        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-	        startButton.setBorderPainted(false);
-	        startButton.setContentAreaFilled(false);
-	        startButton.setFocusPainted(false);
+        // Add button to the bottom of button panel
+        JPanel buttonWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonWrapper.setOpaque(false);
+        buttonWrapper.add(startButton);
+        buttonPanel.add(buttonWrapper, BorderLayout.SOUTH);
 
-	        startButton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                cards.show(panelCards, "third"); // Replace with your actual next card name
-	            }
-	        });
+        // Layer the components
+        contentPanel.add(buttonPanel);
+        contentPanel.add(imageLabel);
 
-	        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-	        contentPanel.add(startButton);
-	        contentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // Add scrolling
+        JScrollPane scrollPane = new JScrollPane(contentPanel);
+        scrollPane.setPreferredSize(new Dimension(800, 600));
 
-	        JScrollPane scrollPane = new JScrollPane(contentPanel);
-	        scrollPane.setPreferredSize(new Dimension(800, 600));
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
+    }
+}
 
-	        setLayout(new BorderLayout());
-	        add(scrollPane, BorderLayout.CENTER);
-	    }
-	}
 	class instructionsCard extends JPanel
 	{
 		public instructionsCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
