@@ -78,9 +78,11 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		firstCard title = new firstCard(this, cards);
 		secondCard report = new secondCard(this, cards);
+		instructionsCard IC = new instructionsCard(this, cards);
 
 		add(title, "title");
 		add(report, "report");
+		add(IC, "third");
 	}
 
 	class firstCard extends JPanel implements MouseListener, MouseMotionListener
@@ -415,6 +417,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        setLayout(new BorderLayout());
 	        add(scrollPane, BorderLayout.CENTER);
 	    }
+	}
+	class instructionsCard extends JPanel
+	{
+		public instructionsCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			
+		}
 	}
 }
 
