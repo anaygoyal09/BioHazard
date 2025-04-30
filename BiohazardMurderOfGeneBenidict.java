@@ -716,7 +716,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        blackScreenTimerHandler bsth = new blackScreenTimerHandler();
 	        blackScreenTimer = new Timer(8300, bsth); //when the black screen shows
 
-	        ImageIcon storeGif = new ImageIcon("startMurderClip.gif");        
+	        ImageIcon storeGif = new ImageIcon("startMurderIntroClip.gif");        
 	        startGameClip = storeGif.getImage();
 
 	        retrieveImage();
@@ -799,7 +799,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	            g.fillRect(0, 0, 1300, 800);
 	        }
 	        
-       //     g.drawImage(murderBoard, 0, -40, 1300, 820, this);
+    //        g.drawImage(murderBoard, 0, -40, 1300, 820, this);
 
 	        if(blackScreen || boardTransparency > 0f) //fade-in murder board
 	        {
@@ -828,8 +828,11 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        else if(clueClicks[4])
 	        	g2d.fillPolygon(xPoly, yPoly, 9);
 	        
-	   /*     g.setColor(new Color(255, 0, 0, 80)); // red with some transparency
-	        int gridSpacing = 50; // change if you want finer/larger grid
+	        else if(clueClicks[5])
+	        	g2d.fillRect(513, 369, 100, 131);
+	        
+	        g.setColor(new Color(255, 0, 0, 80)); // red with some transparency
+	    /*    int gridSpacing = 50; // change if you want finer/larger grid
 
 	        for (int x = 0; x < getWidth(); x += gridSpacing)
 	        {
@@ -853,10 +856,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	            g.drawString(String.valueOf(y), 2, y - 2);
 	        }
 	        
-	        g.setColor(Color.RED);*/
-	     /*   g.drawRect(158, 355, 158, 170);
+	        g.setColor(Color.RED);
+	        g.drawRect(513, 369, 100, 131);*/
 	        
-	        g.fillOval(158, 367, 3, 3);
+	    /*    g.fillOval(158, 367, 3, 3);
 	        g.fillOval(158, 410, 3, 3);
 	        g.fillOval(173, 518, 3, 3);
 	        g.fillOval(215, 518, 3, 3);
@@ -915,6 +918,9 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		    
 		    else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
 		    	clueClicks[4] = true;
+		    
+		    else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
+		    	clueClicks[5] = true;
 		    
 		    else
 		    {
