@@ -1,4 +1,3 @@
-//Github link: https://github.com/anaygoyal09/BioHazard
 //Arsh Abhinkar, Anay Goyal
 //BiohazardMurderOfGeneBenidict.java
 //4/12/25
@@ -695,7 +694,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	    Image startGameClip, murderBoard;
 	    Timer blackScreenTimer, fadeTimer;
 	    boolean blackScreen, startClip;
-	    boolean[] clueClicks;
+	    boolean[] clueClicks, cluePressed;
 	    float boardTransparency;
 
 	    public thirdCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
@@ -709,6 +708,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        startClip = true; //start with the clip
 	        boardTransparency = 0.0f;
 	        clueClicks = new boolean[12];
+	        cluePressed = new boolean[12];
 	        
 	        for(int i = 0; i < clueClicks.length; i++)
 	        	clueClicks[i] = false;
@@ -799,7 +799,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	            g.fillRect(0, 0, 1300, 800);
 	        }
 	        
-    //        g.drawImage(murderBoard, 0, -40, 1300, 820, this);
+    //      g.drawImage(murderBoard, 0, -40, 1300, 820, this);
 
 	        if(blackScreen || boardTransparency > 0f) //fade-in murder board
 	        {
@@ -810,7 +810,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			g2d.setColor(new Color(0, 0, 0, 80));
 	        
 	        if(clueClicks[0]) //ADD && BLACKSCREEN LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FOR MAKING IT BETTER
-				g2d.fillRect(108, 189, 116, 147);
+				g2d.fillRect(108, 189, 117, 147);
 	        
 	        else if(clueClicks[1])
 				g2d.fillRect(410, 201, 117, 62);
@@ -829,7 +829,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        	g2d.fillPolygon(xPoly, yPoly, 9);
 	        
 	        else if(clueClicks[5])
-	        	g2d.fillRect(513, 369, 100, 131);
+	        	g2d.fillRect(512, 369, 101, 131);
 	        
 	        g.setColor(new Color(255, 0, 0, 80)); // red with some transparency
 	    /*    int gridSpacing = 50; // change if you want finer/larger grid
@@ -932,3 +932,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		}
 	}
 }
+
+
+
