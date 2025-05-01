@@ -80,7 +80,7 @@ public class BiohazardMurderOfGeneBenidict
 class BiohazardMurderOfGeneBenidictHolder extends JPanel
 {
 	boolean startClip;
-	
+
 	public BiohazardMurderOfGeneBenidictHolder()
 	{
 		setBackground(Color.BLACK);
@@ -94,7 +94,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		add(title, "title");
 		add(report, "report");
 		add(question1, "clueBoard");
-		
+
 		startClip = false;
 	}
 
@@ -408,431 +408,462 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseDragged(MouseEvent e) {}
 	}
-	
+
 	class secondCard extends JPanel
 	{
-	    BiohazardMurderOfGeneBenidictHolder panelCards;
-	    CardLayout cards;
-	    thirdCard clip;
-        BufferedImage fullImage = null;
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+		thirdCard clip;
+		BufferedImage fullImage = null;
 
-	    public secondCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
-	    {
-	        setLayout(new BorderLayout());
+		public secondCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			setLayout(new BorderLayout());
 
-	        panelCards = panelCardsIn;
-	        cards = cardsIn;
-	        clip = new thirdCard(panelCards, cards);
-	        
-	        // Load the original image for the forensics image
-	        ImageIcon originalIcon = new ImageIcon("coronersReport.png");
-	        int scrollPaneWidth = 1300;
-	        int scaledHeight = (originalIcon.getIconHeight() * scrollPaneWidth) / originalIcon.getIconWidth();
-	        Image scaledImage = originalIcon.getImage().getScaledInstance(scrollPaneWidth, scaledHeight, Image.SCALE_SMOOTH);
-	        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-	        JLabel forensicsLabel = new JLabel(scaledIcon);
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			clip = new thirdCard(panelCards, cards);
 
-	        // Load the full image for the button
-	        try
-	        {
-	            fullImage = ImageIO.read(new File("beginMurderButtons.png"));
-	        }
-	        
-	        catch (IOException e)
-	        {
-	            System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
-	            e.printStackTrace();
-	        }
+			// Load the original image for the forensics image
+			ImageIcon originalIcon = new ImageIcon("coronersReport.png");
+			int scrollPaneWidth = 1300;
+			int scaledHeight = (originalIcon.getIconHeight() * scrollPaneWidth) / originalIcon.getIconWidth();
+			Image scaledImage = originalIcon.getImage().getScaledInstance(scrollPaneWidth, scaledHeight, Image.SCALE_SMOOTH);
+			ImageIcon scaledIcon = new ImageIcon(scaledImage);
+			JLabel forensicsLabel = new JLabel(scaledIcon);
 
-	        JLayeredPane layeredPane = new JLayeredPane();
-	        layeredPane.setPreferredSize(new Dimension(scrollPaneWidth, scaledHeight));
+			// Load the full image for the button
+			try
+			{
+				fullImage = ImageIO.read(new File("beginMurderButtons.png"));
+			}
 
-	        // Add the forensics image to the layered pane
-	        forensicsLabel.setBounds(0, 0, scrollPaneWidth, scaledHeight);
-	        layeredPane.add(forensicsLabel, Integer.valueOf(0));
+			catch (IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
 
-	        int width = fullImage.getWidth();  //crop the top half of the button image
-	        int height = fullImage.getHeight() / 2;
-	        BufferedImage croppedImage = fullImage.getSubimage(0, 0, width, height);
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(scrollPaneWidth, scaledHeight));
 
-	        Image scaleImage = croppedImage.getScaledInstance(400, 65, Image.SCALE_SMOOTH);
-	        ImageIcon scaledReturnIcon = new ImageIcon(scaleImage);
+			// Add the forensics image to the layered pane
+			forensicsLabel.setBounds(0, 0, scrollPaneWidth, scaledHeight);
+			layeredPane.add(forensicsLabel, Integer.valueOf(0));
 
-	        // Create the button with the cropped image
-	        JButton startGameButton = new JButton(scaledReturnIcon);
-	        int originalWidth = 400;
-	        int originalHeight = 65;
-	        int hoverWidth = 430;
-	        int hoverHeight = 75;
-	        
-	        class startGameButtonHandler implements ActionListener
-	        {
-	        	public void actionPerformed(ActionEvent e)
-	        	{
-	        		cards.show(panelCards, "clueBoard");
-	        		startClip = true;
-	        		clip.repaint();
-	        	}
-	        }
+			int width = fullImage.getWidth();  //crop the top half of the button image
+			int height = fullImage.getHeight() / 2;
+			BufferedImage croppedImage = fullImage.getSubimage(0, 0, width, height);
 
-	        int buttonX = (scrollPaneWidth / 2) - (originalWidth / 2);
-	        int buttonY = scaledHeight - 125;
-	        startGameButton.setBounds(buttonX, buttonY, originalWidth, originalHeight);
-	        startGameButton.setBorderPainted(false);
-	        startGameButton.setContentAreaFilled(false);
-	        startGameButton.setFocusPainted(false);
-	        layeredPane.add(startGameButton, Integer.valueOf(1));
-	        startGameButtonHandler sgbh = new startGameButtonHandler();
-	        startGameButton.addActionListener(sgbh); //button Action to switch the card
+			Image scaleImage = croppedImage.getScaledInstance(400, 65, Image.SCALE_SMOOTH);
+			ImageIcon scaledReturnIcon = new ImageIcon(scaleImage);
 
-	        Timer pulseTimer = new Timer(100, null);
-	        int[] pulseDirection = {1}; //1 = grow, -1 = shrink
-	        int[] pulseSize = {0};
-	        
-	        class pulseTimerHandler implements ActionListener
-	        {
-	        	public void actionPerformed(ActionEvent evt)
-	        	{
-	        		pulseSize[0] += pulseDirection[0];
+			// Create the button with the cropped image
+			JButton startGameButton = new JButton(scaledReturnIcon);
+			int originalWidth = 400;
+			int originalHeight = 65;
+			int hoverWidth = 430;
+			int hoverHeight = 75;
 
-		            if(pulseSize[0] >= 10 || pulseSize[0] <= 0)
-		                pulseDirection[0] *= -1;
+			class startGameButtonHandler implements ActionListener
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					cards.show(panelCards, "clueBoard");
+					startClip = true;
+					clip.repaint();
+				}
+			}
 
-		            int newW = originalWidth + pulseSize[0];
-		            int newH = originalHeight + pulseSize[0] / 2;
+			int buttonX = (scrollPaneWidth / 2) - (originalWidth / 2);
+			int buttonY = scaledHeight - 125;
+			startGameButton.setBounds(buttonX, buttonY, originalWidth, originalHeight);
+			startGameButton.setBorderPainted(false);
+			startGameButton.setContentAreaFilled(false);
+			startGameButton.setFocusPainted(false);
+			layeredPane.add(startGameButton, Integer.valueOf(1));
+			startGameButtonHandler sgbh = new startGameButtonHandler();
+			startGameButton.addActionListener(sgbh); //button Action to switch the card
 
-		            Image scaledImg = croppedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-		            startGameButton.setIcon(new ImageIcon(scaledImg));
-		            int newX = buttonX - (newW - originalWidth) / 2;
-		            int newY = buttonY - (newH - originalHeight) / 2;
-		            startGameButton.setBounds(newX, newY, newW, newH);
-	        	}
-	        }
-	        
-	        pulseTimerHandler pth = new pulseTimerHandler();
-	        pulseTimer.addActionListener(pth);
-	        pulseTimer.start();
-	        
-	        class buttonHandler implements MouseListener
-	        {
-	        	Timer expandTimer, shrinkTimer;
-	            ImageIcon currentIcon = scaledReturnIcon;
-	            
-	            class hoverTimerHandler implements ActionListener
-	            {
-	            	int currentWidth = startGameButton.getWidth();
-                    int currentHeight = startGameButton.getHeight();
+			Timer pulseTimer = new Timer(100, null);
+			int[] pulseDirection = {1}; //1 = grow, -1 = shrink
+			int[] pulseSize = {0};
 
-                    public void actionPerformed(ActionEvent evt) {
-                        if(currentWidth >= hoverWidth && currentHeight >= hoverHeight)
-                            expandTimer.stop();
+			class pulseTimerHandler implements ActionListener
+			{
+				public void actionPerformed(ActionEvent evt)
+				{
+					pulseSize[0] += pulseDirection[0];
 
-                        else
-                        {
-                            currentWidth += 3;
-                            currentHeight += 1;
+					if(pulseSize[0] >= 10 || pulseSize[0] <= 0)
+						pulseDirection[0] *= -1;
 
-                            Image scaledImg = croppedImage.getScaledInstance(currentWidth, currentHeight, Image.SCALE_SMOOTH);
-                            currentIcon = new ImageIcon(scaledImg);
-                            startGameButton.setIcon(currentIcon);
+					int newW = originalWidth + pulseSize[0];
+					int newH = originalHeight + pulseSize[0] / 2;
 
-                            int newX = buttonX - ((currentWidth - originalWidth) / 2);
-                            int newY = buttonY - ((currentHeight - originalHeight) / 2);
-                            startGameButton.setBounds(newX, newY, currentWidth, currentHeight);
-                        }
-                    }
-	            }
-	            
-	            hoverTimerHandler hth = new hoverTimerHandler();
+					Image scaledImg = croppedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+					startGameButton.setIcon(new ImageIcon(scaledImg));
+					int newX = buttonX - (newW - originalWidth) / 2;
+					int newY = buttonY - (newH - originalHeight) / 2;
+					startGameButton.setBounds(newX, newY, newW, newH);
+				}
+			}
 
-	            public void mouseEntered(MouseEvent e)
-	            {
-	                pulseTimer.stop(); // stop pulsing when hovered
+			pulseTimerHandler pth = new pulseTimerHandler();
+			pulseTimer.addActionListener(pth);
+			pulseTimer.start();
 
-	                if(shrinkTimer != null && shrinkTimer.isRunning())
-	                	shrinkTimer.stop();
+			class buttonHandler implements MouseListener
+			{
+				Timer expandTimer, shrinkTimer;
+				ImageIcon currentIcon = scaledReturnIcon;
 
-	                expandTimer = new Timer(10, hth);
-	                expandTimer.start();
-	            }
-	            
-	            class shrinkTimerHandler implements ActionListener
-	            {
-	            	int currentWidth = startGameButton.getWidth();
-                    int currentHeight = startGameButton.getHeight();
+				class hoverTimerHandler implements ActionListener
+				{
+					int currentWidth = startGameButton.getWidth();
+					int currentHeight = startGameButton.getHeight();
 
-                    public void actionPerformed(ActionEvent evt)
-                    {
-                        if(currentWidth <= originalWidth && currentHeight <= originalHeight)
-                        {
-                            shrinkTimer.stop();
-                            currentIcon = scaledReturnIcon;
-                            startGameButton.setIcon(currentIcon);
-                            startGameButton.setBounds(buttonX, buttonY, originalWidth, originalHeight);
-                            pulseTimer.start(); //resume pulse when exited
-                        }
-                        
-                        else
-                        {
-                            currentWidth -= 3;
-                            currentHeight -= 1;
+					public void actionPerformed(ActionEvent evt) {
+						if(currentWidth >= hoverWidth && currentHeight >= hoverHeight)
+							expandTimer.stop();
 
-                            Image scaledImg = croppedImage.getScaledInstance(currentWidth, currentHeight, Image.SCALE_SMOOTH);
-                            currentIcon = new ImageIcon(scaledImg);
-                            startGameButton.setIcon(currentIcon);
+						else
+						{
+							currentWidth += 3;
+							currentHeight += 1;
 
-                            int newX = buttonX - (currentWidth - originalWidth) / 2;
-                            int newY = buttonY - (currentHeight - originalHeight) / 2;
-                            startGameButton.setBounds(newX, newY, currentWidth, currentHeight);
-                        }
-                    }
-                }
+							Image scaledImg = croppedImage.getScaledInstance(currentWidth, currentHeight, Image.SCALE_SMOOTH);
+							currentIcon = new ImageIcon(scaledImg);
+							startGameButton.setIcon(currentIcon);
 
-	            public void mouseExited(MouseEvent e)
-	            {
-	                if(expandTimer != null && expandTimer.isRunning())
-	                	expandTimer.stop();
-	                
-	                shrinkTimerHandler sth = new shrinkTimerHandler();
-	                shrinkTimer = new Timer(10, sth);
-	                shrinkTimer.start();
-	            }
+							int newX = buttonX - ((currentWidth - originalWidth) / 2);
+							int newY = buttonY - ((currentHeight - originalHeight) / 2);
+							startGameButton.setBounds(newX, newY, currentWidth, currentHeight);
+						}
+					}
+				}
 
-	            public void mousePressed(MouseEvent e)
-	            {
-	                //crop to bottom half when pressed
-	                BufferedImage croppedBottomHalf = fullImage.getSubimage(0, (fullImage.getHeight() / 2) - 10, fullImage.getWidth(), (fullImage.getHeight() / 2) - 10);
+				hoverTimerHandler hth = new hoverTimerHandler();
 
-	                //show bottom half of image when pressed
-	                Image scaledBottomImage = croppedBottomHalf.getScaledInstance(400, 65, Image.SCALE_SMOOTH);
-	                BufferedImage bufferedBottomImage = new BufferedImage(400, 65, BufferedImage.TYPE_INT_ARGB);
-	                Graphics2D g2 = bufferedBottomImage.createGraphics();
-	                g2.drawImage(scaledBottomImage, 0, 0, null);
+				public void mouseEntered(MouseEvent e)
+				{
+					pulseTimer.stop(); // stop pulsing when hovered
 
-	                RescaleOp op = new RescaleOp(0.6f, 0, null); //dark effect and add the darker image
-	                op.filter(bufferedBottomImage, bufferedBottomImage); 
+					if(shrinkTimer != null && shrinkTimer.isRunning())
+						shrinkTimer.stop();
 
-	                ImageIcon darkIcon = new ImageIcon(bufferedBottomImage);
-	                startGameButton.setIcon(darkIcon);
+					expandTimer = new Timer(10, hth);
+					expandTimer.start();
+				}
 
-	                int pressedWidth = startGameButton.getWidth(); //adjust position when pressed
-	                int pressedHeight = startGameButton.getHeight();
-	                int pressedX = startGameButton.getX() + 5;
-	                int pressedY = startGameButton.getY() + 2;
-	                startGameButton.setBounds(pressedX, pressedY, pressedWidth, pressedHeight);
-	            }
+				class shrinkTimerHandler implements ActionListener
+				{
+					int currentWidth = startGameButton.getWidth();
+					int currentHeight = startGameButton.getHeight();
 
-	            public void mouseReleased(MouseEvent e)
-	            {
-	            	startGameButton.setIcon(currentIcon); //restore image
-	                startGameButton.setBounds((startGameButton.getX() - 5), (startGameButton.getY() - 2), startGameButton.getWidth() + 10, startGameButton.getHeight() + 4);
-	            }
+					public void actionPerformed(ActionEvent evt)
+					{
+						if(currentWidth <= originalWidth && currentHeight <= originalHeight)
+						{
+							shrinkTimer.stop();
+							currentIcon = scaledReturnIcon;
+							startGameButton.setIcon(currentIcon);
+							startGameButton.setBounds(buttonX, buttonY, originalWidth, originalHeight);
+							pulseTimer.start(); //resume pulse when exited
+						}
 
-	            public void mouseClicked(MouseEvent e) {}
-	        }
-	        
-	        buttonHandler bh = new buttonHandler(); //hover and press effect
-	        startGameButton.addMouseListener(bh);
+						else
+						{
+							currentWidth -= 3;
+							currentHeight -= 1;
 
-	        JScrollPane forensicsScroll = new JScrollPane(layeredPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	        JScrollBar verticalBar = forensicsScroll.getVerticalScrollBar();
-	        forensicsScroll.setPreferredSize(new Dimension(scrollPaneWidth, 800));
-	        forensicsScroll.setBorder(null);
+							Image scaledImg = croppedImage.getScaledInstance(currentWidth, currentHeight, Image.SCALE_SMOOTH);
+							currentIcon = new ImageIcon(scaledImg);
+							startGameButton.setIcon(currentIcon);
 
-	        verticalBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
-	        {
-	            Color thumbColor = new Color(110, 0, 0);
-	            Color trackColor = new Color(169, 169, 169);
+							int newX = buttonX - (currentWidth - originalWidth) / 2;
+							int newY = buttonY - (currentHeight - originalHeight) / 2;
+							startGameButton.setBounds(newX, newY, currentWidth, currentHeight);
+						}
+					}
+				}
 
-	            public void paintThumb(Graphics g, JComponent c, Rectangle r)
-	            {
-	                Graphics2D g2 = (Graphics2D) g.create();
-	                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-	                g2.setColor(thumbColor);
-	                g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
-	                g2.dispose();
-	            }
+				public void mouseExited(MouseEvent e)
+				{
+					if(expandTimer != null && expandTimer.isRunning())
+						expandTimer.stop();
 
-	            public void paintTrack(Graphics g, JComponent c, Rectangle r)
-	            {
-	                Graphics2D g2 = (Graphics2D) g.create();
-	                g2.setColor(trackColor);
-	                g2.fillRect(r.x, r.y, r.width, r.height);
-	            }
+					shrinkTimerHandler sth = new shrinkTimerHandler();
+					shrinkTimer = new Timer(10, sth);
+					shrinkTimer.start();
+				}
 
-	            public JButton createDecreaseButton(int orient)
-	            {
-	                return makeButton();
-	            }
+				public void mousePressed(MouseEvent e)
+				{
+					//crop to bottom half when pressed
+					BufferedImage croppedBottomHalf = fullImage.getSubimage(0, (fullImage.getHeight() / 2) - 10, fullImage.getWidth(), (fullImage.getHeight() / 2) - 10);
 
-	            public JButton createIncreaseButton(int orient)
-	            {
-	                return makeButton();
-	            }
+					//show bottom half of image when pressed
+					Image scaledBottomImage = croppedBottomHalf.getScaledInstance(400, 65, Image.SCALE_SMOOTH);
+					BufferedImage bufferedBottomImage = new BufferedImage(400, 65, BufferedImage.TYPE_INT_ARGB);
+					Graphics2D g2 = bufferedBottomImage.createGraphics();
+					g2.drawImage(scaledBottomImage, 0, 0, null);
 
-	            public JButton makeButton()
-	            {
-	                JButton button = new JButton();
-	                button.setPreferredSize(new Dimension(0, 0));
-	                button.setMinimumSize(new Dimension(0, 0));
-	                button.setMaximumSize(new Dimension(0, 0));
-	                button.setOpaque(false);
-	                button.setContentAreaFilled(false);
-	                button.setBorderPainted(false);
-	                return button;
-	            }
-	        });
+					RescaleOp op = new RescaleOp(0.6f, 0, null); //dark effect and add the darker image
+					op.filter(bufferedBottomImage, bufferedBottomImage); 
 
-	        add(forensicsScroll, BorderLayout.CENTER);
-	    }
+					ImageIcon darkIcon = new ImageIcon(bufferedBottomImage);
+					startGameButton.setIcon(darkIcon);
+
+					int pressedWidth = startGameButton.getWidth(); //adjust position when pressed
+					int pressedHeight = startGameButton.getHeight();
+					int pressedX = startGameButton.getX() + 5;
+					int pressedY = startGameButton.getY() + 2;
+					startGameButton.setBounds(pressedX, pressedY, pressedWidth, pressedHeight);
+				}
+
+				public void mouseReleased(MouseEvent e)
+				{
+					startGameButton.setIcon(currentIcon); //restore image
+					startGameButton.setBounds((startGameButton.getX() - 5), (startGameButton.getY() - 2), startGameButton.getWidth() + 10, startGameButton.getHeight() + 4);
+				}
+
+				public void mouseClicked(MouseEvent e) {}
+			}
+
+			buttonHandler bh = new buttonHandler(); //hover and press effect
+			startGameButton.addMouseListener(bh);
+
+			JScrollPane forensicsScroll = new JScrollPane(layeredPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar verticalBar = forensicsScroll.getVerticalScrollBar();
+			forensicsScroll.setPreferredSize(new Dimension(scrollPaneWidth, 800));
+			forensicsScroll.setBorder(null);
+
+			verticalBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(110, 0, 0);
+				Color trackColor = new Color(169, 169, 169);
+
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
+				}
+			});
+
+			add(forensicsScroll, BorderLayout.CENTER);
+		}
 	}
 
 	class thirdCard extends JPanel implements MouseListener, MouseMotionListener
 	{
-	    BiohazardMurderOfGeneBenidictHolder panelCards;
-	    CardLayout cards;
-	    Image startGameClip, murderBoard;
-	    Timer blackScreenTimer, fadeTimer;
-	    boolean blackScreen, startClip;
-	    boolean[] clueClicks, cluePressed;
-	    float boardTransparency;
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+		Image startGameClip, murderBoard;
+		Timer blackScreenTimer, fadeTimer;
+		boolean blackScreen, startClip;
+		boolean[] clueClicks, cluePressed;
+		float boardTransparency;
 
-	    public thirdCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
-	    {
-	    	addMouseListener(this);
-	    	setFocusable(true);
-	    	addMouseMotionListener(this);
-	        panelCards = panelCardsIn;
-	        cards = cardsIn;
-	        blackScreen = false;
-	        startClip = true; //start with the clip
-	        boardTransparency = 0.0f;
-	        clueClicks = new boolean[12];
-	        cluePressed = new boolean[12];
-	        
-	        for(int i = 0; i < clueClicks.length; i++)
-	        	clueClicks[i] = false;
+		public thirdCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			addMouseListener(this);
+			setFocusable(true);
+			addMouseMotionListener(this);
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			blackScreen = false;
+			startClip = true; //start with the clip
+			boardTransparency = 0.0f;
+			clueClicks = new boolean[12];
+			cluePressed = new boolean[12];
 
-	        blackScreenTimerHandler bsth = new blackScreenTimerHandler();
-	        blackScreenTimer = new Timer(8300, bsth); //when the black screen shows
+			for(int i = 0; i < clueClicks.length; i++)
+				clueClicks[i] = false;
 
-	        ImageIcon storeGif = new ImageIcon("startMurderIntroClip.gif");        
-	        startGameClip = storeGif.getImage();
+			blackScreenTimerHandler bsth = new blackScreenTimerHandler();
+			blackScreenTimer = new Timer(8300, bsth); //when the black screen shows
 
-	        retrieveImage();
-	    }
+			ImageIcon storeGif = new ImageIcon("startMurderIntroClip.gif");        
+			startGameClip = storeGif.getImage();
 
-	    public void retrieveImage()
-	    {
-	        try
-	        {
-	            murderBoard = ImageIO.read(new File("pressClues.png"));
-	        }
-	        catch(IOException e)
-	        {
-	            System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
-	            e.printStackTrace();
-	        }
-	    }
+			retrieveImage();
+		}
 
-	    class blackScreenTimerHandler implements ActionListener
-	    {
-	        public void actionPerformed(ActionEvent e)
-	        {
-	            blackScreen = true;
-	            startClip = false;
-	            blackScreenTimer.stop();
-	            repaint();
+		public void retrieveImage()
+		{
+			try
+			{
+				murderBoard = ImageIO.read(new File("pressClues.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+		}
 
-	            helpFadeTimerHandler th = new helpFadeTimerHandler();
-	            Timer helpFadeTimer = new Timer(1000, th);
-	            helpFadeTimer.start();
-	        }
-	    }
-	    
-	    class helpFadeTimerHandler implements ActionListener
-	    {
-	    	public void actionPerformed(ActionEvent e)
-            {
-                startFadeIn();
-            }
-	    }
+		class blackScreenTimerHandler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				blackScreen = true;
+				startClip = false;
+				blackScreenTimer.stop();
+				repaint();
 
-	    class fadeTimerHandler implements ActionListener
-	    {
-	        public void actionPerformed(ActionEvent e)
-	        {
-	            boardTransparency += 0.05f;
+				helpFadeTimerHandler th = new helpFadeTimerHandler();
+				Timer helpFadeTimer = new Timer(1000, th);
+				helpFadeTimer.start();
+			}
+		}
 
-	            if (boardTransparency >= 1f)
-	            {
-	                boardTransparency = 1f;
-	                fadeTimer.stop();
-	            }
-	            repaint();
-	        }
-	    }
+		class helpFadeTimerHandler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				startFadeIn();
+			}
+		}
 
-	    public void startFadeIn()
-	    {
-	        fadeTimerHandler fth = new fadeTimerHandler();
-	        fadeTimer = new Timer(150, fth);
-	        fadeTimer.start();
-	    }
+		class fadeTimerHandler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				boardTransparency += 0.05f;
 
-	    public void paintComponent(Graphics g)
-	    {
-	        super.paintComponent(g);
+				if (boardTransparency >= 1f)
+				{
+					boardTransparency = 1f;
+					fadeTimer.stop();
+				}
+				repaint();
+			}
+		}
+
+		public void startFadeIn()
+		{
+			fadeTimerHandler fth = new fadeTimerHandler();
+			fadeTimer = new Timer(150, fth);
+			fadeTimer.start();
+		}
+
+		public void paintComponent(Graphics g)
+		{
+			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D)(g);
 			int[] xPoly = {158, 158, 173, 215, 215, 295, 316, 316, 273};
 			int[] yPoly = {367, 410, 518, 518, 525, 525, 486, 473, 355};
 
-	        if(startClip)
-	        {
-	            g.drawImage(startGameClip, 0, 0, 1310, 800, this);
-	            blackScreenTimer.start();
-	        }
-	        
-	        else if(blackScreen)
-	        {
-	            g.setColor(Color.BLACK);
-	            g.fillRect(0, 0, 1300, 800);
-	        }
-	        
-    //      g.drawImage(murderBoard, 0, -40, 1300, 820, this);
+			if(startClip)
+			{
+				g.drawImage(startGameClip, 0, 0, 1310, 800, this);
+				blackScreenTimer.start();
+			}
 
-	        if(blackScreen || boardTransparency > 0f) //fade-in murder board
-	        {
-	            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, boardTransparency));
-	            g2d.drawImage(murderBoard, 0, -40, 1300, 820, this);
-	        }
-	        
+			else if(blackScreen)
+			{
+				g.setColor(Color.BLACK);
+				g.fillRect(0, 0, 1300, 800);
+			}
+
+			//      g.drawImage(murderBoard, 0, -40, 1300, 820, this);
+
+			if(blackScreen || boardTransparency > 0f) //fade-in murder board
+			{
+				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, boardTransparency));
+				g2d.drawImage(murderBoard, 0, -40, 1300, 820, this);
+			}
+
 			g2d.setColor(new Color(0, 0, 0, 80));
-	        
-	        if(clueClicks[0]) //ADD && BLACKSCREEN LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FOR MAKING IT BETTER
+
+			if(clueClicks[0]) //ADD && BLACKSCREEN LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FOR MAKING IT BETTER
 				g2d.fillRect(108, 189, 117, 147);
-	        
-	        else if(clueClicks[1])
+
+			else if(clueClicks[1])
 				g2d.fillRect(410, 201, 117, 62);
-	        
-	        else if(clueClicks[2])
+
+			else if(clueClicks[2])
 				g2d.fillRect(563, 137, 122, 120);
-	        
-	        else if(clueClicks[3])
-	        {
-	        	g2d.fillRect(908, 168, 101, 88);
-	        	g2d.fillRect(1009, 142, 116, 116);
-	        	g2d.fillRect(1000, 257, 110, 39);
-	        }
-	        
-	        else if(clueClicks[4])
-	        	g2d.fillPolygon(xPoly, yPoly, 9);
-	        
-	        else if(clueClicks[5])
-	        	g2d.fillRect(512, 369, 101, 131);
-	        
-	        g.setColor(new Color(255, 0, 0, 80)); // red with some transparency
-	    /*    int gridSpacing = 50; // change if you want finer/larger grid
+
+			else if(clueClicks[3])
+			{
+				g2d.fillRect(908, 168, 101, 88);
+				g2d.fillRect(1009, 142, 116, 116);
+				g2d.fillRect(1000, 257, 110, 39);
+			}
+
+			else if(clueClicks[4])
+				g2d.fillPolygon(xPoly, yPoly, 9);
+
+			else if(clueClicks[5])
+				g2d.fillRect(512, 369, 101, 131);
+			else if(clueClicks[6])
+				g2d.fillRect(1075, 351, 135, 76);
+			else if(clueClicks[7])
+			{
+				int[] sevenX = {88, 67, 182, 202};
+				int[] sevenY = {537, 680, 696, 551};
+				g2d.fillPolygon(sevenX, sevenY, 4);
+			}
+			else if(clueClicks[8])
+			{
+				
+			} 
+			else if(clueClicks[9])
+			{
+				int[] nineX = {450,562, 533, 423};
+				int[] nineY = {589, 613, 730, 759};
+				g2d.fillPolygon(nineX, nineY, 4);
+			}
+			else if(clueClicks[10])
+			{
+				int[] tenX = {755, 881,876, 746};
+				int[] tenY = {647, 667, 738, 717};
+				g2d.fillPolygon(tenX, tenY, 4);
+			}
+			else if(clueClicks[11])
+			{
+
+				g2d.fillRect(981, 556, 150, 99);
+				System.out.println("hi");
+			}
+
+
+			g.setColor(new Color(255, 0, 0, 80)); // red with some transparency
+			/*    int gridSpacing = 50; // change if you want finer/larger grid
 
 	        for (int x = 0; x < getWidth(); x += gridSpacing)
 	        {
@@ -855,11 +886,11 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        {
 	            g.drawString(String.valueOf(y), 2, y - 2);
 	        }
-	        
+
 	        g.setColor(Color.RED);
 	        g.drawRect(513, 369, 100, 131);*/
-	        
-	    /*    g.fillOval(158, 367, 3, 3);
+
+			/*    g.fillOval(158, 367, 3, 3);
 	        g.fillOval(158, 410, 3, 3);
 	        g.fillOval(173, 518, 3, 3);
 	        g.fillOval(215, 518, 3, 3);
@@ -868,26 +899,26 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	        g.fillOval(316, 486, 3, 3);
 	        g.fillOval(316, 473, 3, 3);
 	        g.fillOval(273, 355, 3, 3);*/
-	    }
-	    
-	    public void mouseEntered(MouseEvent e)
-		{
-			
 		}
 
-	    public void mouseClicked(MouseEvent e)
-	    {
-	        int x = e.getX();
-	        int y = e.getY();
+		public void mouseEntered(MouseEvent e)
+		{
 
-	        if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
-	        {
-	        }
-	    }
+		}
+
+		public void mouseClicked(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+
+			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
+			{
+			}
+		}
 
 
 		public void mousePressed(MouseEvent e) {
-			
+
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -901,34 +932,51 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public void mouseMoved(MouseEvent e)
 		{
-		    int x = e.getX();
-		    int y = e.getY();
+			int x = e.getX();
+			int y = e.getY();
+			System.out.println(x+ ","+ y);
 
-		    if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
-		        clueClicks[0] = true;
-		    
-		    else if(x >= 410 && x <= 527 && y >= 201 && y <= 263)
-		    	clueClicks[1] = true;
-		    
-		    else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
-		    	clueClicks[2] = true;
-		    
-		    else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
-		    	clueClicks[3] = true;
-		    
-		    else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
-		    	clueClicks[4] = true;
-		    
-		    else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
-		    	clueClicks[5] = true;
-		    
-		    else
-		    {
-		    	for(int i = 0; i < clueClicks.length; i++)
-		        	clueClicks[i] = false;
-		    }
-		    
-		    repaint();
+			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
+				clueClicks[0] = true;
+
+			else if(x >= 410 && x <= 527 && y >= 201 && y <= 263)
+				clueClicks[1] = true;
+
+			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
+				clueClicks[2] = true;
+
+			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
+				clueClicks[3] = true;
+
+			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
+				clueClicks[4] = true;
+			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
+				clueClicks[5] = true;
+			else if(x>=1075 && y>=351 && x<= 1210 && y <=427)
+				clueClicks[6] = true;
+			else if (x>=78 && y>=540 && x<= 192 && y <=693)
+				clueClicks[7] = true;
+			else if (x>=0 && y>=0 && x<= 0 && y <=0)
+				clueClicks[8] = true;
+			else if (x>=441 && y>=592 && x<= 546 && y <=759)
+				clueClicks[9] = true;
+			else if (x>=753 && y>=647 && x<= 875 && y <=738)
+				clueClicks[10] = true;
+			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
+			{
+				clueClicks[11] = true;
+				System.out.println("Hi");
+			}
+
+
+
+			else
+			{
+				for(int i = 0; i < clueClicks.length; i++)
+					clueClicks[i] = false;
+			}
+
+			repaint();
 		}
 	}
 }
