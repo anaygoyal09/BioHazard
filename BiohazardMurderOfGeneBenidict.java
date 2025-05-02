@@ -1032,5 +1032,3 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		}
 	}
 }
-
-
