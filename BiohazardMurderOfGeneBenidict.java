@@ -722,7 +722,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			blackScreenTimer = new Timer(8300, bsth); //when the black screen shows
 
 			ImageIcon storeGif = new ImageIcon("startMurderIntroClip.gif");        
-			startGameClip = storeGif.getImage();
+			startGameClip = storeGif.getImage();	
+			
 
 			retrieveImage();
 		}
@@ -806,13 +807,12 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				g.fillRect(0, 0, 1300, 800);
 			}
 
-			g.drawImage(murderBoard, 0, -40, 1300, 820, this);
+			//g.drawImage(murderBoard, 0, -40, 1300, 820, this);
 
-			if(blackScreen || boardTransparency > 0f) //fade-in murder board
-			{
-				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, boardTransparency));
-				g2d.drawImage(murderBoard, 0, -40, 1300, 820, this);
-			}
+			
+			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, boardTransparency));
+			g2d.drawImage(murderBoard, 0, -40, 1300, 820, this);
+			
 
 			g2d.setColor(new Color(0, 0, 0, 80));
 
