@@ -807,7 +807,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				g.fillRect(0, 0, 1300, 800);
 			}
 
-			//g.drawImage(murderBoard, 0, -40, 1300, 820, this);
+			
 
 			
 			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, boardTransparency));
