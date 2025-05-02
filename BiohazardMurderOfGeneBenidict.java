@@ -709,8 +709,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			blackScreen = false;
 			startClip = true; //start with the clip
 			boardTransparency = 0.0f;
-			clueHovered = new boolean[12];
-			cluePressed = new boolean[12];
+			clueHovered = new boolean[8];
+			cluePressed = new boolean[8];
 
 			for(int i = 0; i < clueHovered.length; i++)
 			{
@@ -819,51 +819,37 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(clueHovered[0]) //ADD && BLACKSCREEN LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FOR MAKING IT BETTER
 				g2d.fillRect(108, 189, 117, 147);
 
-			else if(clueHovered[1])
-				g2d.fillRect(410, 201, 117, 62);
+			
 
-			else if(clueHovered[2])
+			else if(clueHovered[1])
 				g2d.fillRect(563, 136, 122, 120);
 
-			else if(clueHovered[3])
+			else if(clueHovered[2])
 			{
 				g2d.fillRect(908, 168, 101, 88);
 				g2d.fillRect(1009, 142, 116, 116);
 				g2d.fillRect(1000, 257, 110, 39);
 			}
 
-			else if(clueHovered[4])
+			else if(clueHovered[3])
 				g2d.fillPolygon(xShape4, yShape4, 18);
 
-			else if(clueHovered[5])
+			else if(clueHovered[4])
 				g2d.fillRect(512, 369, 101, 131);
 
-			else if(clueHovered[6])
-				g2d.fillRect(1073, 347, 137, 82);
+			
 
-			else if(clueHovered[7])
+			else if(clueHovered[5])
 			{
 				g2d.fillPolygon(xShape7, yShape7, 19);
 			}
-			else if(clueHovered[8])
+			else if(clueHovered[6])
 			{
-				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347, 261, 261};
-				int[] eightY = {560, 663, 663, 680, 680, 695, 695, 721,721, 750,790, 750, 721, 721,701, 701, 688, 688, 662, 662, 633, 633, 620, 620, 580, 580, 560};
-				g2d.fillPolygon(eightX, eightY, 27);
-			} 
-			else if(clueHovered[9])
-			{
-				int[] nineX ={453,476,477,484,484,520,520, 563,563,556,556,549,549,543,541,533,535,521,418,418,426,426,433,433,433,441,441,446,446};
-				int[] nineY = {586, 586,591,592,600,600,608,606,626,626,660,660,694,694,727,727,761,760,733,698,698,685,685,655,628,628,606,606,586};
-				g2d.fillPolygon(nineX, nineY, 29);
+				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347      ,333, 333,325,325,277, 277,      261, 261};
+				int[] eightY = {560, 663, 663, 680, 680, 695, 695, 721,721, 744 ,780 ,740 ,721 ,721 ,701 ,701 ,688 ,688 ,662 ,662 ,633 ,633 ,620 ,620 ,568 ,568, 547, 547,562, 562,575, 575 ,560};
+				g2d.fillPolygon(eightX,eightY ,33);
 			}
-			else if(clueHovered[10])
-			{
-				int[] tenX = {749, 749,741,741, 770, 807,844,  844, 878 , 878, 800, 800};
-				int[] tenY = {647,700 ,700, 722,733, 733 , 733,  740, 740,660, 660, 647};
-				g2d.fillPolygon(tenX, tenY, 12);
-			}
-			else if(clueHovered[11])
+			else if(clueHovered[7])
 			{
 
 				g2d.fillRect(980, 554, 152, 99);
@@ -878,79 +864,37 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(cluePressed[0])
 				g2d.fillRect(108, 189, 117, 147);
 
-			else if(cluePressed[1])
-				g2d.fillRect(410, 201, 117, 62);
+			
 
-			else if(cluePressed[2])
+			else if(cluePressed[1])
 				g2d.fillRect(563, 136, 122, 120);
 
-			else if(cluePressed[3])
+			else if(cluePressed[2])
 			{
 				g2d.fillRect(908, 168, 101, 88);
 				g2d.fillRect(1009, 142, 116, 116);
 				g2d.fillRect(1000, 257, 110, 39);
 			}
 
-			else if(cluePressed[4])
+			else if(cluePressed[3])
 			{
 				g2d.setColor(new Color(0, 100, 0, 80));
 				g2d.fillPolygon(xShape4, yShape4, 18);
 			}
 
-			else if(cluePressed[5])
+			else if(cluePressed[4])
 				g2d.fillRect(512, 369, 101, 131);
 
-			else if(cluePressed[6])
-				g2d.fillRect(1073, 347, 137, 82);
 
-			else if(cluePressed[7])
+			else if(cluePressed[5])
 				g2d.fillPolygon(xShape7, yShape7, 19);
-			else if(cluePressed[8])
-				{
-				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347, 261, 261};
-				int[] eightY = {560, 663, 663, 680, 680, 695, 695, 721,721, 750,790, 750, 721, 721,701, 701, 688, 688, 662, 662, 633, 633, 620, 620 ,580 ,580 ,560};
-				g2d.fillPolygon(eightX,eightY ,27);
-			} 
-			else if(cluePressed[9])
+			else if(cluePressed[6])
 			{
-				int[] nineX ={453 ,476 ,477 ,484 ,484 ,520 ,520 ,563 ,563 ,556 ,556 ,549 ,549 ,543 ,541 ,533 ,535 ,521 ,418 ,418 ,426 ,426 ,433 ,433 ,433 ,441 ,441 ,446};
-				int[] nineY = {586 ,586 ,591 ,592 ,600 ,600 ,608 ,606 ,626 ,626 ,660 ,660 ,694 ,694 ,727 ,727 ,761 ,760 ,733 ,698 ,698 ,685 ,
-						685 ,
-						655 ,
-						628 ,
-						628 ,
-						606 ,
-						606 ,
-						586};
-				g2d.fillPolygon(nineX,nineY,
-						28);
+				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347,333, 333,325,325,277, 277,      261, 261};
+				int[] eightY = {560, 663, 663, 680, 680, 695, 695, 721,721, 744 ,780 ,740 ,721 ,721 ,701 ,701 ,688 ,688 ,662 ,662 ,633 ,633 ,620 ,620 ,568 ,568, 547, 547,562, 562,575, 575 ,560};
+				g2d.fillPolygon(eightX,eightY ,33);
 			}
-			else if(cluePressed[10])
-			{
-				int[] tenX = {749,749,741,741,
-						770,
-						807,
-						844,
-						844,
-						878,
-						878,
-						800,
-						800};
-				int[] tenY = {647,
-						700,
-						700,
-						722,
-						733,
-						733,
-						733,
-						740,
-						740,
-						660,
-						660,
-						647};
-				g2d.fillPolygon(tenX,tenY,12);
-			}
-			else if(cluePressed[11])
+			else if(cluePressed[7])
 			{
 				g2d.fillRect(980, 554, 152, 99);
 			}
@@ -966,10 +910,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int x = e.getX();
 			int y = e.getY();
 
-			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
-			{
 
-			}
 		}
 
 
@@ -981,32 +922,27 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
 				cluePressed[0] = true;
 
-			else if(x >= 410 && x <= 527 && y >= 201 && y <= 263)
-				cluePressed[1] = true;
+			
 
 			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
-				cluePressed[2] = true;
+				cluePressed[1] = true;
 
 			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
-				cluePressed[3] = true;
+				cluePressed[2] = true;
 
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
-				cluePressed[4] = true;
+				cluePressed[3] = true;
 
 			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
-				cluePressed[5] = true;
-			else if(x>=1075 && y>=351 && x<= 1210 && y <=427)
-				cluePressed[6] = true;
+				cluePressed[4] = true;
+			
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
-				cluePressed[7] = true;
+				cluePressed[5] = true;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
-				cluePressed[8] = true;
-			else if (x>=441 && y>=592 && x<= 546 && y <=759)
-				cluePressed[9] = true;
-			else if (x>=753 && y>=647 && x<= 875 && y <=738)
-				cluePressed[10] = true;
+				cluePressed[6] = true;
+			
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
-				cluePressed[11] = true;
+				cluePressed[7] = true;
 
 			repaint();
 		}
@@ -1019,32 +955,27 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
 				cluePressed[0] = false;
 
-			else if(x >= 410 && x <= 527 && y >= 201 && y <= 263)
-				cluePressed[1] = false;
 
 			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
-				cluePressed[2] = false;
+				cluePressed[1] = false;
 
 			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
-				cluePressed[3] = false;
+				cluePressed[2] = false;
 
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
-				cluePressed[4] = false;
+				cluePressed[3] = false;
 
 			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
-				cluePressed[5] = false;
-			else if(x>=1075 && y>=351 && x<= 1210 && y <=427)
-				cluePressed[6] = false;
+				cluePressed[4] = false;
+			
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
-				cluePressed[7] = false;
+				cluePressed[5] = false;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
-				cluePressed[8] = false;
-			else if (x>=441 && y>=592 && x<= 546 && y <=759)
-				cluePressed[9] = false;
-			else if (x>=753 && y>=647 && x<= 875 && y <=738)
-				cluePressed[10] = false;
+				cluePressed[6] = false;
+			
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
-				cluePressed[11] = false;
+				cluePressed[7] = false;
+
 
 			repaint();
 		}
@@ -1064,33 +995,25 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
 				clueHovered[0] = true;
 
-			else if(x >= 410 && x <= 527 && y >= 201 && y <= 263)
+			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
 				clueHovered[1] = true;
 
-			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
+			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
 				clueHovered[2] = true;
 
-			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
-				clueHovered[3] = true;
-
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
-				clueHovered[4] = true;
+				clueHovered[3] = true;
 			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
-				clueHovered[5] = true;
-			else if(x>=1075 && y>=351 && x<= 1210 && y <=427)
-				clueHovered[6] = true;
+				clueHovered[4] = true;
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
-				clueHovered[7] = true;
+				clueHovered[5] = true;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
-				clueHovered[8] = true;
-			else if (x>=441 && y>=592 && x<= 546 && y <=759)
-				clueHovered[9] = true;
-			else if (x>=753 && y>=647 && x<= 875 && y <=738)
-				clueHovered[10] = true;
-
+				clueHovered[6] = true;
+			
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
 			{
-				clueHovered[11] = true;
+				clueHovered[7] = true;
+
 
 			}
 
@@ -1098,7 +1021,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			else
 			{
 				for(int i = 0; i < clueHovered.length; i++)
+				{
 					clueHovered[i] = false;
+					cluePressed[i] = false;
+				}
 			}
 
 			repaint();
