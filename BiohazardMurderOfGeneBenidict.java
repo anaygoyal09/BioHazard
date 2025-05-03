@@ -1207,7 +1207,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	}
 	class forensicsReport extends JPanel
 	{
-
+		// This class is responsible for displaying the forensics report 
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
 		thirdCard clip;
