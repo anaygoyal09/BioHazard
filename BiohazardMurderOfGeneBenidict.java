@@ -81,7 +81,8 @@ public class BiohazardMurderOfGeneBenidict
 class BiohazardMurderOfGeneBenidictHolder extends JPanel
 {
 	boolean startClip;
-
+	String goingBacktoClue;
+	
 	public BiohazardMurderOfGeneBenidictHolder()
 	{
 		setBackground(Color.BLACK);
@@ -933,27 +934,33 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			requestFocusInWindow();
 		}
 
-		public void mouseClicked(MouseEvent e)
-		{
-			int x = e.getX();
-			int y = e.getY();
-			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
-				cards.show(panelCards, "clue1");
-			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
-				cards.show(panelCards, "clue2");
-			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
-				cards.show(panelCards, "clue3");
-			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
-				cards.show(panelCards, "clue4");
-			else if (x>=78 && y>=540 && x<= 192 && y <=693)
-				cards.show(panelCards, "clue5");
-			else if (x>=210 && y>=565 && x<= 392 && y <=759)
-				cards.show(panelCards, "clue6");
-			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
-				cards.show(panelCards, "clue7");
+	    public void mouseClicked(MouseEvent e) {
+	        int x = e.getX();
+	        int y = e.getY();
 
-		}
-
+	        if (x >= 115 && x <= 224 && y >= 189 && y <= 334) {
+	            panelCards.goingBacktoClue = "clue1";
+	            cards.show(panelCards, "clue1");
+	        } else if (x >= 563 && x <= 685 && y >= 137 && y <= 257) {
+	            panelCards.goingBacktoClue = "clue2";
+	            cards.show(panelCards, "clue2");
+	        } else if (x >= 909 && x <= 1125 && y >= 142 && y <= 297) {
+	            panelCards.goingBacktoClue = "clue3";
+	            cards.show(panelCards, "clue3");
+	        } else if (x >= 158 && x <= 316 && y >= 355 && y <= 525) {
+	            panelCards.goingBacktoClue = "clue4";
+	            cards.show(panelCards, "clue4");
+	        } else if (x >= 78 && y >= 540 && x <= 192 && y <= 693) {
+	            panelCards.goingBacktoClue = "clue5";
+	            cards.show(panelCards, "clue5");
+	        } else if (x >= 210 && y >= 565 && x <= 392 && y <= 759) {
+	            panelCards.goingBacktoClue = "clue6";
+	            cards.show(panelCards, "clue6");
+	        } else if (x >= 981 && y >= 556 && x <= 1131 && y <= 655) {
+	            panelCards.goingBacktoClue = "clue7";
+	            cards.show(panelCards, "clue7");
+	        }
+	    }
 
 		public void mousePressed(MouseEvent e)
 		{
@@ -1080,7 +1087,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("Back");
+			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1099,7 +1106,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("Back");
+			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1118,7 +1125,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("Back");
+			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1138,7 +1145,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("Back");
+			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1157,7 +1164,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("Back");
+			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1176,7 +1183,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("Back");
+			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1195,7 +1202,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("Back");
+			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1266,7 +1273,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					cards.show(panelCards, "clueBoard");
+	                cards.show(panelCards, panelCards.goingBacktoClue); // Navigate to the last clue
 					startClip = true;
 					clip.repaint();
 				}
@@ -1462,6 +1469,16 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			});
 
 			add(forensicsScroll, BorderLayout.CENTER);
+			/*
+			JButton backButton = new JButton("Back");
+		       backButton.setBounds(10, 10, 100, 30);
+		        backButton.addActionListener(new ActionListener() {
+		            public void actionPerformed(ActionEvent e) {
+		                cards.show(panelCards, panelCards.goingBacktoClue); // Navigate to the last clue
+		            }
+		        });
+		        layeredPane.add(backButton, Integer.valueOf(1)); // Add the button to the layered pane
+		        */
 		}
 	}
 }
