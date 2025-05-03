@@ -91,11 +91,30 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		firstCard title = new firstCard(this, cards);
 		secondCard report = new secondCard(this, cards);
 		thirdCard question1 = new thirdCard(this, cards);
+		clue1 c1 = new clue1(this, cards);
+		clue2 c2 = new clue2(this,cards);
+		clue2 c3 = new clue2(this,cards);
+		clue2 c4 = new clue2(this,cards);
+		clue2 c5 = new clue2(this,cards);
+		clue2 c6 = new clue2(this,cards);
+		clue2 c7 = new clue2(this,cards);
+		forensicsReport report2 = new forensicsReport(this, cards);
+		
+		
+		
 
 		add(title, "title");
 		add(report, "report");
 		add(question1, "clueBoard");
-
+		add(c1, "clue1");
+		add(c2, "clue2");
+		add(c3, "clue3");
+		add(c4, "clue4");
+		add(c5, "clue5");
+		add(c6, "clue6");
+		add(c7, "clue7");
+		add(report2, "forensicsReport");
+		
 		startClip = false;
 	}
 
@@ -397,6 +416,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			if(x >= 0 && x <= 10 && y >= 0 && y <= 10)
 				cards.show(panelCards, "clueBoard");
+
 		}
 
 		public void mouseExited(MouseEvent e)
@@ -833,23 +853,18 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			else if(clueHovered[3])
 				g2d.fillPolygon(xShape4, yShape4, 18);
-
+			
 			else if(clueHovered[4])
-				g2d.fillRect(512, 369, 101, 131);
+				g2d.fillPolygon(xShape7, yShape7, 19);
 
 			
-
 			else if(clueHovered[5])
-			{
-				g2d.fillPolygon(xShape7, yShape7, 19);
-			}
-			else if(clueHovered[6])
 			{
 				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347      ,333, 333,325,325,277, 277,      261, 261};
 				int[] eightY = {560, 663, 663, 680, 680, 695, 695, 721,721, 744 ,780 ,740 ,721 ,721 ,701 ,701 ,688 ,688 ,662 ,662 ,633 ,633 ,620 ,620 ,568 ,568, 547, 547,562, 562,575, 575 ,560};
 				g2d.fillPolygon(eightX,eightY ,33);
 			}
-			else if(clueHovered[7])
+			else if(clueHovered[6])
 			{
 
 				g2d.fillRect(980, 554, 152, 99);
@@ -862,41 +877,54 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			g2d.setColor(new Color(100, 0, 0, 80));
 
 			if(cluePressed[0])
+			{
 				g2d.fillRect(108, 189, 117, 147);
-
+				
+			}
 			
 
 			else if(cluePressed[1])
+			{
 				g2d.fillRect(563, 136, 122, 120);
+				
+			}
 
 			else if(cluePressed[2])
 			{
 				g2d.fillRect(908, 168, 101, 88);
 				g2d.fillRect(1009, 142, 116, 116);
 				g2d.fillRect(1000, 257, 110, 39);
+				
+				
 			}
 
 			else if(cluePressed[3])
 			{
 				g2d.setColor(new Color(0, 100, 0, 80));
 				g2d.fillPolygon(xShape4, yShape4, 18);
+			
 			}
 
+			
+
+
 			else if(cluePressed[4])
-				g2d.fillRect(512, 369, 101, 131);
-
-
-			else if(cluePressed[5])
+			{
 				g2d.fillPolygon(xShape7, yShape7, 19);
-			else if(cluePressed[6])
+				cards.show(panelCards, "clue5");
+			}
+			else if(cluePressed[5])
 			{
 				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347,333, 333,325,325,277, 277,      261, 261};
 				int[] eightY = {560, 663, 663, 680, 680, 695, 695, 721,721, 744 ,780 ,740 ,721 ,721 ,701 ,701 ,688 ,688 ,662 ,662 ,633 ,633 ,620 ,620 ,568 ,568, 547, 547,562, 562,575, 575 ,560};
 				g2d.fillPolygon(eightX,eightY ,33);
+				
+				
 			}
-			else if(cluePressed[7])
+			else if(cluePressed[6])
 			{
 				g2d.fillRect(980, 554, 152, 99);
+				
 			}
 		}
 
@@ -909,7 +937,20 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			int x = e.getX();
 			int y = e.getY();
-
+			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
+				cards.show(panelCards, "clue1");
+			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
+				cards.show(panelCards, "clue2");
+			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
+				cards.show(panelCards, "clue3");
+			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
+				cards.show(panelCards, "clue4");
+			else if (x>=78 && y>=540 && x<= 192 && y <=693)
+				cards.show(panelCards, "clue5");
+			else if (x>=210 && y>=565 && x<= 392 && y <=759)
+				cards.show(panelCards, "clue6");
+			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
+				cards.show(panelCards, "clue7");
 
 		}
 
@@ -933,16 +974,15 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
 				cluePressed[3] = true;
 
-			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
-				cluePressed[4] = true;
+			
 			
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
-				cluePressed[5] = true;
+				cluePressed[4] = true;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
-				cluePressed[6] = true;
+				cluePressed[5] = true;
 			
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
-				cluePressed[7] = true;
+				cluePressed[6] = true;
 
 			repaint();
 		}
@@ -965,16 +1005,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
 				cluePressed[3] = false;
 
-			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
-				cluePressed[4] = false;
 			
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
-				cluePressed[5] = false;
+				cluePressed[4] = false;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
-				cluePressed[6] = false;
+				cluePressed[5] = false;
 			
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
-				cluePressed[7] = false;
+				cluePressed[6] = false;
 
 
 			repaint();
@@ -990,7 +1028,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			int x = e.getX();
 			int y = e.getY();
-			System.out.println(x+ ","+ (y-2));
+			
 
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
 				clueHovered[0] = true;
@@ -1003,16 +1041,15 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
 				clueHovered[3] = true;
-			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
-				clueHovered[4] = true;
+			
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
-				clueHovered[5] = true;
+				clueHovered[4] = true;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
-				clueHovered[6] = true;
+				clueHovered[5] = true;
 			
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
 			{
-				clueHovered[7] = true;
+				clueHovered[6] = true;
 
 
 			}
@@ -1029,6 +1066,402 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			repaint();
 
+		}
+	
+		
+	}
+	
+	class clue1 extends JPanel
+	{
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+
+		public clue1(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			JButton backButton = new JButton("Back");
+			backButton.setBounds(10, 10, 100, 30);
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "forensicsReport");
+				}
+			});
+			add(backButton);
+		}
+	}
+	class clue2 extends JPanel
+	{
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+
+		public clue2(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			JButton backButton = new JButton("Back");
+			backButton.setBounds(10, 10, 100, 30);
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "forensicsReport");
+				}
+			});
+			add(backButton);
+		}
+	}
+	class clue3 extends JPanel
+	{
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+
+		public clue3(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			JButton backButton = new JButton("Back");
+			backButton.setBounds(10, 10, 100, 30);
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "forensicsReport");
+				}
+			});	
+			add(backButton);
+				
+		}
+	}
+	class clue4 extends JPanel
+	{
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+
+		public clue4(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			JButton backButton = new JButton("Back");
+			backButton.setBounds(10, 10, 100, 30);
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "forensicsReport");
+				}
+			});
+			add(backButton);
+		}
+	}
+	class clue5 extends JPanel
+	{
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+
+		public clue5(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			JButton backButton = new JButton("Back");
+			backButton.setBounds(10, 10, 100, 30);
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "forensicsReport");
+				}
+			});
+			add(backButton);
+		}
+	}
+	class clue6 extends JPanel
+	{
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+
+		public clue6(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			JButton backButton = new JButton("Back");
+			backButton.setBounds(10, 10, 100, 30);
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "forensicsReport");
+				}
+			});
+			add(backButton);
+		}
+	}
+	class clue7 extends JPanel
+	{
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+
+		public clue7(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			JButton backButton = new JButton("Back");
+			backButton.setBounds(10, 10, 100, 30);
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "forensicsReport");
+				}
+			});
+			add(backButton);
+		}
+	}
+	class forensicsReport extends JPanel
+	{
+
+		BiohazardMurderOfGeneBenidictHolder panelCards;
+		CardLayout cards;
+		thirdCard clip;
+		BufferedImage fullImage = null;
+
+		public forensicsReport(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
+			setLayout(new BorderLayout());
+
+			panelCards = panelCardsIn;
+			cards = cardsIn;
+			clip = new thirdCard(panelCards, cards);
+
+			// Load the original image for the forensics image
+			ImageIcon originalIcon = new ImageIcon("coronersReport.png");
+			int scrollPaneWidth = 1300;
+			int scaledHeight = (originalIcon.getIconHeight() * scrollPaneWidth) / originalIcon.getIconWidth();
+			Image scaledImage = originalIcon.getImage().getScaledInstance(scrollPaneWidth, scaledHeight, Image.SCALE_SMOOTH);
+			ImageIcon scaledIcon = new ImageIcon(scaledImage);
+			JLabel forensicsLabel = new JLabel(scaledIcon);
+
+			// Load the full image for the button
+			try
+			{
+				fullImage = ImageIO.read(new File("beginMurderButtons.png"));
+			}
+
+			catch (IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(scrollPaneWidth, scaledHeight));
+
+			// Add the forensics image to the layered pane
+			forensicsLabel.setBounds(0, 0, scrollPaneWidth, scaledHeight);
+			layeredPane.add(forensicsLabel, Integer.valueOf(0));
+
+			int width = fullImage.getWidth();  //crop the top half of the button image
+			int height = fullImage.getHeight() / 2;
+			BufferedImage croppedImage = fullImage.getSubimage(0, 0, width, height);
+
+			Image scaleImage = croppedImage.getScaledInstance(400, 65, Image.SCALE_SMOOTH);
+			ImageIcon scaledReturnIcon = new ImageIcon(scaleImage);
+
+			// Create the button with the cropped image
+			JButton startGameButton = new JButton(scaledReturnIcon);
+			int originalWidth = 400;
+			int originalHeight = 65;
+			int hoverWidth = 430;
+			int hoverHeight = 75;
+
+			class startGameButtonHandler implements ActionListener
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					cards.show(panelCards, "clueBoard");
+					startClip = true;
+					clip.repaint();
+				}
+			}
+
+			int buttonX = (scrollPaneWidth / 2) - (originalWidth / 2);
+			int buttonY = scaledHeight - 125;
+			startGameButton.setBounds(buttonX, buttonY, originalWidth, originalHeight);
+			startGameButton.setBorderPainted(false);
+			startGameButton.setContentAreaFilled(false);
+			startGameButton.setFocusPainted(false);
+			layeredPane.add(startGameButton, Integer.valueOf(1));
+			startGameButtonHandler sgbh = new startGameButtonHandler();
+			startGameButton.addActionListener(sgbh); //button Action to switch the card
+
+			Timer pulseTimer = new Timer(100, null);
+			int[] pulseDirection = {1}; //1 = grow, -1 = shrink
+			int[] pulseSize = {0};
+
+			class pulseTimerHandler implements ActionListener
+			{
+				public void actionPerformed(ActionEvent evt)
+				{
+					pulseSize[0] += pulseDirection[0];
+
+					if(pulseSize[0] >= 10 || pulseSize[0] <= 0)
+						pulseDirection[0] *= -1;
+
+					int newW = originalWidth + pulseSize[0];
+					int newH = originalHeight + pulseSize[0] / 2;
+
+					Image scaledImg = croppedImage.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+					startGameButton.setIcon(new ImageIcon(scaledImg));
+					int newX = buttonX - (newW - originalWidth) / 2;
+					int newY = buttonY - (newH - originalHeight) / 2;
+					startGameButton.setBounds(newX, newY, newW, newH);
+				}
+			}
+
+			pulseTimerHandler pth = new pulseTimerHandler();
+			pulseTimer.addActionListener(pth);
+			pulseTimer.start();
+
+			class buttonHandler implements MouseListener
+			{
+				Timer expandTimer, shrinkTimer;
+				ImageIcon currentIcon = scaledReturnIcon;
+
+				class hoverTimerHandler implements ActionListener
+				{
+					int currentWidth = startGameButton.getWidth();
+					int currentHeight = startGameButton.getHeight();
+
+					public void actionPerformed(ActionEvent evt) {
+						if(currentWidth >= hoverWidth && currentHeight >= hoverHeight)
+							expandTimer.stop();
+
+						else
+						{
+							currentWidth += 3;
+							currentHeight += 1;
+
+							Image scaledImg = croppedImage.getScaledInstance(currentWidth, currentHeight, Image.SCALE_SMOOTH);
+							currentIcon = new ImageIcon(scaledImg);
+							startGameButton.setIcon(currentIcon);
+
+							int newX = buttonX - ((currentWidth - originalWidth) / 2);
+							int newY = buttonY - ((currentHeight - originalHeight) / 2);
+							startGameButton.setBounds(newX, newY, currentWidth, currentHeight);
+						}
+					}
+				}
+
+				hoverTimerHandler hth = new hoverTimerHandler();
+
+				public void mouseEntered(MouseEvent e)
+				{
+					pulseTimer.stop(); // stop pulsing when hovered
+
+					if(shrinkTimer != null && shrinkTimer.isRunning())
+						shrinkTimer.stop();
+
+					expandTimer = new Timer(10, hth);
+					expandTimer.start();
+				}
+
+				class shrinkTimerHandler implements ActionListener
+				{
+					int currentWidth = startGameButton.getWidth();
+					int currentHeight = startGameButton.getHeight();
+
+					public void actionPerformed(ActionEvent evt)
+					{
+						if(currentWidth <= originalWidth && currentHeight <= originalHeight)
+						{
+							shrinkTimer.stop();
+							currentIcon = scaledReturnIcon;
+							startGameButton.setIcon(currentIcon);
+							startGameButton.setBounds(buttonX, buttonY, originalWidth, originalHeight);
+							pulseTimer.start(); //resume pulse when exited
+						}
+
+						else
+						{
+							currentWidth -= 3;
+							currentHeight -= 1;
+
+							Image scaledImg = croppedImage.getScaledInstance(currentWidth, currentHeight, Image.SCALE_SMOOTH);
+							currentIcon = new ImageIcon(scaledImg);
+							startGameButton.setIcon(currentIcon);
+
+							int newX = buttonX - (currentWidth - originalWidth) / 2;
+							int newY = buttonY - (currentHeight - originalHeight) / 2;
+							startGameButton.setBounds(newX, newY, currentWidth, currentHeight);
+						}
+					}
+				}
+
+				public void mouseExited(MouseEvent e)
+				{
+					if(expandTimer != null && expandTimer.isRunning())
+						expandTimer.stop();
+
+					shrinkTimerHandler sth = new shrinkTimerHandler();
+					shrinkTimer = new Timer(10, sth);
+					shrinkTimer.start();
+				}
+
+				public void mousePressed(MouseEvent e)
+				{
+					//crop to bottom half when pressed
+					BufferedImage croppedBottomHalf = fullImage.getSubimage(0, (fullImage.getHeight() / 2) - 10, fullImage.getWidth(), (fullImage.getHeight() / 2) - 10);
+
+					//show bottom half of image when pressed
+					Image scaledBottomImage = croppedBottomHalf.getScaledInstance(400, 65, Image.SCALE_SMOOTH);
+					BufferedImage bufferedBottomImage = new BufferedImage(400, 65, BufferedImage.TYPE_INT_ARGB);
+					Graphics2D g2 = bufferedBottomImage.createGraphics();
+					g2.drawImage(scaledBottomImage, 0, 0, null);
+
+					RescaleOp op = new RescaleOp(0.6f, 0, null); //dark effect and add the darker image
+					op.filter(bufferedBottomImage, bufferedBottomImage); 
+
+					ImageIcon darkIcon = new ImageIcon(bufferedBottomImage);
+					startGameButton.setIcon(darkIcon);
+
+					int pressedWidth = startGameButton.getWidth(); //adjust position when pressed
+					int pressedHeight = startGameButton.getHeight();
+					int pressedX = startGameButton.getX() + 5;
+					int pressedY = startGameButton.getY() + 2;
+					startGameButton.setBounds(pressedX, pressedY, pressedWidth, pressedHeight);
+				}
+
+				public void mouseReleased(MouseEvent e)
+				{
+					startGameButton.setIcon(currentIcon); //restore image
+					startGameButton.setBounds((startGameButton.getX() - 5), (startGameButton.getY() - 2), startGameButton.getWidth() + 10, startGameButton.getHeight() + 4);
+				}
+
+				public void mouseClicked(MouseEvent e) {}
+			}
+
+			buttonHandler bh = new buttonHandler(); //hover and press effect
+			startGameButton.addMouseListener(bh);
+
+			JScrollPane forensicsScroll = new JScrollPane(layeredPane, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar verticalBar = forensicsScroll.getVerticalScrollBar();
+			forensicsScroll.setPreferredSize(new Dimension(scrollPaneWidth, 800));
+			forensicsScroll.setBorder(null);
+
+			verticalBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(110, 0, 0);
+				Color trackColor = new Color(169, 169, 169);
+
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+
+				
+
+			});
+
+			add(forensicsScroll, BorderLayout.CENTER);
 		}
 	}
 }
