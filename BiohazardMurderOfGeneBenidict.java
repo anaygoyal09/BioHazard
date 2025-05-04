@@ -82,7 +82,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 {
 	boolean startClip;
 	String goingBacktoClue;
-	
+	protected boolean correct1, correct2, correct3, correct4, correct5, correct6, correct7;
+
 	public BiohazardMurderOfGeneBenidictHolder()
 	{
 		setBackground(Color.BLACK);
@@ -94,15 +95,16 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		thirdCard question1 = new thirdCard(this, cards);
 		clue1 c1 = new clue1(this, cards);
 		clue2 c2 = new clue2(this,cards);
-		clue2 c3 = new clue2(this,cards);
-		clue2 c4 = new clue2(this,cards);
-		clue2 c5 = new clue2(this,cards);
-		clue2 c6 = new clue2(this,cards);
-		clue2 c7 = new clue2(this,cards);
+		clue3 c3 = new clue3(this,cards);
+		clue4 c4 = new clue4(this,cards);
+		clue5 c5 = new clue5(this,cards);
+		clue6 c6 = new clue6(this,cards);
+		clue7 c7 = new clue7(this,cards);
 		forensicsReport report2 = new forensicsReport(this, cards);
-		
-		
-		
+		correct1 = correct2 = correct3 = correct4 = correct5 = correct6 = correct7 = false;
+
+
+
 
 		add(title, "title");
 		add(report, "report");
@@ -115,7 +117,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		add(c6, "clue6");
 		add(c7, "clue7");
 		add(report2, "forensicsReport");
-		
+
 		startClip = false;
 	}
 
@@ -744,7 +746,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			ImageIcon storeGif = new ImageIcon("startMurderIntroClip.gif");        
 			startGameClip = storeGif.getImage();	
-			
+
 
 			retrieveImage();
 		}
@@ -828,19 +830,19 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				g.fillRect(0, 0, 1300, 800);
 			}
 
-			
 
-			
+
+
 			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, boardTransparency));
 			g2d.drawImage(murderBoard, 0, -40, 1300, 820, this);
-			
+
 
 			g2d.setColor(new Color(0, 0, 0, 80));
 
 			if(clueHovered[0]) //ADD && BLACKSCREEN LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FOR MAKING IT BETTER
 				g2d.fillRect(108, 189, 117, 147);
 
-			
+
 
 			else if(clueHovered[1])
 				g2d.fillRect(563, 136, 122, 120);
@@ -854,11 +856,11 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			else if(clueHovered[3])
 				g2d.fillPolygon(xShape4, yShape4, 18);
-			
+
 			else if(clueHovered[4])
 				g2d.fillPolygon(xShape7, yShape7, 19);
 
-			
+
 			else if(clueHovered[5])
 			{
 				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347      ,333, 333,325,325,277, 277,      261, 261};
@@ -880,14 +882,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(cluePressed[0])
 			{
 				g2d.fillRect(108, 189, 117, 147);
-				
+
 			}
-			
+
 
 			else if(cluePressed[1])
 			{
 				g2d.fillRect(563, 136, 122, 120);
-				
+
 			}
 
 			else if(cluePressed[2])
@@ -895,18 +897,18 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				g2d.fillRect(908, 168, 101, 88);
 				g2d.fillRect(1009, 142, 116, 116);
 				g2d.fillRect(1000, 257, 110, 39);
-				
-				
+
+
 			}
 
 			else if(cluePressed[3])
 			{
 				g2d.setColor(new Color(0, 100, 0, 80));
 				g2d.fillPolygon(xShape4, yShape4, 18);
-			
+
 			}
 
-			
+
 
 
 			else if(cluePressed[4])
@@ -919,13 +921,52 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347,333, 333,325,325,277, 277,      261, 261};
 				int[] eightY = {560, 663, 663, 680, 680, 695, 695, 721,721, 744 ,780 ,740 ,721 ,721 ,701 ,701 ,688 ,688 ,662 ,662 ,633 ,633 ,620 ,620 ,568 ,568, 547, 547,562, 562,575, 575 ,560};
 				g2d.fillPolygon(eightX,eightY ,33);
-				
-				
+
+
 			}
 			else if(cluePressed[6])
 			{
 				g2d.fillRect(980, 554, 152, 99);
-				
+
+			}
+			if(correct1)
+			{
+				g2d.setColor(new Color(0, 100, 0, 80));
+				g2d.fillRect(108, 189, 117, 147);
+			}
+			if(correct2)
+			{
+				g2d.setColor(new Color(0, 100, 0, 80));
+				g2d.fillRect(563, 136, 122, 120);
+			}
+			if(correct3)
+			{
+				g2d.setColor(new Color(0, 100, 0, 80));
+				g2d.fillRect(908, 168, 101, 88);
+				g2d.fillRect(1009, 142, 116, 116);
+				g2d.fillRect(1000, 257, 110, 39);
+			}
+			if(correct4)
+			{
+				g2d.setColor(new Color(0, 100, 0, 80));
+				g2d.fillPolygon(xShape4, yShape4, 18);
+			}
+			if(correct5)
+			{
+				g2d.setColor(new Color(0, 100, 0, 80));
+				g2d.fillPolygon(xShape7, yShape7, 19);
+			}
+			if(correct6)
+			{
+				g2d.setColor(new Color(0, 100, 0, 80));
+				int[] eightX = {209, 209, 217, 217, 239, 239,266, 266,275, 275,286, 408, 395, 391,391, 383,383, 371, 371, 362,362, 355, 355, 347, 347      ,333, 333,325,325,277, 277      ,261, 261};
+				int[] eightY = {560, 663, 663, 680, 680, 695, 695,721 ,721 ,744 ,780 ,740 ,721 ,721 ,701 ,701 ,688 ,688 ,662 ,662 ,633 ,633 ,620 ,620 ,568 ,568 ,547 ,547 ,562 ,562 ,575 ,575 ,560};
+				g2d.fillPolygon(eightX,eightY ,33);
+			}
+			if(correct7)
+			{
+				g2d.setColor(new Color(0, 100, 0, 80));
+				g2d.fillRect(980,554 ,152 ,99);
 			}
 		}
 
@@ -934,33 +975,53 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			requestFocusInWindow();
 		}
 
-	    public void mouseClicked(MouseEvent e) {
-	        int x = e.getX();
-	        int y = e.getY();
+		public void mouseClicked(MouseEvent e) {
+			int x = e.getX();
+			int y = e.getY();
 
-	        if (x >= 115 && x <= 224 && y >= 189 && y <= 334) {
-	            panelCards.goingBacktoClue = "clue1";
-	            cards.show(panelCards, "clue1");
-	        } else if (x >= 563 && x <= 685 && y >= 137 && y <= 257) {
-	            panelCards.goingBacktoClue = "clue2";
-	            cards.show(panelCards, "clue2");
-	        } else if (x >= 909 && x <= 1125 && y >= 142 && y <= 297) {
-	            panelCards.goingBacktoClue = "clue3";
-	            cards.show(panelCards, "clue3");
-	        } else if (x >= 158 && x <= 316 && y >= 355 && y <= 525) {
-	            panelCards.goingBacktoClue = "clue4";
-	            cards.show(panelCards, "clue4");
-	        } else if (x >= 78 && y >= 540 && x <= 192 && y <= 693) {
-	            panelCards.goingBacktoClue = "clue5";
-	            cards.show(panelCards, "clue5");
-	        } else if (x >= 210 && y >= 565 && x <= 392 && y <= 759) {
-	            panelCards.goingBacktoClue = "clue6";
-	            cards.show(panelCards, "clue6");
-	        } else if (x >= 981 && y >= 556 && x <= 1131 && y <= 655) {
-	            panelCards.goingBacktoClue = "clue7";
-	            cards.show(panelCards, "clue7");
-	        }
-	    }
+			if (x >= 115 && x <= 224 && y >= 189 && y <= 334) 
+			{
+				panelCards.goingBacktoClue = "clue1";
+				cards.show(panelCards, "clue1");
+				System.out.println("clue1");
+			} 
+			else if (x >= 563 && x <= 685 && y >= 137 && y <= 257) 
+			{
+				panelCards.goingBacktoClue = "clue2";
+				cards.show(panelCards, "clue2");
+				System.out.println("clue2");
+			}
+			else if (x >= 909 && x <= 1125 && y >= 142 && y <= 297) 
+			{
+				panelCards.goingBacktoClue = "clue3";
+				cards.show(panelCards, "clue3");
+				System.out.println("clue3");
+			} else if (x >= 158 && x <= 316 && y >= 355 && y <= 525) 
+			{
+				panelCards.goingBacktoClue = "clue4";
+				cards.show(panelCards, "clue4");
+				System.out.println("clue4");
+				
+			} 
+			else if (x >= 78 && y >= 540 && x <= 192 && y <= 693) 
+			{
+				panelCards.goingBacktoClue = "clue5";
+				cards.show(panelCards, "clue5");
+				System.out.println("clue5");
+			} 
+			else if (x >= 210 && y >= 565 && x <= 392 && y <= 759)
+			{
+				panelCards.goingBacktoClue = "clue6";
+				cards.show(panelCards, "clue6");
+				System.out.println("clue6");
+			} 
+			else if (x >= 981 && y >= 556 && x <= 1131 && y <= 655) 
+			{
+				panelCards.goingBacktoClue = "clue7";
+				cards.show(panelCards, "clue7");
+				System.out.println("clue7");
+			}
+		}
 
 		public void mousePressed(MouseEvent e)
 		{
@@ -970,7 +1031,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
 				cluePressed[0] = true;
 
-			
+
 
 			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
 				cluePressed[1] = true;
@@ -981,13 +1042,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
 				cluePressed[3] = true;
 
-			
-			
+
+
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
 				cluePressed[4] = true;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
 				cluePressed[5] = true;
-			
+
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
 				cluePressed[6] = true;
 
@@ -1012,12 +1073,12 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
 				cluePressed[3] = false;
 
-			
+
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
 				cluePressed[4] = false;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
 				cluePressed[5] = false;
-			
+
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
 				cluePressed[6] = false;
 
@@ -1035,7 +1096,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			int x = e.getX();
 			int y = e.getY();
-			
+
 
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
 				clueHovered[0] = true;
@@ -1048,12 +1109,12 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
 				clueHovered[3] = true;
-			
+
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
 				clueHovered[4] = true;
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
 				clueHovered[5] = true;
-			
+
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
 			{
 				clueHovered[6] = true;
@@ -1074,10 +1135,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			repaint();
 
 		}
-	
-		
+
+
 	}
-	
+
 	class clue1 extends JPanel
 	{
 		BiohazardMurderOfGeneBenidictHolder panelCards;
@@ -1085,16 +1146,29 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public clue1(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
+			System.out.println("clue1 created"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+			backButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
 					cards.show(panelCards, "forensicsReport");
 				}
 			});
 			add(backButton);
+			JButton gradeAnswerButton = new JButton("Grade Answer");
+			gradeAnswerButton.setBounds(10, 50, 100, 30);
+			gradeAnswerButton.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			        cards.show(panelCards, "clueBoard");
+			        correct1 = true; // Set the correct variable
+			        panelCards.repaint(); // Trigger repaint to update the UI
+			    }
+			});
+			add(gradeAnswerButton);
 		}
 	}
 	class clue2 extends JPanel
@@ -1104,6 +1178,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public clue2(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
+			System.out.println("clue2 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
@@ -1111,9 +1186,19 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			backButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					cards.show(panelCards, "forensicsReport");
+					;
 				}
 			});
 			add(backButton);
+			JButton gradeAnswerButton = new JButton("Grade Answer");
+			gradeAnswerButton.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			        cards.show(panelCards, "clueBoard");
+			        correct2 = true; // Set the correct variable
+			        panelCards.repaint(); // Trigger repaint to update the UI
+			    }
+			});
+			add(gradeAnswerButton);
 		}
 	}
 	class clue3 extends JPanel
@@ -1123,6 +1208,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public clue3(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
+			System.out.println("clue3 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
@@ -1133,7 +1219,21 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				}
 			});	
 			add(backButton);
+			JButton gradeAnswerButton = new JButton("Grade Answer");
 				
+			gradeAnswerButton.setBounds(10, 50, 100, 30);
+			 gradeAnswerButton.addActionListener(new ActionListener() {
+			       public void actionPerformed(ActionEvent e) {
+			           cards.show(panelCards, "clueBoard");
+			           correct3 = true; // Set the correct variable
+			           System.out.println("correct3 set to true"); // Debug statement
+			           panelCards.repaint(); // Trigger repaint to update the UI
+			       }
+			   });
+			
+				add(gradeAnswerButton);
+				
+
 		}
 	}
 	class clue4 extends JPanel
@@ -1143,6 +1243,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public clue4(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
+			System.out.println("clue4 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
@@ -1153,6 +1254,19 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				}
 			});
 			add(backButton);
+			JButton gradeAnswerButton = new JButton("Grade Answer");
+			gradeAnswerButton.setBounds(10, 50, 100, 30);
+				
+			gradeAnswerButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					cards.show(panelCards, "clueBoard");
+					correct4 = true;
+				}
+			});
+			add(gradeAnswerButton);
+			
 		}
 	}
 	class clue5 extends JPanel
@@ -1162,6 +1276,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public clue5(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
+			System.out.println("clue5 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
@@ -1172,6 +1287,17 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				}
 			});
 			add(backButton);
+			JButton gradeAnswerButton = new JButton("Grade Answer");
+			gradeAnswerButton.setBounds(10, 50, 100, 30);
+			gradeAnswerButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					cards.show(panelCards, "clueBoard");
+					correct5 = true;
+				}
+			});
+			add(gradeAnswerButton);
 		}
 	}
 	class clue6 extends JPanel
@@ -1181,6 +1307,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public clue6(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
+			System.out.println("clue6 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
@@ -1191,6 +1318,18 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				}
 			});
 			add(backButton);
+			JButton gradeAnswerButton = new JButton("Grade Answer");
+			gradeAnswerButton.setBounds(10, 50, 100, 30);
+			gradeAnswerButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					cards.show(panelCards, "clueBoard");
+					correct6 = true;
+				}
+			});
+			add(gradeAnswerButton);
+			
 		}
 	}
 	class clue7 extends JPanel
@@ -1200,6 +1339,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public clue7(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
+			System.out.println("clue7 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
@@ -1210,6 +1350,19 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				}
 			});
 			add(backButton);
+			JButton gradeAnswerButton = new JButton("Grade Answer");
+			gradeAnswerButton.setBounds(10, 50, 100, 30);
+			System.out.println("gradeAnswerButton created"); // Debug statement
+			gradeAnswerButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					cards.show(panelCards, "clueBoard");
+					correct7 = true;
+					System.out.println("correct7 set to true"); // Debug statement
+				}
+			});
+			add(gradeAnswerButton);
 		}
 	}
 	class forensicsReport extends JPanel
@@ -1273,7 +1426,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-	                cards.show(panelCards, panelCards.goingBacktoClue); // Navigate to the last clue
+					cards.show(panelCards, panelCards.goingBacktoClue); // Navigate to the last clue
 					startClip = true;
 					clip.repaint();
 				}
@@ -1464,7 +1617,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g2.fillRect(r.x, r.y, r.width, r.height);
 				}
 
-				
+
 
 			});
 
@@ -1478,7 +1631,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		            }
 		        });
 		        layeredPane.add(backButton, Integer.valueOf(1)); // Add the button to the layered pane
-		        */
+			 */
 		}
 	}
 }
