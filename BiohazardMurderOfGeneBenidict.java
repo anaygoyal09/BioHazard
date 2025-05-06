@@ -2,7 +2,81 @@
 //Arsh Abhinkar, Anay Goyal, Period 5
 //BiohazardMurderOfGeneBenidict.java
 //4/12/25
+/* 
+Main Class: BiohazardMurderOfGeneBenidict
 
+	1. Main Method:
+	2. Create an instance of BiohazardMurderOfGeneBenidict.
+	3. Call createFrame().
+	4. createFrame():
+	5. Create a JFrame with title "Biohazard: The Murder of Gene Benidict".
+	6. Set size, close operation, and other properties.
+	7. Add an instance of BiohazardMurderOfGeneBenidictHolder to the frame.
+	8. Make the frame visible.
+
+
+Class: BiohazardMurderOfGeneBenidictHolder
+
+	1. Constructor:
+	2. Set background color and layout to CardLayout.
+	3. Create instances of various cards (firstCard, secondCard, clue1, etc.).
+	4. Add these cards to the layout with unique identifiers.
+	5. Initialize boolean variables for tracking clues.
+
+
+Class: firstCard
+
+	1. Constructor:
+	2. Add mouse listeners for interaction.
+	3. Initialize animations and images (e.g., police lights, title image, start button).
+	4. Start hover animation and black screen transition.
+	5. blackScreen():
+	6. Start timers for black screen and title fade-in.
+	7. retrieveImage():
+	8. Load images for the title and start button.
+	9. startHoverAnimation():
+	10. Start a timer to animate the hover effect on the start button.
+	11. paintComponent():
+	12. Draw the background, title, and start button with transparency and animations.
+	13. Mouse Events:
+	14. Handle hover, click, and release events for the start button.
+	15. Navigate to the next card when the start button is clicked.
+
+
+Class: secondCard
+
+	1. Constructor:
+	2. Load and scale the forensics report image.
+	3. Add a button to navigate to the clue board.
+	4. Add hover and pulse animations for the button.
+
+week 2: 
+Class: thirdCard
+
+	1. Constructor:
+	2. Add mouse listeners for interaction.
+	3. Load images for the murder board and start clip.
+	4. Start a timer for transitioning from the clip to the murder board.
+	5. paintComponent():
+	6. Draw the murder board and highlight clues when hovered or clicked.
+	7. Mouse Events:
+	8. Handle hover and click events for clues.
+	9. Navigate to the corresponding clue card when a clue is clicked.
+
+
+Classes: clue1, clue2, ..., clue7
+
+	1. Constructor:
+	2. Add a button to navigate back to the forensics report.
+	3. Add a button to grade the answer and mark the clue as correct.
+
+
+Class: forensicsReport
+
+	1. Constructor:
+	2. Load and display the forensics report image.
+	3. Add a button to navigate back to the last clue.
+ */
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
@@ -1001,7 +1075,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				panelCards.goingBacktoClue = "clue4";
 				cards.show(panelCards, "clue4");
 				System.out.println("clue4");
-				
+
 			} 
 			else if (x >= 78 && y >= 540 && x <= 192 && y <= 693) 
 			{
@@ -1160,15 +1234,31 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			});
 			add(backButton);
 			JButton gradeAnswerButton = new JButton("Grade Answer");
+
 			gradeAnswerButton.setBounds(10, 50, 100, 30);
 			gradeAnswerButton.addActionListener(new ActionListener() {
-			    public void actionPerformed(ActionEvent e) {
-			        cards.show(panelCards, "clueBoard");
-			        correct1 = true; // Set the correct variable
-			        panelCards.repaint(); // Trigger repaint to update the UI
-			    }
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "clueBoard");
+					correct1 = true; // Set the correct variable
+					panelCards.repaint(); // Trigger repaint to update the UI
+				}
 			});
+
 			add(gradeAnswerButton);
+
+		}
+		public void paintComponent(Graphics g)
+		{
+			super.paintComponent(g);
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, getWidth(), getHeight());
+			g.setColor(Color.BLACK);
+			g.drawString("Clue 1", 10, 20); // Example text
+			Image Grader= new ImageIcon("GradeAnswer.png").getImage();
+			
+			g.drawImage(Grader, 100, 1, 100, 100, this);
+			
+			
 		}
 	}
 	class clue2 extends JPanel
@@ -1183,7 +1273,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			cards = cardsIn;
 			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
+			backButton.addActionListener(new ActionListener()
+			{
 				public void actionPerformed(ActionEvent e) {
 					cards.show(panelCards, "forensicsReport");
 					;
@@ -1191,12 +1282,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			});
 			add(backButton);
 			JButton gradeAnswerButton = new JButton("Grade Answer");
-			gradeAnswerButton.addActionListener(new ActionListener() {
-			    public void actionPerformed(ActionEvent e) {
-			        cards.show(panelCards, "clueBoard");
-			        correct2 = true; // Set the correct variable
-			        panelCards.repaint(); // Trigger repaint to update the UI
-			    }
+			gradeAnswerButton.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "clueBoard");
+					correct2 = true; // Set the correct variable
+					panelCards.repaint(); // Trigger repaint to update the UI
+				}
 			});
 			add(gradeAnswerButton);
 		}
@@ -1220,19 +1312,19 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			});	
 			add(backButton);
 			JButton gradeAnswerButton = new JButton("Grade Answer");
-				
+
 			gradeAnswerButton.setBounds(10, 50, 100, 30);
-			 gradeAnswerButton.addActionListener(new ActionListener() {
-			       public void actionPerformed(ActionEvent e) {
-			           cards.show(panelCards, "clueBoard");
-			           correct3 = true; // Set the correct variable
-			           System.out.println("correct3 set to true"); // Debug statement
-			           panelCards.repaint(); // Trigger repaint to update the UI
-			       }
-			   });
-			
-				add(gradeAnswerButton);
-				
+			gradeAnswerButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cards.show(panelCards, "clueBoard");
+					correct3 = true; // Set the correct variable
+					System.out.println("correct3 set to true"); // Debug statement
+					panelCards.repaint(); // Trigger repaint to update the UI
+				}
+			});
+
+			add(gradeAnswerButton);
+
 
 		}
 	}
@@ -1256,7 +1348,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			add(backButton);
 			JButton gradeAnswerButton = new JButton("Grade Answer");
 			gradeAnswerButton.setBounds(10, 50, 100, 30);
-				
+
 			gradeAnswerButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e) 
@@ -1266,7 +1358,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				}
 			});
 			add(gradeAnswerButton);
-			
+
 		}
 	}
 	class clue5 extends JPanel
@@ -1329,7 +1421,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				}
 			});
 			add(gradeAnswerButton);
-			
+
 		}
 	}
 	class clue7 extends JPanel
