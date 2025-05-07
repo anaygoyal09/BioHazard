@@ -1053,43 +1053,43 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int x = e.getX();
 			int y = e.getY();
 
-			if (x >= 115 && x <= 224 && y >= 189 && y <= 334) 
+			if (x >= 115 && x <= 224 && y >= 189 && y <= 334 && !correct1) 
 			{
 				panelCards.goingBacktoClue = "clue1";
 				cards.show(panelCards, "clue1");
 				System.out.println("clue1");
 			} 
-			else if (x >= 563 && x <= 685 && y >= 137 && y <= 257) 
+			else if (x >= 563 && x <= 685 && y >= 137 && y <= 257&& !correct2) 
 			{
 				panelCards.goingBacktoClue = "clue2";
 				cards.show(panelCards, "clue2");
 				System.out.println("clue2");
 			}
-			else if (x >= 909 && x <= 1125 && y >= 142 && y <= 297) 
+			else if (x >= 909 && x <= 1125 && y >= 142 && y <= 297&&!correct3) 
 			{
 				panelCards.goingBacktoClue = "clue3";
 				cards.show(panelCards, "clue3");
 				System.out.println("clue3");
-			} else if (x >= 158 && x <= 316 && y >= 355 && y <= 525) 
+			} else if (x >= 158 && x <= 316 && y >= 355 && y <= 525&&!correct4) 
 			{
 				panelCards.goingBacktoClue = "clue4";
 				cards.show(panelCards, "clue4");
 				System.out.println("clue4");
 
 			} 
-			else if (x >= 78 && y >= 540 && x <= 192 && y <= 693) 
+			else if (x >= 78 && y >= 540 && x <= 192 && y <= 693&&!correct5) 
 			{
 				panelCards.goingBacktoClue = "clue5";
 				cards.show(panelCards, "clue5");
 				System.out.println("clue5");
 			} 
-			else if (x >= 210 && y >= 565 && x <= 392 && y <= 759)
+			else if (x >= 210 && y >= 565 && x <= 392 && y <= 759&& !correct6)
 			{
 				panelCards.goingBacktoClue = "clue6";
 				cards.show(panelCards, "clue6");
 				System.out.println("clue6");
 			} 
-			else if (x >= 981 && y >= 556 && x <= 1131 && y <= 655) 
+			else if (x >= 981 && y >= 556 && x <= 1131 && y <= 655&&!correct7) 
 			{
 				panelCards.goingBacktoClue = "clue7";
 				cards.show(panelCards, "clue7");
@@ -1213,54 +1213,61 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 	}
 
-	class clue1 extends JPanel
-	{
+	class clue1 extends JPanel implements MouseListener {
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
 
-		public clue1(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
-		{
-			System.out.println("clue1 created"); // Debug statement
+		public clue1(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn) {
 			panelCards = panelCardsIn;
 			cards = cardsIn;
+
+			// Add a back button
 			JButton backButton = new JButton("See Forensics Report");
 			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e) 
-				{
+			backButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					cards.show(panelCards, "forensicsReport");
 				}
 			});
 			add(backButton);
-			JButton gradeAnswerButton = new JButton("Grade Answer");
 
-			gradeAnswerButton.setBounds(10, 50, 100, 30);
-			gradeAnswerButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "clueBoard");
-					correct1 = true; // Set the correct variable
-					panelCards.repaint(); // Trigger repaint to update the UI
-				}
-			});
-
-			add(gradeAnswerButton);
-
+			// Add MouseListener to the panel
+			addMouseListener(this);
 		}
-		public void paintComponent(Graphics g)
-		{
+
+		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, getWidth(), getHeight());
 			g.setColor(Color.BLACK);
 			g.drawString("Clue 1", 10, 20); // Example text
-			Image Grader= new ImageIcon("GradeAnswer.png").getImage();
-			
-			g.drawImage(Grader, 100, 1, 100, 100, this);
-			
-			
+
+			// Draw the "Grade Answer" image
+			Image grader = new ImageIcon("GradeAnswer.png").getImage();
+			g.drawImage(grader, 500, 690, 300, 50, this);
 		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int x = e.getX();
+			int y = e.getY();
+
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 500 && x <= 800 && y >= 690 && y <= 740) {
+				System.out.println("Grade Answer button clicked");
+				cards.show(panelCards, "clueBoard");
+				panelCards.correct1 = true; // Set the correct variable
+				panelCards.repaint(); // Trigger repaint to update the UI
+			}
+		}
+
+		// Unused MouseListener methods
+		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {}
 	}
+
 	class clue2 extends JPanel
 	{
 		BiohazardMurderOfGeneBenidictHolder panelCards;
@@ -1572,7 +1579,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					int currentWidth = startGameButton.getWidth();
 					int currentHeight = startGameButton.getHeight();
 
-					public void actionPerformed(ActionEvent evt) {
+					public void actionPerformed(ActionEvent evt)
+					{
 						if(currentWidth >= hoverWidth && currentHeight >= hoverHeight)
 							expandTimer.stop();
 
