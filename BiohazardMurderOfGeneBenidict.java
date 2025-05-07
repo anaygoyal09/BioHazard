@@ -1213,191 +1213,931 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 	}
 
-	class clue1 extends JPanel implements MouseListener {
+	class clue1 extends JPanel implements MouseListener
+	{
+		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-
-		public clue1(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn) {
+		Image background;
+		public clue1(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-
-			// Add a back button
-			JButton backButton = new JButton("See Forensics Report");
-			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "forensicsReport");
-				}
-			});
-			add(backButton);
-
-			// Add MouseListener to the panel
+			retreiveImage();
+			
+			
+			setupLayout();
+			repaint();
 			addMouseListener(this);
 		}
 
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.setColor(Color.WHITE);
-			g.fillRect(0, 0, getWidth(), getHeight());
-			g.setColor(Color.BLACK);
-			g.drawString("Clue 1", 10, 20); // Example text
-
-			// Draw the "Grade Answer" image
-			Image grader = new ImageIcon("GradeAnswer.png").getImage();
-			g.drawImage(grader, 500, 690, 300, 50, this);
+		public void retreiveImage()
+		{
+			try
+			{
+				background = ImageIO.read(new File("question1BG.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
 		}
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
+		
+		
+		class centerPanel extends JPanel
+		{
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(background != null)
+				{
+					
+					g.drawImage(background, -20, 0, 1050, 870, this);
+				}
+				// Draw the "Grade Answer" image
+				Image grader = new ImageIcon("GradeAnswer.png").getImage();
+				g.drawImage(grader, 375, 700, 300, 50, this);
+				
+				Image hint = new ImageIcon("forensicButton.png").getImage();
+				g.drawImage(hint, 50, 695, 50, 60, this);
+				if (darkenButton)
+				{
+					g.setColor(new Color(0, 0, 0, 80));
+					g.fillRect(375, 700, 300, 50);
+				}
+			
+
+			}
+		}
+
+		class cluePanelWithBackground extends JPanel
+		{
+			private Image backgroundImage;
+			public cluePanelWithBackground(String imagePath)
+			{
+				try
+				{
+					backgroundImage = ImageIO.read(new File(imagePath));
+				}
+				catch (IOException e)
+				{
+					System.out.println("Failed to load background image for clue panel.");
+					e.printStackTrace();
+				}
+			}
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(backgroundImage != null)
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+				
+			}
+		}
+
+		centerPanel cp = new centerPanel();
+		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+
+		public void setupLayout()
+		{
+			setLayout(new BorderLayout());
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(1250, 800));
+			cp.setBounds(-30, 0, 1000, 800);
+			cp.setOpaque(false);
+			cluePan.setLayout(new BoxLayout(cluePan, BoxLayout.Y_AXIS));
+			cluePan.setOpaque(false);
+			cluePan.setPreferredSize(new Dimension(260, 1000));
+			JScrollPane scrollPane = new JScrollPane(cluePan, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar clueScrollBar = scrollPane.getVerticalScrollBar();
+			clueScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(182, 119, 62);
+				Color trackColor = new Color(71, 35, 32);
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
+				}
+			});
+			scrollPane.setBounds(970, 0, 330, 800);
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			scrollPane.setBorder(null);
+			layeredPane.add(cp, Integer.valueOf(1));
+			layeredPane.add(scrollPane, Integer.valueOf(1));
+			add(layeredPane, BorderLayout.CENTER);
+		
+		}
+
+		
+		public void mouseClicked(MouseEvent e)
+		{
 			int x = e.getX();
 			int y = e.getY();
 
 			// Check if the click is within the bounds of the "Grade Answer" image
-			if (x >= 500 && x <= 800 && y >= 690 && y <= 740) {
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
 				System.out.println("Grade Answer button clicked");
 				cards.show(panelCards, "clueBoard");
 				panelCards.correct1 = true; // Set the correct variable
 				panelCards.repaint(); // Trigger repaint to update the UI
 			}
+			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			{
+				cards.show(panelCards, "forensicsReport");
+			}
+			
 		}
-
-		// Unused MouseListener methods
-		public void mousePressed(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {}		
 		public void mouseReleased(MouseEvent e) {}
-		public void mouseEntered(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+				
+				darkenButton = true;
+				repaint();
+			
+			}
+		}
 		public void mouseExited(MouseEvent e) {}
+		
 	}
 
-	class clue2 extends JPanel
+	class clue2 extends JPanel implements MouseListener
 	{
+		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-
+		Image background;
 		public clue2(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
-			System.out.println("clue2 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("See Forensics Report");
-			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "forensicsReport");
-					;
-				}
-			});
-			add(backButton);
-			JButton gradeAnswerButton = new JButton("Grade Answer");
-			gradeAnswerButton.addActionListener(new ActionListener() 
-			{
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "clueBoard");
-					correct2 = true; // Set the correct variable
-					panelCards.repaint(); // Trigger repaint to update the UI
-				}
-			});
-			add(gradeAnswerButton);
+			retreiveImage();
+			
+			
+			setupLayout();
+			repaint();
+			addMouseListener(this);
 		}
+
+		public void retreiveImage()
+		{
+			try
+			{
+				background = ImageIO.read(new File("question1BG.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		class centerPanel extends JPanel
+		{
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(background != null)
+				{
+					
+					g.drawImage(background, -20, 0, 1050, 870, this);
+				}
+				// Draw the "Grade Answer" image
+				Image grader = new ImageIcon("GradeAnswer.png").getImage();
+				g.drawImage(grader, 375, 700, 300, 50, this);
+				
+				Image hint = new ImageIcon("forensicButton.png").getImage();
+				g.drawImage(hint, 50, 695, 50, 60, this);
+				if (darkenButton)
+				{
+					g.setColor(new Color(0, 0, 0, 80));
+					g.fillRect(375, 700, 300, 50);
+				}
+			
+
+			}
+		}
+
+		class cluePanelWithBackground extends JPanel
+		{
+			private Image backgroundImage;
+			public cluePanelWithBackground(String imagePath)
+			{
+				try
+				{
+					backgroundImage = ImageIO.read(new File(imagePath));
+				}
+				catch (IOException e)
+				{
+					System.out.println("Failed to load background image for clue panel.");
+					e.printStackTrace();
+				}
+			}
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(backgroundImage != null)
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+				
+			}
+		}
+
+		centerPanel cp = new centerPanel();
+		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+
+		public void setupLayout()
+		{
+			setLayout(new BorderLayout());
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(1250, 800));
+			cp.setBounds(-30, 0, 1000, 800);
+			cp.setOpaque(false);
+			cluePan.setLayout(new BoxLayout(cluePan, BoxLayout.Y_AXIS));
+			cluePan.setOpaque(false);
+			cluePan.setPreferredSize(new Dimension(260, 1000));
+			JScrollPane scrollPane = new JScrollPane(cluePan, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar clueScrollBar = scrollPane.getVerticalScrollBar();
+			clueScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(182, 119, 62);
+				Color trackColor = new Color(71, 35, 32);
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
+				}
+			});
+			scrollPane.setBounds(970, 0, 330, 800);
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			scrollPane.setBorder(null);
+			layeredPane.add(cp, Integer.valueOf(1));
+			layeredPane.add(scrollPane, Integer.valueOf(1));
+			add(layeredPane, BorderLayout.CENTER);
+		
+		}
+
+		
+		public void mouseClicked(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button clicked");
+				cards.show(panelCards, "clueBoard");
+				panelCards.correct2 = true; // Set the correct variable
+				panelCards.repaint(); // Trigger repaint to update the UI
+			}
+			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			{
+				cards.show(panelCards, "forensicsReport");
+			}
+			
+		}
+		public void mousePressed(MouseEvent e) {}		
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+				
+				darkenButton = true;
+				repaint();
+			
+			}
+		}
+		public void mouseExited(MouseEvent e) {}
+		
 	}
-	class clue3 extends JPanel
+	class clue3 extends JPanel implements MouseListener
 	{
+		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-
+		Image background;
 		public clue3(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
-			System.out.println("clue3 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("See Forensics Report");
-			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "forensicsReport");
-				}
-			});	
-			add(backButton);
-			JButton gradeAnswerButton = new JButton("Grade Answer");
+			retreiveImage();
+			
+			
+			setupLayout();
+			repaint();
+			addMouseListener(this);
+		}
 
-			gradeAnswerButton.setBounds(10, 50, 100, 30);
-			gradeAnswerButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "clueBoard");
-					correct3 = true; // Set the correct variable
-					System.out.println("correct3 set to true"); // Debug statement
-					panelCards.repaint(); // Trigger repaint to update the UI
+		public void retreiveImage()
+		{
+			try
+			{
+				background = ImageIO.read(new File("question1BG.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		class centerPanel extends JPanel
+		{
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(background != null)
+				{
+					
+					g.drawImage(background, -20, 0, 1050, 870, this);
+				}
+				// Draw the "Grade Answer" image
+				Image grader = new ImageIcon("GradeAnswer.png").getImage();
+				g.drawImage(grader, 375, 700, 300, 50, this);
+				
+				Image hint = new ImageIcon("forensicButton.png").getImage();
+				g.drawImage(hint, 50, 695, 50, 60, this);
+				if (darkenButton)
+				{
+					g.setColor(new Color(0, 0, 0, 80));
+					g.fillRect(375, 700, 300, 50);
+				}
+			
+
+			}
+		}
+
+		class cluePanelWithBackground extends JPanel
+		{
+			private Image backgroundImage;
+			public cluePanelWithBackground(String imagePath)
+			{
+				try
+				{
+					backgroundImage = ImageIO.read(new File(imagePath));
+				}
+				catch (IOException e)
+				{
+					System.out.println("Failed to load background image for clue panel.");
+					e.printStackTrace();
+				}
+			}
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(backgroundImage != null)
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+				
+			}
+		}
+
+		centerPanel cp = new centerPanel();
+		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+
+		public void setupLayout()
+		{
+			setLayout(new BorderLayout());
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(1250, 800));
+			cp.setBounds(-30, 0, 1000, 800);
+			cp.setOpaque(false);
+			cluePan.setLayout(new BoxLayout(cluePan, BoxLayout.Y_AXIS));
+			cluePan.setOpaque(false);
+			cluePan.setPreferredSize(new Dimension(260, 1000));
+			JScrollPane scrollPane = new JScrollPane(cluePan, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar clueScrollBar = scrollPane.getVerticalScrollBar();
+			clueScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(182, 119, 62);
+				Color trackColor = new Color(71, 35, 32);
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
 				}
 			});
-
-			add(gradeAnswerButton);
-
-
+			scrollPane.setBounds(970, 0, 330, 800);
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			scrollPane.setBorder(null);
+			layeredPane.add(cp, Integer.valueOf(1));
+			layeredPane.add(scrollPane, Integer.valueOf(1));
+			add(layeredPane, BorderLayout.CENTER);
+		
 		}
+
+		
+		public void mouseClicked(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button clicked");
+				cards.show(panelCards, "clueBoard");
+				panelCards.correct3 = true; // Set the correct variable
+				panelCards.repaint(); // Trigger repaint to update the UI
+			}
+			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			{
+				cards.show(panelCards, "forensicsReport");
+			}
+			
+		}
+		public void mousePressed(MouseEvent e) {}		
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+				
+				darkenButton = true;
+				repaint();
+			
+			}
+		}
+		public void mouseExited(MouseEvent e) {}
+		
 	}
-	class clue4 extends JPanel
+	class clue4 extends JPanel implements MouseListener
 	{
+		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-
+		Image background;
 		public clue4(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
-			System.out.println("clue4 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("See Forensics Report");
-			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "forensicsReport");
-				}
-			});
-			add(backButton);
-			JButton gradeAnswerButton = new JButton("Grade Answer");
-			gradeAnswerButton.setBounds(10, 50, 100, 30);
-
-			gradeAnswerButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e) 
-				{
-					cards.show(panelCards, "clueBoard");
-					correct4 = true;
-				}
-			});
-			add(gradeAnswerButton);
-
+			retreiveImage();
+			
+			
+			setupLayout();
+			repaint();
+			addMouseListener(this);
 		}
+
+		public void retreiveImage()
+		{
+			try
+			{
+				background = ImageIO.read(new File("question1BG.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		class centerPanel extends JPanel
+		{
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(background != null)
+				{
+					
+					g.drawImage(background, -20, 0, 1050, 870, this);
+				}
+				// Draw the "Grade Answer" image
+				Image grader = new ImageIcon("GradeAnswer.png").getImage();
+				g.drawImage(grader, 375, 700, 300, 50, this);
+				
+				Image hint = new ImageIcon("forensicButton.png").getImage();
+				g.drawImage(hint, 50, 695, 50, 60, this);
+				if (darkenButton)
+				{
+					g.setColor(new Color(0, 0, 0, 80));
+					g.fillRect(375, 700, 300, 50);
+				}
+			
+
+			}
+		}
+
+		class cluePanelWithBackground extends JPanel
+		{
+			private Image backgroundImage;
+			public cluePanelWithBackground(String imagePath)
+			{
+				try
+				{
+					backgroundImage = ImageIO.read(new File(imagePath));
+				}
+				catch (IOException e)
+				{
+					System.out.println("Failed to load background image for clue panel.");
+					e.printStackTrace();
+				}
+			}
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(backgroundImage != null)
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+				
+			}
+		}
+
+		centerPanel cp = new centerPanel();
+		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+
+		public void setupLayout()
+		{
+			setLayout(new BorderLayout());
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(1250, 800));
+			cp.setBounds(-30, 0, 1000, 800);
+			cp.setOpaque(false);
+			cluePan.setLayout(new BoxLayout(cluePan, BoxLayout.Y_AXIS));
+			cluePan.setOpaque(false);
+			cluePan.setPreferredSize(new Dimension(260, 1000));
+			JScrollPane scrollPane = new JScrollPane(cluePan, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar clueScrollBar = scrollPane.getVerticalScrollBar();
+			clueScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(182, 119, 62);
+				Color trackColor = new Color(71, 35, 32);
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
+				}
+			});
+			scrollPane.setBounds(970, 0, 330, 800);
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			scrollPane.setBorder(null);
+			layeredPane.add(cp, Integer.valueOf(1));
+			layeredPane.add(scrollPane, Integer.valueOf(1));
+			add(layeredPane, BorderLayout.CENTER);
+		
+		}
+
+		
+		public void mouseClicked(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button clicked");
+				cards.show(panelCards, "clueBoard");
+				panelCards.correct4 = true; // Set the correct variable
+				panelCards.repaint(); // Trigger repaint to update the UI
+			}
+			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			{
+				cards.show(panelCards, "forensicsReport");
+			}
+			
+		}
+		public void mousePressed(MouseEvent e) {}		
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+				
+				darkenButton = true;
+				repaint();
+			
+			}
+		}
+		public void mouseExited(MouseEvent e) {}
+		
 	}
-	class clue5 extends JPanel
+	class clue5 extends JPanel implements MouseListener
 	{
+		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-
+		Image background;
 		public clue5(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
-			System.out.println("clue5 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("See Forensics Report");
-			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "forensicsReport");
-				}
-			});
-			add(backButton);
-			JButton gradeAnswerButton = new JButton("Grade Answer");
-			gradeAnswerButton.setBounds(10, 50, 100, 30);
-			gradeAnswerButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e) 
-				{
-					cards.show(panelCards, "clueBoard");
-					correct5 = true;
-				}
-			});
-			add(gradeAnswerButton);
+			retreiveImage();
+			
+			
+			setupLayout();
+			repaint();
+			addMouseListener(this);
 		}
+
+		public void retreiveImage()
+		{
+			try
+			{
+				background = ImageIO.read(new File("question1BG.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		class centerPanel extends JPanel
+		{
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(background != null)
+				{
+					
+					g.drawImage(background, -20, 0, 1050, 870, this);
+				}
+				// Draw the "Grade Answer" image
+				Image grader = new ImageIcon("GradeAnswer.png").getImage();
+				g.drawImage(grader, 375, 700, 300, 50, this);
+				
+				Image hint = new ImageIcon("forensicButton.png").getImage();
+				g.drawImage(hint, 50, 695, 50, 60, this);
+				if (darkenButton)
+				{
+					g.setColor(new Color(0, 0, 0, 80));
+					g.fillRect(375, 700, 300, 50);
+				}
+			
+
+			}
+		}
+
+		class cluePanelWithBackground extends JPanel
+		{
+			private Image backgroundImage;
+			public cluePanelWithBackground(String imagePath)
+			{
+				try
+				{
+					backgroundImage = ImageIO.read(new File(imagePath));
+				}
+				catch (IOException e)
+				{
+					System.out.println("Failed to load background image for clue panel.");
+					e.printStackTrace();
+				}
+			}
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(backgroundImage != null)
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+				
+			}
+		}
+
+		centerPanel cp = new centerPanel();
+		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+
+		public void setupLayout()
+		{
+			setLayout(new BorderLayout());
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(1250, 800));
+			cp.setBounds(-30, 0, 1000, 800);
+			cp.setOpaque(false);
+			cluePan.setLayout(new BoxLayout(cluePan, BoxLayout.Y_AXIS));
+			cluePan.setOpaque(false);
+			cluePan.setPreferredSize(new Dimension(260, 1000));
+			JScrollPane scrollPane = new JScrollPane(cluePan, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar clueScrollBar = scrollPane.getVerticalScrollBar();
+			clueScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(182, 119, 62);
+				Color trackColor = new Color(71, 35, 32);
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
+				}
+			});
+			scrollPane.setBounds(970, 0, 330, 800);
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			scrollPane.setBorder(null);
+			layeredPane.add(cp, Integer.valueOf(1));
+			layeredPane.add(scrollPane, Integer.valueOf(1));
+			add(layeredPane, BorderLayout.CENTER);
+		
+		}
+
+		
+		public void mouseClicked(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button clicked");
+				cards.show(panelCards, "clueBoard");
+				panelCards.correct5 = true; // Set the correct variable
+				panelCards.repaint(); // Trigger repaint to update the UI
+			}
+			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			{
+				cards.show(panelCards, "forensicsReport");
+			}
+			
+		}
+		public void mousePressed(MouseEvent e) {}		
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+				
+				darkenButton = true;
+				repaint();
+			
+			}
+		}
+		public void mouseExited(MouseEvent e) {}
+		
 	}
 	class clue6 extends JPanel
 	{
@@ -1431,38 +2171,190 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		}
 	}
-	class clue7 extends JPanel
+	class clue7 extends JPanel implements MouseListener
 	{
+		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-
+		Image background;
 		public clue7(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
-			System.out.println("clue7 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("See Forensics Report");
-			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "forensicsReport");
-				}
-			});
-			add(backButton);
-			JButton gradeAnswerButton = new JButton("Grade Answer");
-			gradeAnswerButton.setBounds(10, 50, 100, 30);
-			System.out.println("gradeAnswerButton created"); // Debug statement
-			gradeAnswerButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e) 
-				{
-					cards.show(panelCards, "clueBoard");
-					correct7 = true;
-					System.out.println("correct7 set to true"); // Debug statement
-				}
-			});
-			add(gradeAnswerButton);
+			retreiveImage();
+			
+			
+			setupLayout();
+			repaint();
+			addMouseListener(this);
 		}
+
+		public void retreiveImage()
+		{
+			try
+			{
+				background = ImageIO.read(new File("question1BG.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		class centerPanel extends JPanel
+		{
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(background != null)
+				{
+					
+					g.drawImage(background, -20, 0, 1050, 870, this);
+				}
+				// Draw the "Grade Answer" image
+				Image grader = new ImageIcon("GradeAnswer.png").getImage();
+				g.drawImage(grader, 375, 700, 300, 50, this);
+				
+				Image hint = new ImageIcon("forensicButton.png").getImage();
+				g.drawImage(hint, 50, 695, 50, 60, this);
+				if (darkenButton)
+				{
+					g.setColor(new Color(0, 0, 0, 80));
+					g.fillRect(375, 700, 300, 50);
+				}
+			
+
+			}
+		}
+
+		class cluePanelWithBackground extends JPanel
+		{
+			private Image backgroundImage;
+			public cluePanelWithBackground(String imagePath)
+			{
+				try
+				{
+					backgroundImage = ImageIO.read(new File(imagePath));
+				}
+				catch (IOException e)
+				{
+					System.out.println("Failed to load background image for clue panel.");
+					e.printStackTrace();
+				}
+			}
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(backgroundImage != null)
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+				
+			}
+		}
+
+		centerPanel cp = new centerPanel();
+		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+
+		public void setupLayout()
+		{
+			setLayout(new BorderLayout());
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(1250, 800));
+			cp.setBounds(-30, 0, 1000, 800);
+			cp.setOpaque(false);
+			cluePan.setLayout(new BoxLayout(cluePan, BoxLayout.Y_AXIS));
+			cluePan.setOpaque(false);
+			cluePan.setPreferredSize(new Dimension(260, 1000));
+			JScrollPane scrollPane = new JScrollPane(cluePan, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar clueScrollBar = scrollPane.getVerticalScrollBar();
+			clueScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(182, 119, 62);
+				Color trackColor = new Color(71, 35, 32);
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
+				}
+			});
+			scrollPane.setBounds(970, 0, 330, 800);
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			scrollPane.setBorder(null);
+			layeredPane.add(cp, Integer.valueOf(1));
+			layeredPane.add(scrollPane, Integer.valueOf(1));
+			add(layeredPane, BorderLayout.CENTER);
+		
+		}
+
+		
+		public void mouseClicked(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button clicked");
+				cards.show(panelCards, "clueBoard");
+				panelCards.correct6 = true; // Set the correct variable
+				panelCards.repaint(); // Trigger repaint to update the UI
+			}
+			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			{
+				cards.show(panelCards, "forensicsReport");
+			}
+			
+		}
+		public void mousePressed(MouseEvent e) {}		
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+				
+				darkenButton = true;
+				repaint();
+			
+			}
+		}
+		public void mouseExited(MouseEvent e) {}
+		
 	}
 	class forensicsReport extends JPanel
 	{
