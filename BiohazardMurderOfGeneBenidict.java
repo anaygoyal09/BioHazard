@@ -2330,7 +2330,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				System.out.println("Grade Answer button clicked");
 				cards.show(panelCards, "clueBoard");
-				panelCards.correct6 = true; // Set the correct variable
+				panelCards.correct7 = true; // Set the correct variable
 				panelCards.repaint(); // Trigger repaint to update the UI
 			}
 			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
