@@ -14,7 +14,9 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 import javax.swing.Timer;
 import javax.imageio.ImageIO;
 import java.awt.GridLayout;
@@ -52,6 +54,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.event.ChangeListener;
@@ -81,18 +85,21 @@ public class BiohazardMurderOfGeneBenidict
 class BiohazardMurderOfGeneBenidictHolder extends JPanel
 {
 	boolean startClip, darkenScreenPanel3;
+	String file;
 
 	public BiohazardMurderOfGeneBenidictHolder()
 	{
 		setBackground(Color.BLACK);
 		CardLayout cards = new CardLayout();
 		setLayout(cards);
+		file = "";
+		readFile();
 
 		firstCard title = new firstCard(this, cards);
 		secondCard report = new secondCard(this, cards);
 		thirdCard practiceQuestion = new thirdCard(this, cards);
 		fourthCard clueBoard = new fourthCard(this, cards);
-		fifthCard question1 = new fifthCard(this, cards);
+		question1 question1 = new question1(this, cards);
 
 		add(title, "title");
 		add(report, "report");
@@ -101,6 +108,28 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		add(question1, "question1");
 
 		startClip = darkenScreenPanel3 = false;
+	}
+
+	public void readFile()
+	{
+		Scanner input = null;
+		String inFileName = "questions.txt";
+
+		File inFile = new File(inFileName); //D+I new file
+
+		try
+		{
+			input = new Scanner(inFile); //initializing scanner
+		}
+
+		catch(FileNotFoundException e) //if scanner fails to initialize, print error message and exit program
+		{
+			System.err.printf("\nERROR: Cannot find/open file %s. ", inFileName);
+			System.exit(1);
+		}
+
+		while(input.hasNextLine()) //store the entire text file in string file
+			file += input.nextLine() + "\n";
 	}
 
 	class firstCard extends JPanel implements MouseListener, MouseMotionListener
@@ -384,7 +413,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 		public void mouseReleased(MouseEvent e)
 		{
-			if (clickingStart) {
+			if(clickingStart)
+			{
 				startX -= clickOffset; //reset button position
 				startY -= clickOffset;
 				clickingStart = false;
@@ -401,11 +431,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				cards.show(panelCards, "report");
 
 			if(x >= 0 && x <= 10 && y >= 0 && y <= 10)
-			{
-				cards.show(panelCards, "practiceQuestion");
-				darkenScreenPanel3 = true;
-				darkScreen.repaint();
-			}
+				cards.show(panelCards, "question1");
 		}
 
 		public void mouseExited(MouseEvent e)
@@ -789,7 +815,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			cp.repaint();
 		}
 
-
 		private void swapImage(int index)
 		{
 			if(currentFrames[index] % 2 == 1)
@@ -1002,7 +1027,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
-			
+
 			if(darkenScreenPanel3 && repeats == 0)
 			{
 				darkScreenTimer.start();
@@ -1366,16 +1391,16 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			else if(clueHovered[7])
 				g2d.fillPolygon(sevenX, sevenY, 19);
-			
+
 			else if(clueHovered[8])
 				g2d.fillPolygon(eightX, eightY, 27);
-			
+
 			else if(clueHovered[9])
 				g2d.fillPolygon(nineX, nineY, 29);
-			
+
 			else if(clueHovered[10])
 				g2d.fillPolygon(tenX, tenY, 12);
-			
+
 			else if(clueHovered[11])
 				g2d.fillRect(980, 554, 152, 99);
 
@@ -1469,7 +1494,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				cluePressed[4] = false;
 				cards.show(panelCards, "question1");
-				
+
 			}
 
 			else if(x >= 513 && x <= 613 && y >= 369 && y <= 500)
@@ -1485,7 +1510,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			int x = e.getX();
 			int y = e.getY();
-		//	System.out.println(x+ ","+ (y-2)); //remove later
+			//	System.out.println(x+ ","+ (y-2)); //remove later
 
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
 				clueHovered[0] = true;
@@ -1532,24 +1557,52 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			repaint();
 		}
 	}
-	
-	class fifthCard extends JPanel
+
+	class question1 extends JPanel implements KeyListener
 	{
 		BiohazardMurderOfGeneBenidictHolder panelCards;
+		centerPanel cp;
 		CardLayout cards;
-		Image background;
+		Image background, questions, options, boxes;
+		String question1Text, questionChoice, questionsName, optionsName, boxesName;
+		Timer waitTimer, lowerTimer;
+		int randNum, repeats, xCord, yCord;
 
-		public fifthCard(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
+		public question1(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
-			retreiveImage();
+			cp = new centerPanel();
+
 			setupLayout();
+			requestFocusInWindow();
+			addKeyListener(this);
+
+			repeats = 0;
+			xCord = 500;
+			yCord = 140;
+
+			waitTimerHandler wth = new waitTimerHandler();
+			lowerTimerHandler lth = new lowerTimerHandler();
+			waitTimer = new Timer(3000, wth);
+			lowerTimer = new Timer(130, lth);
+
+			question1Text = file.substring(file.indexOf("Question 1"), (file.indexOf("-----")));
+			randNum = (int)(Math.random() * 5) + 1;
+			questionChoice = question1Text.substring(question1Text.indexOf("Choice " + randNum), question1Text.indexOf("-", question1Text.indexOf("Choice " + randNum)));
+			questionsName = question1Text.substring(question1Text.indexOf("Questions: ") + 11, (question1Text.indexOf("-", question1Text.indexOf("Questions: "))) - 1);
+			optionsName = question1Text.substring(question1Text.indexOf("Options: ") + 9, (question1Text.indexOf("-", question1Text.indexOf("Options: "))) - 1);
+			boxesName = (question1Text.substring(question1Text.indexOf("Boxes: ") + 7, question1Text.length())).trim();
+
+			retreiveImage();
 		}
-		
+
 		public void retreiveImage()
 		{
 			try
 			{
 				background = ImageIO.read(new File("question1BG.png"));
+				questions = ImageIO.read(new File(questionsName));
+				options = ImageIO.read(new File(optionsName));
+				boxes = ImageIO.read(new File(boxesName));
 			}
 
 			catch(IOException e)
@@ -1558,22 +1611,62 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				e.printStackTrace();
 			}
 		}
+
 		
+		class waitTimerHandler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				lowerTimer.start();
+				waitTimer.stop();
+			}
+		}
+
+		class lowerTimerHandler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				yCord += 10;
+				requestFocusInWindow();
+				cp.repaint();
+			}
+		}
+
 		class centerPanel extends JPanel
 		{
+			int questionHeight, questionWidth, optionHeight, optionWidth;
+
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
 				Graphics2D g2d = (Graphics2D)(g);
 
+				requestFocusInWindow();
+
+				questionHeight = questions.getHeight(this) / 5;
+				questionWidth = questions.getWidth(this);
+
+				optionHeight = options.getHeight(this) / 5;
+				optionWidth = options.getWidth(this);
+
 				if(background != null)
-				{
-					System.out.println("HELLEOELEL");
 					g.drawImage(background, -20, 0, 1050, 870, this);
-				}
+
+				g.drawImage(questions, 100, 30, 920, 100, 0, questionHeight * (randNum - 1), questionWidth, questionHeight * randNum, this);
+
+				g.setColor(Color.RED);
+				g.fillRect(xCord, yCord, 20, 20);
+
+				if(repeats == 0)
+					waitTimer.start();
+
+				repeats++;
+
+				g.drawImage(options, 100, 130, 920, 290, 0, optionHeight * (randNum - 1), optionWidth, optionHeight * randNum, this);
+				g.drawImage(boxes, 100, 620, 820, 150, this);		
 			}
 		}
-		
+
 		class cluePanelWithBackground extends JPanel
 		{
 			private Image backgroundImage;
@@ -1601,10 +1694,9 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 			}
 		}
-		
-		centerPanel cp = new centerPanel();
+
 		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
-		
+
 		public void setupLayout()
 		{
 			setLayout(new BorderLayout());
@@ -1673,8 +1765,42 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
-
+			layeredPane.addKeyListener(this);
+			layeredPane.setFocusable(true);
+			layeredPane.requestFocusInWindow();
 			add(layeredPane, BorderLayout.CENTER);
 		}
+		public void keyTyped(KeyEvent e)
+		{
+
+		}
+
+		public void keyPressed(KeyEvent e)
+		{
+			int key = e.getKeyCode();
+			System.out.println("helloo");
+
+
+			if(key == KeyEvent.VK_RIGHT)
+			{
+				xCord += 15;
+				cp.repaint();
+				System.out.println("helloo");
+
+			}
+
+			if(key == KeyEvent.VK_LEFT)
+			{
+				xCord -= 15;
+				cp.repaint();
+				System.out.println("helloo");
+
+			}
+		}
+
+		public void keyReleased(KeyEvent e)
+		{
+		}
+
 	}
 }
