@@ -1240,6 +1240,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 	class clue1 extends JPanel implements MouseListener, MouseMotionListener
 	{
+
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
@@ -1455,8 +1456,9 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 	}
 
-	class clue2 extends JPanel implements MouseListener
+	class clue2 extends JPanel implements MouseListener, MouseMotionListener
 	{
+
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
@@ -1471,6 +1473,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			setupLayout();
 			repaint();
 			addMouseListener(this);
+			addMouseMotionListener(this);
+			requestFocusInWindow();
+			setFocusable(true);
+
 		}
 
 		public void retreiveImage()
@@ -1608,36 +1614,63 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			int x = e.getX();
 			int y = e.getY();
-
+			System.out.println("Mouse clicked at: " + x + ", " + y);
 			// Check if the click is within the bounds of the "Grade Answer" image
 			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
 			{
 				System.out.println("Grade Answer button clicked");
 				cards.show(panelCards, "clueBoard");
-				panelCards.correct2 = true; // Set the correct variable
+				panelCards.correct1 = true; // Set the correct variable
 				panelCards.repaint(); // Trigger repaint to update the UI
 			}
-			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			else if (x >= 28 && x <= 66 && y >= 695 && y <= 755) 
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
 
 		}
-		public void mousePressed(MouseEvent e) {}		
-		public void mouseReleased(MouseEvent e) {}
-		public void mouseEntered(MouseEvent e)
+		public void mouseDragged(MouseEvent e) {}
+		public void mouseMoved(MouseEvent e) 
 		{
 			int x = e.getX();
 			int y = e.getY();
-			if(x>=375 && x<=675 && y>=700 && y<=750)
+			System.out.println("Mouse moved at: " + x + ", " + y);
+			// Check if the mouse is within the bounds of the "Grade Answer" image
+			if (x >= 345 && x <= 650 && y >= 700 && y <= 750) 
 			{
-
+				System.out.println("Mouse over Grade Answer button");
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
 				darkenButton = true;
 				repaint();
-
+			} 
+			else 
+			{
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				darkenButton = false;
+				repaint();
 			}
 		}
-		public void mouseExited(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) 
+		{
+
+			int x = e.getX();
+			int y = e.getY();
+			System.out.println("Mouse pressed at: " + x + ", " + y);
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button pressed");
+				darkenButton = true;
+				repaint();
+			}
+		}
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+		}
+		public void mouseExited(MouseEvent e) 
+		{
+		}
 
 	}
 	class clue3 extends JPanel implements MouseListener
