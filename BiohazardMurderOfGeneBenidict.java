@@ -1173,25 +1173,48 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 
 			if(x >= 115 && x <= 224 && y >= 189 && y <= 334)
+			{
 				clueHovered[0] = true;
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
 
 			else if(x >= 563 && x <= 685 && y >= 137 && y <= 257)
+			{
 				clueHovered[1] = true;
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+			}
 
 			else if(x >= 909 && x <= 1125 && y >= 142 && y <= 297)
+			{
 				clueHovered[2] = true;
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+			}
 			else if(x >= 158 && x <= 316 && y >= 355 && y <= 525)
+			{
 				clueHovered[3] = true;
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+			}
 
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
+			{
 				clueHovered[4] = true;
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+			}
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
+			{
 				clueHovered[5] = true;
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+			}
 
 			else if (x>=981 && y>=556 && x<= 1131 && y <=655)
 			{
 				clueHovered[6] = true;
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 
 			}
@@ -1199,6 +1222,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			else
 			{
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
 				for(int i = 0; i < clueHovered.length; i++)
 				{
 					clueHovered[i] = false;
@@ -1213,7 +1238,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 	}
 
-	class clue1 extends JPanel implements MouseListener
+	class clue1 extends JPanel implements MouseListener, MouseMotionListener
 	{
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
@@ -1224,11 +1249,15 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
-			
-			
+
+
 			setupLayout();
 			repaint();
 			addMouseListener(this);
+			addMouseMotionListener(this);
+			requestFocusInWindow();
+			setFocusable(true);
+
 		}
 
 		public void retreiveImage()
@@ -1244,8 +1273,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-		
-		
+
+
 		class centerPanel extends JPanel
 		{
 			public void paintComponent(Graphics g)
@@ -1254,13 +1283,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(background != null)
 				{
-					
+
 					g.drawImage(background, -20, 0, 1050, 870, this);
 				}
 				// Draw the "Grade Answer" image
 				Image grader = new ImageIcon("GradeAnswer.png").getImage();
 				g.drawImage(grader, 375, 700, 300, 50, this);
-				
+
 				Image hint = new ImageIcon("forensicButton.png").getImage();
 				g.drawImage(hint, 50, 695, 50, 60, this);
 				if (darkenButton)
@@ -1268,7 +1297,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-			
+
 
 			}
 		}
@@ -1294,7 +1323,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-				
+
 			}
 		}
 
@@ -1358,15 +1387,15 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-		
+
 		}
 
-		
+
 		public void mouseClicked(MouseEvent e)
 		{
 			int x = e.getX();
 			int y = e.getY();
-
+			System.out.println("Mouse clicked at: " + x + ", " + y);
 			// Check if the click is within the bounds of the "Grade Answer" image
 			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
 			{
@@ -1375,28 +1404,55 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				panelCards.correct1 = true; // Set the correct variable
 				panelCards.repaint(); // Trigger repaint to update the UI
 			}
-			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			else if (x >= 28 && x <= 66 && y >= 695 && y <= 755) 
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
-			
+
 		}
-		public void mousePressed(MouseEvent e) {}		
-		public void mouseReleased(MouseEvent e) {}
-		public void mouseEntered(MouseEvent e)
+		public void mouseDragged(MouseEvent e) {}
+		public void mouseMoved(MouseEvent e) 
 		{
 			int x = e.getX();
 			int y = e.getY();
-			if(x>=375 && x<=675 && y>=700 && y<=750)
+			System.out.println("Mouse moved at: " + x + ", " + y);
+			// Check if the mouse is within the bounds of the "Grade Answer" image
+			if (x >= 345 && x <= 650 && y >= 700 && y <= 750) 
 			{
-				
+				System.out.println("Mouse over Grade Answer button");
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
 				darkenButton = true;
 				repaint();
-			
+			} 
+			else 
+			{
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				darkenButton = false;
+				repaint();
 			}
 		}
-		public void mouseExited(MouseEvent e) {}
-		
+		public void mousePressed(MouseEvent e) 
+		{
+
+			int x = e.getX();
+			int y = e.getY();
+			System.out.println("Mouse pressed at: " + x + ", " + y);
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button pressed");
+				darkenButton = true;
+				repaint();
+			}
+		}
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+		}
+		public void mouseExited(MouseEvent e) 
+		{
+		}
+
 	}
 
 	class clue2 extends JPanel implements MouseListener
@@ -1410,8 +1466,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
-			
-			
+
+
 			setupLayout();
 			repaint();
 			addMouseListener(this);
@@ -1430,8 +1486,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-		
-		
+
+
 		class centerPanel extends JPanel
 		{
 			public void paintComponent(Graphics g)
@@ -1440,13 +1496,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(background != null)
 				{
-					
+
 					g.drawImage(background, -20, 0, 1050, 870, this);
 				}
 				// Draw the "Grade Answer" image
 				Image grader = new ImageIcon("GradeAnswer.png").getImage();
 				g.drawImage(grader, 375, 700, 300, 50, this);
-				
+
 				Image hint = new ImageIcon("forensicButton.png").getImage();
 				g.drawImage(hint, 50, 695, 50, 60, this);
 				if (darkenButton)
@@ -1454,7 +1510,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-			
+
 
 			}
 		}
@@ -1480,7 +1536,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-				
+
 			}
 		}
 
@@ -1544,10 +1600,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-		
+
 		}
 
-		
+
 		public void mouseClicked(MouseEvent e)
 		{
 			int x = e.getX();
@@ -1565,7 +1621,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
-			
+
 		}
 		public void mousePressed(MouseEvent e) {}		
 		public void mouseReleased(MouseEvent e) {}
@@ -1575,14 +1631,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int y = e.getY();
 			if(x>=375 && x<=675 && y>=700 && y<=750)
 			{
-				
+
 				darkenButton = true;
 				repaint();
-			
+
 			}
 		}
 		public void mouseExited(MouseEvent e) {}
-		
+
 	}
 	class clue3 extends JPanel implements MouseListener
 	{
@@ -1595,8 +1651,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
-			
-			
+
+
 			setupLayout();
 			repaint();
 			addMouseListener(this);
@@ -1615,8 +1671,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-		
-		
+
+
 		class centerPanel extends JPanel
 		{
 			public void paintComponent(Graphics g)
@@ -1625,13 +1681,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(background != null)
 				{
-					
+
 					g.drawImage(background, -20, 0, 1050, 870, this);
 				}
 				// Draw the "Grade Answer" image
 				Image grader = new ImageIcon("GradeAnswer.png").getImage();
 				g.drawImage(grader, 375, 700, 300, 50, this);
-				
+
 				Image hint = new ImageIcon("forensicButton.png").getImage();
 				g.drawImage(hint, 50, 695, 50, 60, this);
 				if (darkenButton)
@@ -1639,7 +1695,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-			
+
 
 			}
 		}
@@ -1665,7 +1721,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-				
+
 			}
 		}
 
@@ -1729,10 +1785,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-		
+
 		}
 
-		
+
 		public void mouseClicked(MouseEvent e)
 		{
 			int x = e.getX();
@@ -1750,7 +1806,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
-			
+
 		}
 		public void mousePressed(MouseEvent e) {}		
 		public void mouseReleased(MouseEvent e) {}
@@ -1760,14 +1816,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int y = e.getY();
 			if(x>=375 && x<=675 && y>=700 && y<=750)
 			{
-				
+
 				darkenButton = true;
 				repaint();
-			
+
 			}
 		}
 		public void mouseExited(MouseEvent e) {}
-		
+
 	}
 	class clue4 extends JPanel implements MouseListener
 	{
@@ -1780,8 +1836,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
-			
-			
+
+
 			setupLayout();
 			repaint();
 			addMouseListener(this);
@@ -1800,8 +1856,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-		
-		
+
+
 		class centerPanel extends JPanel
 		{
 			public void paintComponent(Graphics g)
@@ -1810,13 +1866,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(background != null)
 				{
-					
+
 					g.drawImage(background, -20, 0, 1050, 870, this);
 				}
 				// Draw the "Grade Answer" image
 				Image grader = new ImageIcon("GradeAnswer.png").getImage();
 				g.drawImage(grader, 375, 700, 300, 50, this);
-				
+
 				Image hint = new ImageIcon("forensicButton.png").getImage();
 				g.drawImage(hint, 50, 695, 50, 60, this);
 				if (darkenButton)
@@ -1824,7 +1880,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-			
+
 
 			}
 		}
@@ -1850,7 +1906,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-				
+
 			}
 		}
 
@@ -1914,10 +1970,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-		
+
 		}
 
-		
+
 		public void mouseClicked(MouseEvent e)
 		{
 			int x = e.getX();
@@ -1935,7 +1991,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
-			
+
 		}
 		public void mousePressed(MouseEvent e) {}		
 		public void mouseReleased(MouseEvent e) {}
@@ -1945,14 +2001,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int y = e.getY();
 			if(x>=375 && x<=675 && y>=700 && y<=750)
 			{
-				
+
 				darkenButton = true;
 				repaint();
-			
+
 			}
 		}
 		public void mouseExited(MouseEvent e) {}
-		
+
 	}
 	class clue5 extends JPanel implements MouseListener
 	{
@@ -1965,8 +2021,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
-			
-			
+
+
 			setupLayout();
 			repaint();
 			addMouseListener(this);
@@ -1985,8 +2041,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-		
-		
+
+
 		class centerPanel extends JPanel
 		{
 			public void paintComponent(Graphics g)
@@ -1995,13 +2051,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(background != null)
 				{
-					
+
 					g.drawImage(background, -20, 0, 1050, 870, this);
 				}
 				// Draw the "Grade Answer" image
 				Image grader = new ImageIcon("GradeAnswer.png").getImage();
 				g.drawImage(grader, 375, 700, 300, 50, this);
-				
+
 				Image hint = new ImageIcon("forensicButton.png").getImage();
 				g.drawImage(hint, 50, 695, 50, 60, this);
 				if (darkenButton)
@@ -2009,7 +2065,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-			
+
 
 			}
 		}
@@ -2035,7 +2091,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-				
+
 			}
 		}
 
@@ -2099,10 +2155,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-		
+
 		}
 
-		
+
 		public void mouseClicked(MouseEvent e)
 		{
 			int x = e.getX();
@@ -2120,7 +2176,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
-			
+
 		}
 		public void mousePressed(MouseEvent e) {}		
 		public void mouseReleased(MouseEvent e) {}
@@ -2130,14 +2186,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int y = e.getY();
 			if(x>=375 && x<=675 && y>=700 && y<=750)
 			{
-				
+
 				darkenButton = true;
 				repaint();
-			
+
 			}
 		}
 		public void mouseExited(MouseEvent e) {}
-		
+
 	}
 	class clue6 extends JPanel
 	{
@@ -2182,8 +2238,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
-			
-			
+
+
 			setupLayout();
 			repaint();
 			addMouseListener(this);
@@ -2202,8 +2258,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-		
-		
+
+
 		class centerPanel extends JPanel
 		{
 			public void paintComponent(Graphics g)
@@ -2212,13 +2268,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(background != null)
 				{
-					
+
 					g.drawImage(background, -20, 0, 1050, 870, this);
 				}
 				// Draw the "Grade Answer" image
 				Image grader = new ImageIcon("GradeAnswer.png").getImage();
 				g.drawImage(grader, 375, 700, 300, 50, this);
-				
+
 				Image hint = new ImageIcon("forensicButton.png").getImage();
 				g.drawImage(hint, 50, 695, 50, 60, this);
 				if (darkenButton)
@@ -2226,7 +2282,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-			
+
 
 			}
 		}
@@ -2252,7 +2308,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-				
+
 			}
 		}
 
@@ -2316,10 +2372,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-		
+
 		}
 
-		
+
 		public void mouseClicked(MouseEvent e)
 		{
 			int x = e.getX();
@@ -2337,9 +2393,21 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
-			
+
 		}
-		public void mousePressed(MouseEvent e) {}		
+		public void mousePressed(MouseEvent e) 
+		{
+			System.out.println("Mouse pressed");
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+				System.out.println("Grade Answer button pressed");
+				darkenButton = true;
+				repaint();
+			}
+		}
+
 		public void mouseReleased(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e)
 		{
@@ -2347,14 +2415,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int y = e.getY();
 			if(x>=375 && x<=675 && y>=700 && y<=750)
 			{
-				
+
 				darkenButton = true;
 				repaint();
-			
+
 			}
 		}
 		public void mouseExited(MouseEvent e) {}
-		
+
 	}
 	class forensicsReport extends JPanel
 	{
