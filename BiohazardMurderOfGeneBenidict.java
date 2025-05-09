@@ -1201,7 +1201,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			else if (x>=78 && y>=540 && x<= 192 && y <=693)
 			{
 				clueHovered[4] = true;
-				setCursor(new Cursor(Cursor.HAND_CURSOR));
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
 			}
 			else if (x>=210 && y>=565 && x<= 392 && y <=759)
