@@ -45,6 +45,8 @@ import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
@@ -54,8 +56,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.event.ChangeListener;
@@ -1573,8 +1573,9 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			cp = new centerPanel();
 
 			setupLayout();
-			requestFocusInWindow();
 			addKeyListener(this);
+			setFocusable(true);
+			requestFocusInWindow();
 
 			repeats = 0;
 			xCord = 500;
@@ -1583,7 +1584,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			waitTimerHandler wth = new waitTimerHandler();
 			lowerTimerHandler lth = new lowerTimerHandler();
 			waitTimer = new Timer(3000, wth);
-			lowerTimer = new Timer(130, lth);
+			waitTimer.setRepeats(false);
+			lowerTimer = new Timer(150, lth);
 
 			question1Text = file.substring(file.indexOf("Question 1"), (file.indexOf("-----")));
 			randNum = (int)(Math.random() * 5) + 1;
@@ -1612,11 +1614,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-		
+
 		class waitTimerHandler implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				requestFocusInWindow();
+
+				setFocusable(true);
 				lowerTimer.start();
 				waitTimer.stop();
 			}
@@ -1628,6 +1633,11 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				yCord += 10;
 				requestFocusInWindow();
+				
+				if(yCord == 700)
+					lowerTimer.stop();
+
+				setFocusable(true);
 				cp.repaint();
 			}
 		}
@@ -1642,6 +1652,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 
 				requestFocusInWindow();
+				setFocusable(true);
 
 				questionHeight = questions.getHeight(this) / 5;
 				questionWidth = questions.getWidth(this);
@@ -1762,45 +1773,49 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
 			scrollPane.setBorder(null);
-
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
-			layeredPane.addKeyListener(this);
-			layeredPane.setFocusable(true);
-			layeredPane.requestFocusInWindow();
 			add(layeredPane, BorderLayout.CENTER);
 		}
-		public void keyTyped(KeyEvent e)
-		{
 
+		public void keyTyped(KeyEvent e) {
+			System.out.println("helloooooo");
+
+			int key = e.getKeyCode();
+			if(key == KeyEvent.VK_LEFT)
+				xCord -= 100;
+
+			if(key == KeyEvent.VK_RIGHT)
+				xCord += 100;
+
+			cp.repaint();
 		}
 
 		public void keyPressed(KeyEvent e)
 		{
-			int key = e.getKeyCode();
-			System.out.println("helloo");
+			System.out.println("helloooooo");
 
+			int key = e.getKeyCode();
+			if(key == KeyEvent.VK_LEFT)
+				xCord -= 100;
 
 			if(key == KeyEvent.VK_RIGHT)
-			{
-				xCord += 15;
-				cp.repaint();
-				System.out.println("helloo");
+				xCord += 100;
 
-			}
+			cp.repaint();
+		}
 
+		public void keyReleased(KeyEvent e) {
+			System.out.println("helloooooo");
+
+			int key = e.getKeyCode();
 			if(key == KeyEvent.VK_LEFT)
-			{
-				xCord -= 15;
-				cp.repaint();
-				System.out.println("helloo");
+				xCord -= 100;
 
-			}
+			if(key == KeyEvent.VK_RIGHT)
+				xCord += 100;
+
+			cp.repaint();
 		}
-
-		public void keyReleased(KeyEvent e)
-		{
-		}
-
 	}
 }
