@@ -1,0 +1,41 @@
+Question 1:
+
+Choice 1: What is the function of the kidneys?
+3
+-
+Choice 2: What is the function of the heart?
+1
+-
+Choice 3: How is an ischemic stroke caused?
+4
+-
+Choice 4: What is the function of the lungs?
+2
+-
+Choice 5: What does the superior vena cava do?
+3
+-
+Image Names:
+
+Questions: question1Questions.png
+-
+Options: question1Options.png
+-
+Boxes: question1Boxes.png
+-----
+Question 2:
+
+Sub1: "A forensic technician notes that the victim's blood oxygen levels were critically low at the time of death. Considering the primary function of the respiratory system, which process was most likely severely impaired?"
+Choice1: Filtration of air
+Choice2: Gas exchange
+Choice3: Mucus production 
+Choice4: Regulation of airflow
+Ans: 2
+Clue1: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub2: "The Cause of Death is listed as 'Multiple stab wounds caused cellular systems shut down due to oxygen deprivation.' Based on the Lung Report, which specific structures are primarily responsible for the transfer of oxygen into the blood?"
+Choice1: 
+Choice2: 
+Choice3: 
+Choice4: 
+Ans: 
