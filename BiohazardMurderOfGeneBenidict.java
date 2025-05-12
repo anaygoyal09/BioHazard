@@ -77,8 +77,8 @@ Class: forensicsReport
 	2. Load and display the forensics report image.
 	3. Add a button to navigate back to the last clue.
  */
-
 import java.awt.Graphics;
+import java.util.Scanner;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.Color;
@@ -91,6 +91,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.Timer;
 import javax.imageio.ImageIO;
@@ -132,11 +133,7 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.event.ChangeListener;
-
-
 import javax.swing.event.ChangeEvent;
-import java.io.*;
-import java.util.*;
 
 public class BiohazardMurderOfGeneBenidict
 {
@@ -1462,17 +1459,18 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		}
 
 	}
-	//clue2
+
 	class clue2 extends JPanel implements MouseListener, MouseMotionListener
 	{
-		private Font font; //Font for the text
-		private Scanner input; //Scanner obj to read from the file
+		protected boolean displayQ = false;
+		String question ="";
+		protected boolean DrawQ = true;
+		protected Scanner input;
+		protected Font font;
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
 		Image background;
-
-
 		public clue2(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
 			panelCards = panelCardsIn;
@@ -1483,32 +1481,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			setupLayout();
 			repaint();
 			addMouseListener(this);
-
 			addMouseMotionListener(this);
 			requestFocusInWindow();
 			setFocusable(true);
-			readQuestionsFromFile("questions.txt");
-			drawQuestion();
 			makeFont();
 
-
 		}
-		
-		private void readQuestionsFromFile(String fileName) 
-		{
 
-			File inFile = new File(fileName);
-			try
-			{
-				input = new Scanner(inFile);
-			}
-			catch(FileNotFoundException e)
-			{
-				System.err.printf("\n\n\nERROR: Cannot find/open file %s.\n\n\n",fileName);
-				System.exit(1);
-			}
-			System.out.println("Reading questions from file: " + fileName);
-		}
+
 		public void retreiveImage()
 		{
 			try
@@ -1520,31 +1500,32 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
 				e.printStackTrace();
 			}
-
 		}
-	
-		
+
 		public void makeFont()
 		{
 			try
 			{
-				font = Font.createFont(Font.TRUETYPE_FONT, new File("font.ttf"));
+				font = Font.createFont(Font.TRUETYPE_FONT, new File("VT323-Regular.ttf"));
 				GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 				ge.registerFont(font);
 			}
-			catch (IOException | FontFormatException e)
+			catch (FontFormatException | IOException e)
 			{
+				System.err.println("Error loading font: " + e.getMessage());
 				e.printStackTrace();
-				System.out.println("Font not found, using default font.");
 			}
-			System.out.println("Font created");
-			
 		}
-
 
 		class centerPanel extends JPanel
 		{
+			String ans1, ans2, ans3, ans4;
 			Image questionBase;
+			public centerPanel()
+			{
+				DrawQuestion();
+				repaint();
+			}
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
@@ -1565,15 +1546,159 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-
 				questionBase = new ImageIcon("questionBase.png").getImage();
-				g.drawImage(questionBase, 120, -40, 800, 320, this);
+				g.drawImage(questionBase, 120, -40, 800, 380, this);
+				g.setFont(font.deriveFont(30f));
+				g.setColor(Color.WHITE);
+
+
+				if(displayQ)
+				{
+					g.setFont(font.deriveFont(30f));
+					g.setColor(Color.WHITE);
+					
+					g.drawString(question, 150, 100);
+					
+					g.drawString(ans1, 150, 150);
+				
+					g.drawString(ans2, 150, 200);
+				
+					g.drawString(ans3, 150, 250);
+					
+					g.drawString(ans4, 150, 300);
+				}
+				
+				
+
+			}
+			public void DrawQuestion()
+			{
+
+				int counter = 0;
+
+				int questionVariant;
+
+
+				File inFile = new File("questions.txt");
+				try
+				{
+					input = new Scanner(inFile);
+				}
+				catch(FileNotFoundException e)
+				{
+					System.err.printf("\n\n\nERROR: Cannot find/open file %s.\n\n\n","questions.txt");
+					System.exit(1);
+				}
+
+				if(DrawQ)
+				{
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Question2:")) 
+						{
+							System.out.println("Question2 found");
+							break; 
+						}
+					}
+				}
+				DrawQ = false;
+				//choose between 1-5
+
+				questionVariant = ((int)(Math.random() * 5) + 1);
+				System.out.println(questionVariant);
+				switch(questionVariant)
+				{
+				case 1:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub1:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+
+					break;
+				case 2:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub2:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+					break;
+				case 3:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub3:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+				
+					break;
+				case 4:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub4:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+					
+					break;
+				case 5:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub5:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+				
+					break;
+				default:
+					System.out.println("Invalid question variant.");
+				}
+				displayQ = true;
+				question = input.nextLine();
+				ans1 = input.nextLine();
+				ans2 = input.nextLine();
+				ans3 = input.nextLine();
+				ans4 = input.nextLine();
 			}
 		}
 
 		class cluePanelWithBackground extends JPanel
 		{
-			
 			private Image backgroundImage;
 			public cluePanelWithBackground(String imagePath)
 			{
@@ -1586,20 +1711,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					System.out.println("Failed to load background image for clue panel.");
 					e.printStackTrace();
 				}
-				//load QuestionBase.png
-				
-
-
 			}
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
-
+				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-				
-
-
 
 
 			}
@@ -1687,14 +1805,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				cards.show(panelCards, "forensicsReport");
 			}
 
-
 		}
 		public void mouseDragged(MouseEvent e) {}
 		public void mouseMoved(MouseEvent e) 
 		{
 			int x = e.getX();
 			int y = e.getY();
-			System.out.println("Mouse moved at: " + x + ", " + y);
+			//System.out.println("Mouse moved at: " + x + ", " + y);
 			// Check if the mouse is within the bounds of the "Grade Answer" image
 			if (x >= 345 && x <= 650 && y >= 700 && y <= 750) 
 			{
@@ -1710,22 +1827,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				repaint();
 			}
 		}
-		public void drawQuestion()
-		{
-			int x = 100;
-			int y = 100;
-			int lineHeight = 20;
-
-			y += lineHeight;
-			while(input.hasNextLine())
-			{
-				
-				y += lineHeight;
-			}
-		}
 		public void mousePressed(MouseEvent e) 
 		{
-
 
 			int x = e.getX();
 			int y = e.getY();
@@ -1737,11 +1840,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				darkenButton = true;
 				repaint();
 			}
-
 		}
 		public void mouseReleased(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e)
-	{
+		{
 		}
 		public void mouseExited(MouseEvent e) 
 		{

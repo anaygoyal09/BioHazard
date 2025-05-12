@@ -23,19 +23,44 @@ Options: question1Options.png
 -
 Boxes: question1Boxes.png
 -----
-Question 2:
-
+Question2:
 Sub1: "A forensic technician notes that the victim's blood oxygen levels were critically low at the time of death. Considering the primary function of the respiratory system, which process was most likely severely impaired?"
-Choice1: Filtration of air
-Choice2: Gas exchange
-Choice3: Mucus production 
-Choice4: Regulation of airflow
+(A) Filtration of air
+(B) Gas exchange
+(C) Mucus production 
+(D) Regulation of airflow
 Ans: 2
 Clue1: The killer understood the basic mechanism of oxygen exchange in the lungs.
 
 Sub2: "The Cause of Death is listed as 'Multiple stab wounds caused cellular systems shut down due to oxygen deprivation.' Based on the Lung Report, which specific structures are primarily responsible for the transfer of oxygen into the blood?"
-Choice1: 
-Choice2: 
-Choice3: 
-Choice4: 
-Ans: 
+(A) Trachea and Bronchi 
+(B) Bronchioles and Alveoli
+(C) Pleura and Rib Cage
+(D) Diaphragm and Larynx
+Ans: 2
+Clue2: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub3: "During the autopsy, the medical examiner observes significant damage to the tiny air sacs in the victim's lungs. What are these structures called, and what is their main role in respiration?" 
+(A) Bronchi - conducting air
+(B) Alveoli - facilitating gas exchange
+(C) Diaghragm - Controlling breathing
+(D) Pleura - protecting the lungs
+Ans: 2
+Clue3: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub4: "Imagine a scenario where the delivery of oxygen to the bloodstream is severely compromised within the lungs. Which anatomical components are directly involved in the crucial interface between air and blood?" 
+(A) Pharynx and Larynx
+(B) Trachea and Esophagus
+(C) Bronchioles and Pulmonary capillaries
+(D) Ribs and Intercostal muscles
+Ans: 3
+Clue4: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub5: "If a toxin specifically targeted the structures responsible for the diffusion of oxygen from inhaled air into the circulating blood, which part of the lung would be most affected?" 
+(A) Cartilaginous rings of the trachea	
+(B) Smooth muscle lining the bronchioles
+(C) Thin-walled sacs surrounded by capillaries 
+(D) Ciliated epithelium of the airways
+Ans: 3
+Clue5: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
