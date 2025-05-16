@@ -29,7 +29,7 @@ Sub1: "A forensic technician notes that the victim's blood oxygen levels were cr
 (B) Gas exchange
 (C) Mucus production 
 (D) Regulation of airflow
-Ans: 2
+2
 Clue1: The killer understood the basic mechanism of oxygen exchange in the lungs.
 
 Sub2: "The Cause of Death is listed as 'Multiple stab wounds caused cellular systems shut down due to oxygen deprivation.' Based on the Lung Report, which specific structures are primarily responsible for the transfer of oxygen into the blood?"
@@ -37,7 +37,7 @@ Sub2: "The Cause of Death is listed as 'Multiple stab wounds caused cellular sys
 (B) Bronchioles and Alveoli
 (C) Pleura and Rib Cage
 (D) Diaphragm and Larynx
-Ans: 2
+2
 Clue2: The killer understood the basic mechanism of oxygen exchange in the lungs.
 
 Sub3: "During the autopsy, the medical examiner observes significant damage to the tiny air sacs in the victim's lungs. What are these structures called, and what is their main role in respiration?" 
@@ -45,7 +45,7 @@ Sub3: "During the autopsy, the medical examiner observes significant damage to t
 (B) Alveoli - facilitating gas exchange
 (C) Diaghragm - Controlling breathing
 (D) Pleura - protecting the lungs
-Ans: 2
+2
 Clue3: The killer understood the basic mechanism of oxygen exchange in the lungs.
 
 Sub4: "Imagine a scenario where the delivery of oxygen to the bloodstream is severely compromised within the lungs. Which anatomical components are directly involved in the crucial interface between air and blood?" 
@@ -53,7 +53,7 @@ Sub4: "Imagine a scenario where the delivery of oxygen to the bloodstream is sev
 (B) Trachea and Esophagus
 (C) Bronchioles and Pulmonary capillaries
 (D) Ribs and Intercostal muscles
-Ans: 3
+3
 Clue4: The killer understood the basic mechanism of oxygen exchange in the lungs.
 
 Sub5: "If a toxin specifically targeted the structures responsible for the diffusion of oxygen from inhaled air into the circulating blood, which part of the lung would be most affected?" 
@@ -61,6 +61,37 @@ Sub5: "If a toxin specifically targeted the structures responsible for the diffu
 (B) Smooth muscle lining the bronchioles
 (C) Thin-walled sacs surrounded by capillaries 
 (D) Ciliated epithelium of the airways
-Ans: 3
+3
 Clue5: The killer understood the basic mechanism of oxygen exchange in the lungs.
+Question3:
+1. Put the following organs in the correct order based on when they become involved in digestion: Mouth Large Intestine Small Intestine
+Esophagus
+
+2. Organize the following structures in the correct sequence: Rectum Esophagus Anus Stomach
+
+3. Sequence the organs in the order where enzymatic digestion primarily occurs: Mouth Small Intestine Stomach Esophagus
+
+4. Place these digestive parts in the order food encounters them: Pharynx Large Intestine Stomach Small Intestine
+
+5. Arrange these parts in the correct order of function during digestion: Mouth Rectum
+Esophagus Large Intestine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
