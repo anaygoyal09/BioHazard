@@ -93,5 +93,200 @@ Esophagus Large Intestine
 
 
 
+Question 1:
 
+Choice 1: What is the function of the kidneys?
+3
+-
+Choice 2: What is the function of the heart?
+1
+-
+Choice 3: How is an ischemic stroke caused?
+4
+-
+Choice 4: What is the function of the lungs?
+2
+-
+Choice 5: What does the superior vena cava do?
+3
+-
+Image Names:
+
+Questions: question1Questions.png
+-
+Options: question1Options.png
+-
+Boxes: question1Boxes.png
+-----
+Question2:
+Sub1: "A forensic technician notes that the victim's blood oxygen levels were critically low at the time of death. Considering the primary function of the respiratory system, which process was most likely severely impaired?"
+(A) Filtration of air
+(B) Gas exchange
+(C) Mucus production 
+(D) Regulation of airflow
+2
+Clue1: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub2: "The Cause of Death is listed as 'Multiple stab wounds caused cellular systems shut down due to oxygen deprivation.' Based on the Lung Report, which specific structures are primarily responsible for the transfer of oxygen into the blood?"
+(A) Trachea and Bronchi 
+(B) Bronchioles and Alveoli
+(C) Pleura and Rib Cage
+(D) Diaphragm and Larynx
+2
+Clue2: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub3: "During the autopsy, the medical examiner observes significant damage to the tiny air sacs in the victim's lungs. What are these structures called, and what is their main role in respiration?" 
+(A) Bronchi - conducting air
+(B) Alveoli - facilitating gas exchange
+(C) Diaghragm - Controlling breathing
+(D) Pleura - protecting the lungs
+2
+Clue3: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub4: "Imagine a scenario where the delivery of oxygen to the bloodstream is severely compromised within the lungs. Which anatomical components are directly involved in the crucial interface between air and blood?" 
+(A) Pharynx and Larynx
+(B) Trachea and Esophagus
+(C) Bronchioles and Pulmonary capillaries
+(D) Ribs and Intercostal muscles
+3
+Clue4: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub5: "If a toxin specifically targeted the structures responsible for the diffusion of oxygen from inhaled air into the circulating blood, which part of the lung would be most affected?" 
+(A) Cartilaginous rings of the trachea	
+(B) Smooth muscle lining the bronchioles
+(C) Thin-walled sacs surrounded by capillaries 
+(D) Ciliated epithelium of the airways
+3
+Clue5: The killer understood the basic mechanism of oxygen exchange in the lungs.
+Question3:
+1. Put the following organs in the correct order based on when they become involved in digestion: Mouth Large Intestine Small Intestine
+Esophagus
+
+2. Organize the following structures in the correct sequence: Rectum Esophagus Anus Stomach
+
+3. Sequence the organs in the order where enzymatic digestion primarily occurs: Mouth Small Intestine Stomach Esophagus
+
+4. Place these digestive parts in the order food encounters them: Pharynx Large Intestine Stomach Small Intestine
+
+5. Arrange these parts in the correct order of function during digestion: Mouth Rectum
+Esophagus Large Intestine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Question 1:
+
+Choice 1: What is the function of the kidneys?
+3
+-
+Choice 2: What is the function of the heart?
+1
+-
+Choice 3: How is an ischemic stroke caused?
+4
+-
+Choice 4: What is the function of the lungs?
+2
+-
+Choice 5: What does the superior vena cava do?
+3
+-
+Image Names:
+
+Questions: question1Questions.png
+-
+Options: question1Options.png
+-
+Boxes: question1Boxes.png
+-----
+Question2:
+Sub1: "A forensic technician notes that the victim's blood oxygen levels were critically low at the time of death. Considering the primary function of the respiratory system, which process was most likely severely impaired?"
+(A) Filtration of air
+(B) Gas exchange
+(C) Mucus production 
+(D) Regulation of airflow
+2
+Clue1: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub2: "The Cause of Death is listed as 'Multiple stab wounds caused cellular systems shut down due to oxygen deprivation.' Based on the Lung Report, which specific structures are primarily responsible for the transfer of oxygen into the blood?"
+(A) Trachea and Bronchi 
+(B) Bronchioles and Alveoli
+(C) Pleura and Rib Cage
+(D) Diaphragm and Larynx
+2
+Clue2: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub3: "During the autopsy, the medical examiner observes significant damage to the tiny air sacs in the victim's lungs. What are these structures called, and what is their main role in respiration?" 
+(A) Bronchi - conducting air
+(B) Alveoli - facilitating gas exchange
+(C) Diaghragm - Controlling breathing
+(D) Pleura - protecting the lungs
+2
+Clue3: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub4: "Imagine a scenario where the delivery of oxygen to the bloodstream is severely compromised within the lungs. Which anatomical components are directly involved in the crucial interface between air and blood?" 
+(A) Pharynx and Larynx
+(B) Trachea and Esophagus
+(C) Bronchioles and Pulmonary capillaries
+(D) Ribs and Intercostal muscles
+3
+Clue4: The killer understood the basic mechanism of oxygen exchange in the lungs.
+
+Sub5: "If a toxin specifically targeted the structures responsible for the diffusion of oxygen from inhaled air into the circulating blood, which part of the lung would be most affected?" 
+(A) Cartilaginous rings of the trachea	
+(B) Smooth muscle lining the bronchioles
+(C) Thin-walled sacs surrounded by capillaries 
+(D) Ciliated epithelium of the airways
+3
+Clue5: The killer understood the basic mechanism of oxygen exchange in the lungs.
+Question4:
+Sub1: "The 'HEART HEALTH REPORT' explains common symptoms of a heart attack. Which of the following is a typical warning sign?"
+(A) Sudden improvement in vision
+(B) Chest pain or pressure
+(C) Increased appetite
+(D) Skin rash on arms and legs
+2
+
+Sub2: "The 'HEART HEALTH REPORT' highlights risk factors for heart attacks. Which of the following is a major risk factor?"
+(A) Regular physical activity
+(B) Low blood pressure
+(C) Smoking cigarettes
+(D) Eating only fruits
+3
+
+Sub3: "According to the 'HEART HEALTH REPORT,' how does a heart attack typically occur?"
+(A) A muscle in the heart grows too large
+(B) The heart suddenly stops beating without warning
+(C) A blood clot blocks a coronary artery
+(D) An infection spreads through the heart muscle
+3
+
+Sub4: "The 'HEART HEALTH REPORT' stresses the importance of quick action. Why is immediate treatment critical during a heart attack?"
+(A) It helps stop bleeding in the brain
+(B) It reduces damage to the heart muscle
+(C) It prevents broken bones
+(D) It boosts immune system response
+2
+
+Sub5: "The 'HEART HEALTH REPORT' suggests lifestyle changes to prevent heart attacks. Which of the following is a recommended habit?"
+(A) Avoiding all fats in the diet
+(B) Skipping meals regularly
+(C) Managing stress and exercising regularly
+(D) Sleeping less to stay active
+3
 

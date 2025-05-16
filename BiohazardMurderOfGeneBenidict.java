@@ -2293,8 +2293,12 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 	}
 	class clue4 extends JPanel implements MouseListener, MouseMotionListener
 	{
-		int[] x = new int[4];
-		int[] y = new int[4];
+
+		String answer;
+		protected boolean displayQ = false;
+		String question ="";
+		protected boolean DrawQ = true;
+		protected Scanner input;
 
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
@@ -2310,7 +2314,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			setupLayout();
 			repaint();
 			addMouseListener(this);
+			addMouseMotionListener(this);
+			requestFocusInWindow();
+			setFocusable(true);
+			makeFont();
+
 		}
+
 
 		public void retreiveImage()
 		{
@@ -2325,10 +2335,30 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 		}
 
-
+		public void makeFont()
+		{
+			try
+			{
+				font = Font.createFont(Font.TRUETYPE_FONT, new File("VT323-Regular.ttf"));
+				GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+				ge.registerFont(font);
+			}
+			catch (FontFormatException | IOException e)
+			{
+				System.err.println("Error loading font: " + e.getMessage());
+				e.printStackTrace();
+			}
+		}
 
 		class centerPanel extends JPanel
 		{
+			String ans1, ans2, ans3, ans4;
+			Image questionBase;
+			public centerPanel()
+			{
+				DrawQuestion();
+				repaint();
+			}
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
@@ -2349,6 +2379,352 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
+				questionBase = new ImageIcon("questionBase.png").getImage();
+				g.drawImage(questionBase, 50, -85, 920, 860, this);
+				g.setFont(font.deriveFont(15f));
+				g.setColor(Color.WHITE);
+
+
+				if (displayQ) {
+					g.setFont(font.deriveFont(30f));
+					g.setColor(Color.WHITE);
+
+					int maxWidth = 700; // Maximum width for a single line
+					int x = 175; // Starting x-coordinate
+					int y = 90; // Starting y-coordinate
+					int lineHeight = g.getFontMetrics().getHeight(); // Line height
+
+					String[] words = question.split(" ");
+					StringBuilder line = new StringBuilder();
+
+					for (String word : words) {
+						String testLine = line + word + " ";
+						int lineWidth = g.getFontMetrics().stringWidth(testLine);
+
+						if (lineWidth > maxWidth) {
+							g.drawString(line.toString(), x, y);
+							line = new StringBuilder(word + " ");
+							y += lineHeight;
+						} else {
+							line.append(word).append(" ");
+						}
+					}
+
+					// Draw the last line
+					if (line.length() > 0) {
+						g.drawString(line.toString(), x, y);
+					}
+				}
+
+			}
+
+			public void DrawQuestion()
+			{
+				int questionVariant;
+
+
+				File inFile = new File("questions.txt");
+				try
+				{
+					input = new Scanner(inFile);
+				}
+				catch(FileNotFoundException e)
+				{
+					System.err.printf("\n\n\nERROR: Cannot find/open file %s.\n\n\n","questions.txt");
+					System.exit(1);
+				}
+
+				if(DrawQ)
+				{
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+
+
+						if (question.equalsIgnoreCase("Question4:")) 
+						{
+							System.out.println("Question2 found");
+							break; 
+						}
+					}
+				}
+				DrawQ = false;
+				//choose between 1-5
+
+				questionVariant =(int) (Math.random()*5)+1;
+				System.out.println(questionVariant);
+				switch(questionVariant)
+				{
+				case 1:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub1:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+
+					break;
+				case 2:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub2:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+					break;
+				case 3:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub3:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+
+					break;
+				case 4:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub4:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+
+					break;
+				case 5:
+					while (input.hasNext())
+					{
+						question = input.next().trim(); // Trim to remove extra spaces
+						System.out.println("Question: " + question); // Debugging output
+
+						if (question.equalsIgnoreCase("Sub5:")) 
+						{
+							System.out.println("Sub1 found");
+							break; 
+						}
+					}
+
+
+					break;
+				default:
+					System.out.println("Invalid question variant.");
+				}
+				displayQ = true;
+				question = input.nextLine();
+				ans1 = input.nextLine();
+				ans2 = input.nextLine();
+				ans3 = input.nextLine();
+				ans4 = input.nextLine();
+				//create radio buttons
+				JPanel radioPanel = new JPanel();
+				radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.Y_AXIS)); 
+				radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.Y_AXIS)); // Vertical alignment
+				radioPanel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left
+				radioPanel.setBorder(BorderFactory.createEmptyBorder(300, 180, 20, 50)); // Add padding
+
+				// Set layout to BoxLayout for vertical alignment
+				radioPanel.setBounds(150, 300, 800, 200); // Set bounds for the panel
+
+				radioPanel.setBackground(new Color(0, 0, 0, 0)); // Set transparent background
+				// Create the radio buttons
+				JRadioButton button1 = new JRadioButton(ans1);
+				JRadioButton button2 = new JRadioButton(ans2);
+				JRadioButton button3 = new JRadioButton(ans3);
+				JRadioButton button4 = new JRadioButton(ans4);
+
+				// Add the radio buttons to a ButtonGroup
+				ButtonGroup group = new ButtonGroup();
+
+				group.add(button1);
+				group.add(button2);
+				group.add(button3);
+				group.add(button4);
+
+				// Add the radio buttons to the panel
+				radioPanel.add(button1);
+				radioPanel.add(button2);
+				radioPanel.add(button3);
+				radioPanel.add(button4);
+
+				// Customize the appearance of the radio buttons
+				button1.setOpaque(false);
+				button2.setOpaque(false);
+				button3.setOpaque(false);
+				button4.setOpaque(false);
+				button1.setBackground(null);
+				button2.setBackground(null);
+				button3.setBackground(null);
+				button4.setBackground(null);
+
+				try
+				{
+					font = Font.createFont(Font.TRUETYPE_FONT, new File("VT323-Regular.ttf"));
+					GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+					ge.registerFont(font);
+				}
+				catch (FontFormatException | IOException e)
+				{
+					System.err.println("Error loading font: " + e.getMessage());
+					e.printStackTrace();
+				}
+				// Add the panel to your main container
+
+				// Set font for the radio buttons
+				Font customFont = font.deriveFont(30f);
+				button1.setFont(customFont);
+				button2.setFont(customFont);
+				button3.setFont(customFont);
+				button4.setFont(customFont);
+				button1.setOpaque(false);
+				button2.setOpaque(false);
+				button3.setOpaque(false);
+				button4.setOpaque(false);
+
+				button1.setForeground(Color.WHITE);
+				button2.setForeground(Color.WHITE);
+				button3.setForeground(Color.WHITE);
+
+				button4.setForeground(Color.WHITE);
+				answer = input.nextLine();
+				button1.addActionListener(new ActionListener() 
+				{
+
+
+					public void actionPerformed(ActionEvent e) 
+					{
+						System.out.println(answer);
+						System.out.println(answer.equals("1"));
+						System.out.println("Button 1 clicked");
+						if (button1.isSelected())
+						{
+
+
+							if(answer.equals("1"))
+							{
+								panelCards.correct2 = true;
+								panelCards.wrong2 = false;
+							}
+							else
+							{
+								panelCards.wrong2 = true;
+								panelCards.correct2 = false;
+							}
+
+						} 
+						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
+
+					}
+				});
+				button2.addActionListener(new ActionListener()
+				{
+
+					public void actionPerformed(ActionEvent e) 
+					{
+
+						System.out.println(answer.equals("2"));
+						System.out.println(answer);
+
+						System.out.println("Button 2 clicked");
+						if (button2.isSelected())
+						{
+
+							if(answer.equals("2"))
+							{
+								panelCards.correct2 = true;
+								panelCards.wrong2 = false;
+							}
+							else
+							{
+								panelCards.wrong2 = true;
+								panelCards.correct2 = false;
+							}
+						} 
+						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
+
+					}
+				});
+				button3.addActionListener(new ActionListener() 
+				{
+
+					public void actionPerformed(ActionEvent e) 
+					{
+						System.out.println(answer);
+						System.out.println(answer.equals("3"));
+						System.out.println("Button 3 clicked");
+						if (button3.isSelected())
+						{
+
+							if(answer.equals("3"))
+							{
+								panelCards.correct2 = true;
+								panelCards.wrong2 = false;
+							}
+							else
+							{
+								panelCards.wrong2 = true;
+								panelCards.correct2 = false;
+							}
+						} 
+						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
+
+					}
+				});
+
+				button4.addActionListener(new ActionListener() 
+				{
+
+					public void actionPerformed(ActionEvent e) 
+					{
+						System.out.println(answer);
+						System.out.println("Button 4 clicked");
+						System.out.println(answer.equals("4"));
+						if (button4.isSelected())
+						{
+
+
+							if(answer.equals("4"))
+							{
+
+								panelCards.correct2 = true;
+								panelCards.wrong2 = false;
+
+							}
+							else
+							{
+								panelCards.wrong2 = true;
+								panelCards.correct2 = false;
+							}
+							//	System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
+
+						} 
+					}
+				});
+
+				add(radioPanel);
+
 
 
 			}
@@ -2375,6 +2751,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				Graphics2D g2d = (Graphics2D)(g);
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
 
 			}
 		}
@@ -2447,53 +2824,68 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			int x = e.getX();
 			int y = e.getY();
-
+			System.out.println("Mouse clicked at: " + x + ", " + y);
 			// Check if the click is within the bounds of the "Grade Answer" image
 			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
 			{
 				System.out.println("Grade Answer button clicked");
 				cards.show(panelCards, "clueBoard");
-				panelCards.correct4 = true; // Set the correct variable
+
 				panelCards.repaint(); // Trigger repaint to update the UI
 			}
-			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			else if (x >= 28 && x <= 66 && y >= 695 && y <= 755) 
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
 
+
 		}
-		public void mousePressed(MouseEvent e) {}		
-		public void mouseReleased(MouseEvent e) {}
-		public void mouseEntered(MouseEvent e)
+		public void mouseDragged(MouseEvent e) {}
+		public void mouseMoved(MouseEvent e) 
 		{
 			int x = e.getX();
 			int y = e.getY();
-			if(x>=375 && x<=675 && y>=700 && y<=750)
+			//System.out.println("Mouse moved at: " + x + ", " + y);
+			// Check if the mouse is within the bounds of the "Grade Answer" image
+			if (x >= 345 && x <= 650 && y >= 700 && y <= 750) 
 			{
-
+				System.out.println("Mouse over Grade Answer button");
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
 				darkenButton = true;
 				repaint();
-
+			} 
+			else 
+			{
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				darkenButton = false;
+				repaint();
 			}
 		}
-		public void mouseExited(MouseEvent e) {}
-
-
-		public void mouseDragged(MouseEvent e) 
+		public void mousePressed(MouseEvent e) 
 		{
 
-
-
+			int x = e.getX();
+			int y = e.getY();
+			System.out.println("Mouse pressed at: " + x + ", " + y);
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button pressed");
+				darkenButton = true;
+				repaint();
+			}
+		}
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+		}
+		public void mouseExited(MouseEvent e) 
+		{
 		}
 
-
-		public void mouseMoved(MouseEvent e) {
-
-
-		}
 
 	}
-	class clue5 extends JPanel implements MouseListener
+	class clue5 extends JPanel implements MouseListener, MouseMotionListener
 	{
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
@@ -2677,36 +3069,215 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		}
 		public void mouseExited(MouseEvent e) {}
 
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
-	class clue6 extends JPanel
+	class clue6 extends JPanel implements MouseMotionListener, MouseListener
 	{
+		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-
+		Image background;
 		public clue6(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
-			System.out.println("clue6 constructor called"); // Debug statement
 			panelCards = panelCardsIn;
 			cards = cardsIn;
-			JButton backButton = new JButton("See Forensics Report");
-			backButton.setBounds(10, 10, 100, 30);
-			backButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					cards.show(panelCards, "forensicsReport");
-				}
-			});
-			add(backButton);
-			JButton gradeAnswerButton = new JButton("Grade Answer");
-			gradeAnswerButton.setBounds(10, 50, 100, 30);
-			gradeAnswerButton.addActionListener(new ActionListener()
+			retreiveImage();
+
+
+			setupLayout();
+			repaint();
+			addMouseListener(this);
+			addMouseMotionListener(this);
+		}
+
+		public void retreiveImage()
+		{
+			try
 			{
-				public void actionPerformed(ActionEvent e) 
+				background = ImageIO.read(new File("question1BG.png"));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
+				e.printStackTrace();
+			}
+		}
+
+
+
+		class centerPanel extends JPanel
+		{
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(background != null)
 				{
-					cards.show(panelCards, "clueBoard");
-					correct6 = true;
+
+					g.drawImage(background, -20, 0, 1050, 870, this);
+				}
+				// Draw the "Grade Answer" image
+				Image grader = new ImageIcon("GradeAnswer.png").getImage();
+				g.drawImage(grader, 375, 700, 300, 50, this);
+
+				Image hint = new ImageIcon("forensicButton.png").getImage();
+				g.drawImage(hint, 50, 695, 50, 60, this);
+				if (darkenButton)
+				{
+					g.setColor(new Color(0, 0, 0, 80));
+					g.fillRect(375, 700, 300, 50);
+				}
+
+
+			}
+		}
+
+		class cluePanelWithBackground extends JPanel
+		{
+			private Image backgroundImage;
+			public cluePanelWithBackground(String imagePath)
+			{
+				try
+				{
+					backgroundImage = ImageIO.read(new File(imagePath));
+				}
+				catch (IOException e)
+				{
+					System.out.println("Failed to load background image for clue panel.");
+					e.printStackTrace();
+				}
+			}
+			public void paintComponent(Graphics g)
+			{
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)(g);
+				if(backgroundImage != null)
+					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
+			}
+		}
+
+		centerPanel cp = new centerPanel();
+		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+
+		public void setupLayout()
+		{
+			setLayout(new BorderLayout());
+			JLayeredPane layeredPane = new JLayeredPane();
+			layeredPane.setPreferredSize(new Dimension(1250, 800));
+			cp.setBounds(-30, 0, 1000, 800);
+			cp.setOpaque(false);
+			cluePan.setLayout(new BoxLayout(cluePan, BoxLayout.Y_AXIS));
+			cluePan.setOpaque(false);
+			cluePan.setPreferredSize(new Dimension(260, 1000));
+			JScrollPane scrollPane = new JScrollPane(cluePan, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JScrollBar clueScrollBar = scrollPane.getVerticalScrollBar();
+			clueScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI()
+			{
+				Color thumbColor = new Color(182, 119, 62);
+				Color trackColor = new Color(71, 35, 32);
+				public void paintThumb(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(thumbColor);
+					g2.fillRoundRect(r.x, r.y, r.width, r.height, 10, 10);
+					g2.dispose();
+				}
+				public void paintTrack(Graphics g, JComponent c, Rectangle r)
+				{
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setColor(trackColor);
+					g2.fillRect(r.x, r.y, r.width, r.height);
+				}
+				public JButton createDecreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton createIncreaseButton(int orient)
+				{
+					return makeButton();
+				}
+				public JButton makeButton()
+				{
+					JButton button = new JButton();
+					button.setPreferredSize(new Dimension(0, 0));
+					button.setMinimumSize(new Dimension(0, 0));
+					button.setMaximumSize(new Dimension(0, 0));
+					button.setOpaque(false);
+					button.setContentAreaFilled(false);
+					button.setBorderPainted(false);
+					return button;
 				}
 			});
-			add(gradeAnswerButton);
+			scrollPane.setBounds(970, 0, 330, 800);
+			scrollPane.setOpaque(false);
+			scrollPane.getViewport().setOpaque(false);
+			scrollPane.setBorder(null);
+			layeredPane.add(cp, Integer.valueOf(1));
+			layeredPane.add(scrollPane, Integer.valueOf(1));
+			add(layeredPane, BorderLayout.CENTER);
+
+		}
+
+
+		public void mouseClicked(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+
+			// Check if the click is within the bounds of the "Grade Answer" image
+			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				System.out.println("Grade Answer button clicked");
+				cards.show(panelCards, "clueBoard");
+				panelCards.correct4 = true; // Set the correct variable
+				panelCards.repaint(); // Trigger repaint to update the UI
+			}
+			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
+			{
+				cards.show(panelCards, "forensicsReport");
+			}
+
+		}
+		public void mousePressed(MouseEvent e) {}		
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e)
+		{
+			int x = e.getX();
+			int y = e.getY();
+			if(x>=375 && x<=675 && y>=700 && y<=750)
+			{
+
+				darkenButton = true;
+				repaint();
+
+			}
+		}
+		public void mouseExited(MouseEvent e) {}
+
+
+		public void mouseDragged(MouseEvent e) 
+		{
+
+
+
+		}
+
+
+		public void mouseMoved(MouseEvent e) {
+
 
 		}
 	}
@@ -2852,13 +3423,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		public void labels()
 		{
 
-			label1 = new JLabel("1");
+			label1 = new JLabel("Stomach");
 			label1.setBounds(100, 500, 100, 100);
-			label2 = new JLabel("2");
+			label2 = new JLabel("Small Intestine");
 			label2.setBounds(300, 500, 100, 100);
-			label3 = new JLabel("3");
+			label3 = new JLabel("Esophagus");
 			label3.setBounds(500, 500, 100, 100);
-			label4 = new JLabel("4");
+			label4 = new JLabel("Large Intestine");
 			label4.setBounds(700, 500, 100, 100);
 			label1.setFont(font.deriveFont(10f));
 			label2.setFont(font.deriveFont(10f));
@@ -2876,22 +3447,22 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			label2.setBackground(Color.WHITE);
 			label3.setBackground(Color.WHITE);
 			label4.setBackground(Color.WHITE);
-			top1 = new JLabel("1");
+			top1 = new JLabel("Stomach");
 			top1.setBounds(100, 100, 100, 100);
-			top2 = new JLabel("2");
+			top2 = new JLabel("Small Intestine");
 			top2.setBounds(300, 100, 100, 100);
-			top3 = new JLabel("3");
+			top3 = new JLabel("Esophagus");
 			top3.setBounds(500, 100, 100, 100);
-			top4 = new JLabel("4");
+			top4 = new JLabel("Large Intestine");
 			top4.setBounds(700, 100, 100, 100);
 			top1.setFont(font.deriveFont(10f));
 			top2.setFont(font.deriveFont(10f));
 			top3.setFont(font.deriveFont(10f));
 			top4.setFont(font.deriveFont(10f));
-			top1.setText("1");
-			top2.setText("2");
-			top3.setText("3");
-			top4.setText("4");
+			top1.setText("Stomach");
+			top2.setText("Small Intestine");
+			top3.setText("Esophagus");
+			top4.setText("Large Intestine");
 
 			top1.setForeground(Color.BLACK);
 			top2.setForeground(Color.BLACK);
@@ -2981,8 +3552,20 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				System.out.println("Grade Answer button clicked");
 				cards.show(panelCards, "clueBoard");
-				panelCards.correct5 = true; // Set the correct variable
+				if(label1.getText().equalsIgnoreCase("Esophagus") && label2.getText().equalsIgnoreCase("Stomach") && label3.getText().equalsIgnoreCase("Small Intestine") && label4.getText().equalsIgnoreCase("Large Intestine"))
+				{
+					panelCards.correct7 = true; // Set the correct variable
+					panelCards.wrong7 = false;
+					panelCards.repaint(); // Trigger repaint to update the UI
+				}
+				else
+				{
+					panelCards.wrong7 = true;
+					panelCards.correct7 = false;
+				}
+				
 				panelCards.repaint(); // Trigger repaint to update the UI
+				
 			}
 			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
 			{
@@ -3049,21 +3632,21 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 				if(dragging1)
 				{
-					label1.setText("1");
+					label1.setText("Stomach");
 					
 
 				}
 				else if(dragging2)
 				{
-					label1.setText("2");
+					label1.setText("Small Intestine");
 				}
 				else if(dragging3)
 				{
-					label1.setText("3");
+					label1.setText("Esophagus");
 				}
 				else if(dragging4)
 				{
-					label1.setText("4");
+					label1.setText("Large Intestine");
 
 				}
 
@@ -3072,24 +3655,24 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			else if(x>300&&x<400&&y>500&&y<600)
 			{
 				System.out.println("Mouse released in second square");
+
 				if(dragging1)
 				{
-					label2.setText("1");
-
-					System.out.println("TEST");
+					label2.setText("Stomach");
+					
 
 				}
 				else if(dragging2)
 				{
-					label2.setText("2");
+					label2.setText("Small Intestine");
 				}
 				else if(dragging3)
 				{
-					label2.setText("3");
+					label2.setText("Esophagus");
 				}
 				else if(dragging4)
 				{
-					label2.setText("4");
+					label2.setText("Large Intestine");
 
 				}
 
@@ -3100,22 +3683,24 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				System.out.println("Mouse released in third square");
 				x3 = 500;
 				y3 = 500;
+
 				if(dragging1)
 				{
-					label3.setText("1");
+					label3.setText("Stomach");
+					
 
 				}
 				else if(dragging2)
 				{
-					label3.setText("2");
+					label3.setText("Small Intestine");
 				}
 				else if(dragging3)
 				{
-					label3.setText("3");
+					label3.setText("Esophagus");
 				}
 				else if(dragging4)
 				{
-					label3.setText("4");
+					label3.setText("Large Intestine");
 
 				}
 
@@ -3125,22 +3710,24 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				System.out.println("Mouse released in fourth square");
 				x4 = 700;
 				y4 = 500;
+
 				if(dragging1)
 				{
-					label4.setText("1");
+					label4.setText("Stomach");
+					
 
 				}
 				else if(dragging2)
 				{
-					label4.setText("2");
+					label4.setText("Small Intestine");
 				}
 				else if(dragging3)
 				{
-					label4.setText("3");
+					label4.setText("Esophagus");
 				}
 				else if(dragging4)
 				{
-					label4.setText("4");
+					label4.setText("Large Intestine");
 
 				}
 
