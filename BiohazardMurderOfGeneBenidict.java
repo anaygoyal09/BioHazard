@@ -3346,10 +3346,10 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.fillRect(375, 700, 300, 50);
 				}
 				g.setColor(Color.WHITE);
-				g.fillRect(100, 100, 100, 100);
-				g.fillRect(300, 100, 100, 100);
-				g.fillRect(500, 100, 100, 100);
-				g.fillRect(700, 100, 100, 100);
+				g.fillRect(100, 200, 100, 100);
+				g.fillRect(300, 200, 100, 100);
+				g.fillRect(500, 200, 100, 100);
+				g.fillRect(700, 200, 100, 100);
 
 				g.setColor(Color.WHITE);
 				g.fillRect(100, 500, 100, 100);
@@ -3388,6 +3388,37 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.setColor(Color.RED);
 					g.drawRect(x4, y4, 100, 100);
 				}
+			
+
+				g.setFont(font.deriveFont(30f));
+				g.setColor(Color.WHITE);
+
+				int maxWidth = 700; // Maximum width for a single line
+				int x = 175; // Starting x-coordinate
+				int y = 90; // Starting y-coordinate
+				int lineHeight = g.getFontMetrics().getHeight(); // Line height
+
+				String[] words = "The \"DIGESTIVE REPORT\" outlines the path food takes. Arrange the following digestive organs in the order food passes through them:".split(" ");
+				StringBuilder line = new StringBuilder();
+
+				for (String word : words) {
+					String testLine = line + word + " ";
+					int lineWidth = g.getFontMetrics().stringWidth(testLine);
+
+					if (lineWidth > maxWidth) {
+						g.drawString(line.toString(), x, y);
+						line = new StringBuilder(word + " ");
+						y += lineHeight;
+					} else {
+						line.append(word).append(" ");
+					}
+				}
+
+				// Draw the last line
+				if (line.length() > 0) {
+					g.drawString(line.toString(), x, y);
+				}
+			
 
 			}
 		}
@@ -3455,6 +3486,11 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			top3.setBounds(500, 100, 100, 100);
 			top4 = new JLabel("Large Intestine");
 			top4.setBounds(700, 100, 100, 100);
+			top1.setBounds(100, 200, 100, 100);
+			top2.setBounds(300, 200, 100, 100);
+			top3.setBounds(500, 200, 100, 100);
+			top4.setBounds(700, 200, 100, 100);
+
 			top1.setFont(font.deriveFont(10f));
 			top2.setFont(font.deriveFont(10f));
 			top3.setFont(font.deriveFont(10f));
@@ -3588,25 +3624,25 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 
 			}
-			else if(x>100&&x<200&&y>100&&y<200)
+			else if(x>100&&x<200&&y>200&&y<300)
 			{	
 				System.out.println("Mouse pressed in first square");
 				dragging1 = true;
 
 			}
-			else if(x>300&&x<400&&y>100&&y<200)
+			else if(x>300&&x<400&&y>200&&y<300)
 			{
 				System.out.println("Mouse pressed in second square");
 				dragging2 = true;
 
 			}
-			else if(x>500&&x<600&&y>100&&y<200)
+			else if(x>500&&x<600&&y>200&&y<300)
 			{
 				System.out.println("Mouse pressed in third square");
 				dragging3 = true;
 
 			}
-			else if(x>700&&x<800&&y>100&&y<200)
+			else if(x>700&&x<800&&y>200&&y<300)
 			{
 				System.out.println("Mouse pressed in fourth square");
 				dragging4 = true;
