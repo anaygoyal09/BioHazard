@@ -112,6 +112,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		question3 question3 = new question3(this, cards);
 		question4 question4 = new question4(this, cards);
 		question5 question5 = new question5(this, cards);
+		question6 question6 = new question6(this, cards);
 		question7 question7 = new question7(this, cards);
 		chooseMurderer chooseMurderer = new chooseMurderer(this, cards);
 
@@ -126,6 +127,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		add(question3, "question3");
 		add(question4, "question4");
 		add(question5, "question5");
+		add(question6, "question6");
 		add(question7, "question7");
 		add(chooseMurderer, "chooseMurderer");
 
@@ -460,7 +462,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				cards.show(panelCards, "report");
 
 			if(x >= 0 && x <= 10 && y >= 0 && y <= 10)
-				cards.show(panelCards, "question2");
+				cards.show(panelCards, "question6");
 		}
 
 		public void mouseExited(MouseEvent e)
@@ -1914,64 +1916,55 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 			int num = 0;
 
-			if(questionsAnswered[6])
+			if(questionsAnswered[5])
 				num = 7;
 
-			else if(questionsAnswered[5])
+			else if(questionsAnswered[4])
 				num = 6;
 
-			else if(questionsAnswered[4])
+			else if(questionsAnswered[3])
 				num = 5;
 
-			else if(questionsAnswered[3])
+			else if(questionsAnswered[2])
 				num = 4;
 
-			else if(questionsAnswered[2])
+			else if(questionsAnswered[1])
 				num = 3;
 
-			else if(questionsAnswered[1])
+			else if(questionsAnswered[0])
 				num = 2;
 
-			if(x >= 115 && x <= 224 && y >= 189 && y <= 334 && !correct1) 
-			{
-				//	if(questionsAnswered[0] = false)
-				System.out.println("\n\n\n\n!!!!!!! " + num + " !!!!!!!!!!!");
-
-				cards.show(panelCards, "question" + num);
-
-				//		else if(questionsAnswered[1] = false)
-				//		cards.show(panelCards, "question2");
-
-				//	else if(questionsAnswered[2] = false)
-
-			} 
-
-			else if (x >= 563 && x <= 685 && y >= 137 && y <= 257&& !correct2) 
-			{
-				cards.show(panelCards, "question" + num);
-			}
-
-			else if (x >= 909 && x <= 1125 && y >= 142 && y <= 297&& !correct3) 
-			{
-				cards.show(panelCards, "question" + num);
-			}
-
-			else if (x >= 158 && x <= 316 && y >= 355 && y <= 525&& !correct4) 
+			if(x >= 115 && x <= 224 && y >= 189 && y <= 334) 
 			{
 				cards.show(panelCards, "question" + num);
 			} 
 
-			else if (x >= 78 && y >= 540 && x <= 192 && y <= 693&&!correct5) 
+			else if (x >= 563 && x <= 685 && y >= 137 && y <= 257) 
 			{
 				cards.show(panelCards, "question" + num);
 			}
 
-			else if (x >= 210 && y >= 565 && x <= 392 && y <= 759&& !correct6)
+			else if (x >= 909 && x <= 1125 && y >= 142 && y <= 297) 
+			{
+				cards.show(panelCards, "question" + num);
+			}
+
+			else if (x >= 158 && x <= 316 && y >= 355 && y <= 525) 
 			{
 				cards.show(panelCards, "question" + num);
 			} 
 
-			else if (x >= 981 && y >= 556 && x <= 1131 && y <= 655&&!correct7) 
+			else if (x >= 78 && y >= 540 && x <= 192 && y <= 693) 
+			{
+				cards.show(panelCards, "question" + num);
+			}
+
+			else if (x >= 210 && y >= 565 && x <= 392 && y <= 759)
+			{
+				cards.show(panelCards, "question" + num);
+			} 
+
+			else if (x >= 981 && y >= 556 && x <= 1131 && y <= 655) 
 			{
 				cards.show(panelCards, "question" + num);
 			}
@@ -2738,7 +2731,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 						g.drawString(line.toString(), x, y);
 					}
 				}
-
 			}
 
 			public void DrawQuestion()
@@ -2913,9 +2905,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					System.err.println("Error loading font: " + e.getMessage());
 					e.printStackTrace();
 				}
-				// Add the panel to your main container
 
-				// Set font for the radio buttons
 				Font customFont = font.deriveFont(30f);
 				button1.setFont(customFont);
 				button2.setFont(customFont);
@@ -2955,6 +2945,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 							}
 
 						} 
+						makeFrame();
+
 						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
 
 					}
@@ -2984,6 +2976,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 								panelCards.correct2 = false;
 							}
 						} 
+						makeFrame();
+
 						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
 
 					}
@@ -3011,6 +3005,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 								panelCards.correct2 = false;
 							}
 						} 
+						makeFrame();
+
 						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
 
 					}
@@ -3043,10 +3039,11 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 							//	System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
 
 						} 
+						
+						makeFrame();
 					}
 				});
 
-				makeFrame();
 				add(radioPanel);
 			}
 		}
@@ -3231,7 +3228,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			if(x >= 375 && x <= 675 && y >= 700 && y <= 750) //---------------------------------------------------------------------------------------------------------------
 			{
 				frame.setVisible(true);
-				
+				questionsAnswered[1] = true;
 				panelCards.repaint();
 			}
 			else if(x >= 28 && x <= 66 && y >= 695 && y <= 755) 
@@ -3282,54 +3279,49 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		}
 
 	}
+	
 
 	class question3 extends JPanel implements MouseListener, MouseMotionListener
 	{
 		int x, y;
 		boolean drawCircle;
 		Image questionBase, diaphragm;
+		String response;
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-		Image background;
+		Image background, answerImage;
+		JFrame frame;
+		
 		public question3(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
 
-
 			setupLayout();
 			repaint();
 			addMouseListener(this);
-			addMouseMotionListener(this); 	
+			addMouseMotionListener(this);
+			requestFocusInWindow();
+			setFocusable(true);
 		}
 
 		public void retreiveImage()
 		{
-
 			try
 			{
 				background = ImageIO.read(new File("question1BG.png"));
-			}
-			catch(IOException e)
-			{
-				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
-				e.printStackTrace();
-			}
-			try
-			{
 				diaphragm = ImageIO.read(new File("diaphragm.png"));
-
+				answerImage = ImageIO.read(new File("answers.png"));
 			}
+			
 			catch(IOException e)
 			{
 				System.err.println("\n\n\nERROR IN RETRIEVING IMAGE\n\n\n");
 				e.printStackTrace();
 			}
 		}
-
-
 
 		class centerPanel extends JPanel
 		{
@@ -3337,6 +3329,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			{
 				super.paintComponent(g);
 				Graphics2D g2d = (Graphics2D)(g);
+				
 				if(background != null)
 				{
 
@@ -3348,32 +3341,34 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 				Image hint = new ImageIcon("forensicButton.png").getImage();
 				g.drawImage(hint, 50, 695, 50, 60, this);
-				if (darkenButton)
+				
+				if(darkenButton)
 				{
 					g.setColor(new Color(0, 0, 0, 80));
 					g.fillRect(375, 700, 300, 50);
 				}
-				questionBase = new ImageIcon("questionBase.png").getImage();
-				g.drawImage(questionBase, 50, -85, 920, 750, this);
-				g.drawImage(diaphragm, 325, 190, 400, 500, this);
-				g.setFont(font.deriveFont(25f));
+				
+				questionBase = new ImageIcon("questionPaper.png").getImage();
+				g.drawImage(questionBase, 60, 35, 900, 80, this);
+				g.drawImage(diaphragm, 325, 160, 400, 500, this);
+				
+				g.setFont(font.deriveFont(30f));
 				g.setColor(Color.BLACK);
-
-				g.drawString("The \"DIAPHRAGM REPORT\" describes the diaphragm's role in breathing.", 175, 130);
-				g.drawString(" Click on the image below representing the diaphragm.", 175, 175);
-				if(drawCircle)
+				g.drawString("The \"DIAPHRAGM REPORT\" describes the diaphragm's role in breathing.", 145, 70);
+				g.drawString("Click on the image below representing the diaphragm.", 145, 100);
+								
+				if(drawCircle && x >= 325 && x <= 675 && y >= 160 && y <= 660)
 				{
-					g.setColor(Color.RED);
-					g.fillOval(x+30, y, 5, 5);
-
-				}	
-
+					g.setColor(new Color(159, 34, 23));
+					g.fillOval(x + 27, y - 5, 7, 7);
+				}
 			}
 		}
 
 		class cluePanelWithBackground extends JPanel
 		{
 			private Image backgroundImage;
+			
 			public cluePanelWithBackground(String imagePath)
 			{
 				try
@@ -3386,13 +3381,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					e.printStackTrace();
 				}
 			}
+			
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
 				Graphics2D g2d = (Graphics2D)(g);
+				
 				if(backgroundImage != null)
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-
 			}
 		}
 
@@ -3449,6 +3445,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					return button;
 				}
 			});
+			
 			scrollPane.setBounds(970, 0, 330, 800);
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
@@ -3456,57 +3453,190 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-
 		}
-
+		
+		public void makeFrame()
+		{						
+			frame = new JFrame(response);
+			frame.setSize(300, 200);				
+			frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			frame.setResizable(false);
+			answerFrameHandler afh = new answerFrameHandler();
+			frame.getContentPane().add(afh);
+			frame.setLocationRelativeTo(null);
+			frame.setVisible(false);
+		}
 
 		public void mouseClicked(MouseEvent e)
 		{
 			x = e.getX();
 			y = e.getY();
-			if(x>=392 && y>=508 && x<= 601 && y<616)
+			
+			requestFocusInWindow();
+			setFocusable(true);
+						
+			if(x >= 420 && y >= 395 && x <= 585 && y <= 475)
 			{
-				panelCards.correct1 = true;
-				System.out.println("Correct Answer");
-
-
-
+				panelCards.correct3 = true;
+				response = "Correct!";
+				System.out.println("GOOOOOOOOD");
+				makeFrame();
 			}
-			else if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			
+			else if(!(x >= 375 && x <= 675 && y >= 700 && y <= 750))
 			{
-				System.out.println("Grade Answer button clicked");
-				cards.show(panelCards, "clueBoard");
+				response = "Incorrect";
+				System.out.println("BAAAADDDDDD");
+				makeFrame();
+			}
+			
+			makeFrame();
+			
+			if(x >= 375 && x <= 675 && y >= 700 && y <= 750) 
+			{
+				questionsAnswered[2] = true;
+				
+				if(frame != null)
+					frame.setVisible(true);
+				
 				drawCircle = true;
-				panelCards.repaint(); // Trigger repaint to update the UI
+				panelCards.repaint();
 			}
+			
 			else if (x >= 50 && x <= 100 && y >= 695 && y <= 755) 
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
+			
 			else
 			{
-				panelCards.correct1 = false;
-
+				panelCards.correct3 = false;
 			}
-			drawCircle = true;
 
-			System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
+			makeFrame();
 			repaint();
 		}
-		public void mousePressed(MouseEvent e) {}		
-		public void mouseReleased(MouseEvent e) {}
+		
+		class answerFrameHandler extends JPanel
+		{
+			public answerFrameHandler()
+			{
+				setBackground(Color.WHITE);
+				setLayout(null);
+
+				JLabel title = new JLabel(response);
+				JButton returnToClue;
+				returnToClue = new JButton("Return to clue page");
+				title.setFont(new Font("Monospaced", Font.PLAIN, 25));
+				title.setBounds(130, 20, 150, 40);
+				title.setForeground(Color.BLACK);
+				title.setVisible(true);
+				add(title);
+
+				if(response != null)
+				{
+					if(response.equals("Correct!") | correct3)
+						returnToClue.setText("View clue");
+				}
+
+				returnToClue.setFont(new Font("Monospaced", Font.PLAIN, 10));
+				returnToClue.setBounds(120, 60, 160, 70);
+				returnToClue.setForeground(Color.BLACK);
+				returnToClue.setVisible(true);
+				buttonHandler ibh = new buttonHandler();
+				returnToClue.addActionListener(ibh);
+				add(returnToClue);
+			}
+
+			class buttonHandler implements ActionListener
+			{
+				public void actionPerformed(ActionEvent e)
+				{	
+					if(response.equals("Incorrect"))
+					{
+						cards.show(panelCards, "secondClueBoard");
+						showClueVid = false;
+					}
+
+					else
+						cards.show(panelCards, "clue1");
+
+					questionsAnswered[0] = true;
+					frame.dispose();
+				}
+			}
+
+			public void paintComponent(Graphics g)
+			{
+				int answerWidth = answerImage.getWidth(this) / 2;
+				int answerHeight = answerImage.getHeight(this);
+
+				if(response.equals("Correct!"))
+				{
+					g.drawImage(answerImage, 20, 20, 100, 130, 0, 0, answerWidth, answerHeight, this);
+					correct1 = true;
+				}
+
+				else if(response.equals("Incorrect"))
+					g.drawImage(answerImage, 17, 20, 100, 130, answerWidth, 0, answerWidth * 2, answerHeight, this);
+			}
+		}
+		
+		public void mousePressed(MouseEvent e)
+		{
+			x = e.getX();
+			y = e.getY();
+			
+			if(x >= 420 && y >= 395 && x <= 585 && y <= 475)
+			{
+				panelCards.correct3 = true;
+				response = "Correct!";
+				System.out.println("GOOOOOOOOD");
+				makeFrame();
+			}
+			
+			else if(!(x >= 375 && x <= 675 && y >= 700 && y <= 750))
+			{
+				response = "Incorrect";
+				System.out.println("BAAAADDDDDD");
+				makeFrame();
+			}
+			
+			drawCircle = true;
+			repaint();
+		}		
+		public void mouseReleased(MouseEvent e)
+		{
+			x = e.getX();
+			y = e.getY();
+			
+			if(x >= 420 && y >= 395 && x <= 585 && y <= 475)
+			{
+				panelCards.correct3 = true;
+				response = "Correct!";
+				System.out.println("GOOOOOOOOD");
+				makeFrame();
+			}
+			
+			else if(!(x >= 375 && x <= 675 && y >= 700 && y <= 750))
+			{
+				response = "Incorrect";
+				System.out.println("BAAAADDDDDD");
+				makeFrame();
+			}
+		}
 		public void mouseEntered(MouseEvent e)
 		{
 			int x1 = e.getX();
 			int y1 = e.getY();
-			if(x1>=375 && x1<=675 && y1>=700 && y1<=750)
+			
+			if(x1 >= 375 && x1 <= 675 && y1 >= 700 && y1 <= 750)
 			{
-
 				darkenButton = true;
 				repaint();
-
 			}
 		}
+		
 		public void mouseExited(MouseEvent e) {}
 
 
@@ -3543,6 +3673,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 	}
 
+	
 	class question4 extends JPanel implements MouseListener
 	{
 		BiohazardMurderOfGeneBenidictHolder panelCards;
@@ -3650,6 +3781,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				if(yCord == 700)
 				{
 					lowerTimer.stop();
+					questionsAnswered[3] = true;
 					drawBox = false;
 				}
 
@@ -3963,26 +4095,26 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		}
 	}
 
+
+	
 	class question5 extends JPanel implements MouseListener, MouseMotionListener
 	{
-
-		String answer;
+		String answer, response;
 		protected boolean displayQ = false;
-		String question ="";
+		String question = "";
 		protected boolean DrawQ = true;
 		protected Scanner input;
-
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-		Image background;
+		JFrame frame;
+		Image background, answerImage;
 
 		public question5(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
 			retreiveImage();
-
 
 			setupLayout();
 			repaint();
@@ -3998,6 +4130,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			try
 			{
 				background = ImageIO.read(new File("question1BG.png"));
+				answerImage = ImageIO.read(new File("answers.png"));
 			}
 			catch(IOException e)
 			{
@@ -4014,6 +4147,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 				ge.registerFont(font);
 			}
+			
 			catch (FontFormatException | IOException e)
 			{
 				System.err.println("Error loading font: " + e.getMessage());
@@ -4056,7 +4190,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				g.setColor(Color.WHITE);
 
 
-				if (displayQ) {
+				if(displayQ)
+				{
 					g.setFont(font.deriveFont(30f));
 					g.setColor(Color.WHITE);
 
@@ -4068,31 +4203,30 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					String[] words = question.split(" ");
 					StringBuilder line = new StringBuilder();
 
-					for (String word : words) {
+					for(String word : words)
+					{
 						String testLine = line + word + " ";
 						int lineWidth = g.getFontMetrics().stringWidth(testLine);
 
-						if (lineWidth > maxWidth) {
+						if(lineWidth > maxWidth)
+						{
 							g.drawString(line.toString(), x, y);
 							line = new StringBuilder(word + " ");
 							y += lineHeight;
-						} else {
-							line.append(word).append(" ");
 						}
+						
+						else
+							line.append(word).append(" ");
 					}
 
-					// Draw the last line
-					if (line.length() > 0) {
+					if(line.length() > 0)	//write the last line
 						g.drawString(line.toString(), x, y);
-					}
 				}
-
 			}
 
 			public void DrawQuestion()
 			{
 				int questionVariant;
-
 
 				File inFile = new File("questions.txt");
 				try
@@ -4292,18 +4426,18 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 							if(answer.equals("1"))
 							{
-								correct2 = true;
-								panelCards.wrong2 = false;
+								correct5 = true;
+								panelCards.wrong5 = false;
 							}
 							else
 							{
-								panelCards.wrong2 = true;
-								correct2 = false;
+								panelCards.wrong5 = true;
+								correct5 = false;
 							}
 
 						} 
 						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
-
+						makeFrame();
 					}
 				});
 				button2.addActionListener(new ActionListener()
@@ -4321,17 +4455,17 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 							if(answer.equals("2"))
 							{
-								correct2 = true;
-								panelCards.wrong2 = false;
+								correct5 = true;
+								panelCards.wrong5 = false;
 							}
 							else
 							{
-								panelCards.wrong2 = true;
-								correct2 = false;
+								panelCards.wrong5 = true;
+								correct5 = false;
 							}
 						} 
 						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
-
+						makeFrame();
 					}
 				});
 				button3.addActionListener(new ActionListener() 
@@ -4347,17 +4481,17 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 							if(answer.equals("3"))
 							{
-								correct2 = true;
-								panelCards.wrong2 = false;
+								correct5 = true;
+								panelCards.wrong5 = false;
 							}
 							else
 							{
-								panelCards.wrong2 = true;
-								correct2 = false;
+								panelCards.wrong5 = true;
+								correct5 = false;
 							}
 						} 
 						//System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
-
+						makeFrame();
 					}
 				});
 
@@ -4376,26 +4510,23 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 							if(answer.equals("4"))
 							{
 
-								correct2 = true;
-								panelCards.wrong2 = false;
+								correct5 = true;
+								panelCards.wrong5 = false;
 
 							}
 							
 							else
 							{
-								panelCards.wrong2 = true;
-								correct2 = false;
+								panelCards.wrong5 = true;
+								correct5 = false;
 							}
 							//	System.out.println(correct1 + " " + correct2 + " " + correct3 + " " + correct4 + " " + correct5 + " " + correct6 + " " + correct7);
-
+							makeFrame();
 						} 
 					}
 				});
 
 				add(radioPanel);
-
-
-
 			}
 		}
 
@@ -4422,6 +4553,88 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
 
+			}
+		}
+		
+		public void makeFrame()
+		{			
+			if(correct5)
+				response = "Correct!";
+			
+			else if(!correct5)
+				response = "Incorrect";
+			
+			frame = new JFrame(response);
+			frame.setSize(300, 200);				
+			frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			frame.setResizable(false);
+			answerFrameHandler afh = new answerFrameHandler();
+			frame.getContentPane().add(afh);
+			frame.setLocationRelativeTo(null);
+			frame.setVisible(false);	
+		}
+		
+		class answerFrameHandler extends JPanel
+		{
+			public answerFrameHandler()
+			{
+				setBackground(Color.WHITE);
+				setLayout(null);
+
+				JLabel title = new JLabel(response);
+				JButton returnToClue;
+				title.setFont(new Font("Monospaced", Font.PLAIN, 25));
+				title.setBounds(130, 20, 150, 40);
+				title.setForeground(Color.BLACK);
+				title.setVisible(true);
+				add(title);
+
+				if(response.equals("Correct!"))
+					returnToClue = new JButton("View clue");
+
+				else 
+					returnToClue = new JButton("Return to clue page");
+
+				returnToClue.setFont(new Font("Monospaced", Font.PLAIN, 10));
+				returnToClue.setBounds(120, 60, 160, 70);
+				returnToClue.setForeground(Color.BLACK);
+				returnToClue.setVisible(true);
+				buttonHandler ibh = new buttonHandler();
+				returnToClue.addActionListener(ibh);
+				add(returnToClue);
+			}
+
+			class buttonHandler implements ActionListener
+			{
+				public void actionPerformed(ActionEvent e)
+				{	
+					if(response.equals("Incorrect"))
+					{
+						cards.show(panelCards, "secondClueBoard");
+						showClueVid = false;
+					}
+
+					else
+						cards.show(panelCards, "clue1");
+
+					questionsAnswered[0] = true;
+					frame.dispose();
+				}
+			}
+
+			public void paintComponent(Graphics g)
+			{
+				int answerWidth = answerImage.getWidth(this) / 2;
+				int answerHeight = answerImage.getHeight(this);
+
+				if(response.equals("Correct!"))
+				{
+					g.drawImage(answerImage, 20, 20, 100, 130, 0, 0, answerWidth, answerHeight, this);
+					correct1 = true;
+				}
+
+				else if(response.equals("Incorrect"))
+					g.drawImage(answerImage, 17, 20, 100, 130, answerWidth, 0, answerWidth * 2, answerHeight, this);
 			}
 		}
 
@@ -4493,22 +4706,20 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			int x = e.getX();
 			int y = e.getY();
-			System.out.println("Mouse clicked at: " + x + ", " + y);
 			// Check if the click is within the bounds of the "Grade Answer" image
 			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
 			{
-				System.out.println("Grade Answer button clicked");
-				cards.show(panelCards, "clueBoard");
-
+				questionsAnswered[4] = true;
+				frame.setVisible(true);
 				panelCards.repaint(); // Trigger repaint to update the UI
 			}
-			else if (x >= 28 && x <= 66 && y >= 695 && y <= 755) 
+			
+			else if (x >= 28 && x <= 66 && y >= 695 && y <= 755)
 			{
 				cards.show(panelCards, "forensicsReport");
 			}
-
-
 		}
+		
 		public void mouseDragged(MouseEvent e) {}
 		public void mouseMoved(MouseEvent e) 
 		{
@@ -4553,19 +4764,21 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		}
 	}
 
+
+
 	class question6 extends JPanel implements MouseListener, MouseMotionListener
 	{
 		boolean dragging1, dragging2, dragging3, dragging4;
 		int x1, x2, x3, x4;
 		int y1, y2, y3, y4;
-
-
+		String response;
 		JLabel label1 , label2, label3, label4;
 		JLabel top1, top2, top3, top4;
 		protected boolean darkenButton;
 		BiohazardMurderOfGeneBenidictHolder panelCards;
 		CardLayout cards;
-		Image background;
+		Image background, answerImage;
+		JFrame frame;
 
 		public question6(BiohazardMurderOfGeneBenidictHolder panelCardsIn, CardLayout cardsIn)
 		{
@@ -4585,6 +4798,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			try
 			{
 				background = ImageIO.read(new File("question1BG.png"));
+				answerImage = ImageIO.read(new File("answers.png"));
 			}
 			catch(IOException e)
 			{
@@ -4684,8 +4898,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				if (line.length() > 0) {
 					g.drawString(line.toString(), x, y);
 				}
-
-
 			}
 		}
 
@@ -4714,9 +4926,92 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			}
 
 		}
+		
+		public void makeFrame()
+		{			
+			if(correct6)
+				response = "Correct!";
+			
+			else if(!correct6)
+				response = "Incorrect";
+			
+			frame = new JFrame(response);
+			frame.setSize(300, 200);				
+			frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			frame.setResizable(false);
+			answerFrameHandler afh = new answerFrameHandler();
+			frame.getContentPane().add(afh);
+			frame.setLocationRelativeTo(null);
+			frame.setVisible(false);	
+		}
+		
+		class answerFrameHandler extends JPanel
+		{
+			public answerFrameHandler()
+			{
+				setBackground(Color.WHITE);
+				setLayout(null);
+
+				JLabel title = new JLabel(response);
+				JButton returnToClue;
+				title.setFont(new Font("Monospaced", Font.PLAIN, 25));
+				title.setBounds(130, 20, 150, 40);
+				title.setForeground(Color.BLACK);
+				title.setVisible(true);
+				add(title);
+
+				if(response.equals("Correct!"))
+					returnToClue = new JButton("View clue");
+
+				else 
+					returnToClue = new JButton("Return to clue page");
+
+				returnToClue.setFont(new Font("Monospaced", Font.PLAIN, 10));
+				returnToClue.setBounds(120, 60, 160, 70);
+				returnToClue.setForeground(Color.BLACK);
+				returnToClue.setVisible(true);
+				buttonHandler ibh = new buttonHandler();
+				returnToClue.addActionListener(ibh);
+				add(returnToClue);
+			}
+
+			class buttonHandler implements ActionListener
+			{
+				public void actionPerformed(ActionEvent e)
+				{	
+					if(response.equals("Incorrect"))
+					{
+						cards.show(panelCards, "secondClueBoard");
+						showClueVid = false;
+					}
+
+					else
+						cards.show(panelCards, "clue1");
+
+					questionsAnswered[0] = true;
+					frame.dispose();
+				}
+			}
+
+			public void paintComponent(Graphics g)
+			{
+				int answerWidth = answerImage.getWidth(this) / 2;
+				int answerHeight = answerImage.getHeight(this);
+
+				if(response.equals("Correct!"))
+				{
+					g.drawImage(answerImage, 20, 20, 100, 130, 0, 0, answerWidth, answerHeight, this);
+					correct1 = true;
+				}
+
+				else if(response.equals("Incorrect"))
+					g.drawImage(answerImage, 17, 20, 100, 130, answerWidth, 0, answerWidth * 2, answerHeight, this);
+			}
+		}
 
 		centerPanel cp = new centerPanel();
 		cluePanelWithBackground cluePan = new cluePanelWithBackground("cluesPanelBG.png");
+		
 		public void labels()
 		{
 
@@ -4771,7 +5066,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			top3.setForeground(Color.BLACK);
 			top4.setForeground(Color.BLACK);
 
-
 			add(top1);
 			add(top2);
 			add(top3);
@@ -4782,6 +5076,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			add(label3);
 			add(label4);
 		}
+		
 		public void setupLayout()
 		{
 			setLayout(new BorderLayout());
@@ -4839,7 +5134,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			layeredPane.add(cp, Integer.valueOf(1));
 			layeredPane.add(scrollPane, Integer.valueOf(1));
 			add(layeredPane, BorderLayout.CENTER);
-
 		}
 
 
@@ -4848,24 +5142,28 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			int x = e.getX();
 			int y = e.getY();
 
-
 			// Check if the click is within the bounds of the "Grade Answer" image
 			if (x >= 375 && x <= 675 && y >= 700 && y <= 750) 
 			{
 				System.out.println("Grade Answer button clicked");
-				cards.show(panelCards, "clueBoard");
+				
 				if(label1.getText().equalsIgnoreCase("Esophagus") && label2.getText().equalsIgnoreCase("Stomach") && label3.getText().equalsIgnoreCase("Small Intestine") && label4.getText().equalsIgnoreCase("Large Intestine"))
 				{
-					panelCards.correct7 = true; // Set the correct variable
-					panelCards.wrong7 = false;
+					panelCards.correct6 = true; // Set the correct variable
+					panelCards.wrong6 = false;
+					makeFrame();
 					panelCards.repaint(); // Trigger repaint to update the UI
 				}
+				
 				else
 				{
-					panelCards.wrong7 = true;
-					panelCards.correct7 = false;
+					panelCards.wrong6 = true;
+					panelCards.correct6 = false;
+					makeFrame();
 				}
 
+				questionsAnswered[5] = true;
+				frame.setVisible(true);				
 				panelCards.repaint(); // Trigger repaint to update the UI
 
 			}
@@ -5032,8 +5330,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					label4.setText("Large Intestine");
 
 				}
-
-
 			}
 			dragging1 = false;
 			dragging2 = false;
@@ -5090,7 +5386,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			repaint();
 		}
 
-		@Override
 		public void mouseMoved(MouseEvent e) 
 		{
 
@@ -5098,6 +5393,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 
 
 	}
+
 
 	class question7 extends JPanel implements MouseListener
 	{
@@ -5134,22 +5430,14 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			indOptions = new String[4];
 
 			questionText = file.substring(file.indexOf("Question 7"), file.indexOf("-----", file.indexOf("Question 7")));
-			randNum = (int)(Math.random() * 5) + 1;
+			randNum = (int)(Math.random() * 3) + 1;
 			questionChoice = questionText.substring(questionText.indexOf("Choice " + randNum), questionText.indexOf("-", questionText.indexOf("Choice " + randNum)));
-
-
-			question = questionChoice.substring(0, questionChoice.indexOf("?") + 1);
-			question = question.substring(8, question.length());
-			System.out.println(question.indexOf(":") + 1);
-
-
-
+			question = questionChoice.substring(questionChoice.indexOf(":") + 2, questionChoice.indexOf("?") + 1);
 			options = questionChoice.substring(questionChoice.indexOf("1."), questionChoice.length());
 			questionPaperName = questionText.substring(questionText.indexOf("Questions: ") + 11, questionText.indexOf("-", questionText.indexOf("Questions: ")) - 1);
 			optionPaperName = questionText.substring(questionText.indexOf("Options: ") + 9, questionText.indexOf("-", questionText.indexOf("Options: ")) - 1);
 			boxesName = questionText.substring(questionText.indexOf("Boxes: ") + 7, questionText.length() - 1);
-
-			answer = Integer.parseInt(questionChoice.substring(questionChoice.indexOf("?") + 2, questionChoice.indexOf("?") + 3));	
+			answer = Integer.parseInt(questionChoice.substring(questionChoice.indexOf("?") + 2, questionChoice.indexOf("?") + 3));		
 
 			for(int i = 0; i < indOptions.length; i++)
 			{	
@@ -5160,7 +5448,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 					indOptions[i] = options.substring(options.indexOf(i + 1 + "."), options.indexOf(i + 2 + "."));
 			}
 
-			/*		question1Text = file.substring(file.indexOf("Question 4"), (file.indexOf("-----", file.indexOf("Question 4"))));
+		/*	question1Text = file.substring(file.indexOf("Question 4"), (file.indexOf("-----", file.indexOf("Question 4"))));
 			randNum = (int)(Math.random() * 5) + 1;
 			questionChoice = question1Text.substring(question1Text.indexOf("Choice " + randNum), question1Text.indexOf("-", question1Text.indexOf("Choice " + randNum)));
 			answer = Integer.parseInt(questionChoice.substring(questionChoice.length() - 2, questionChoice.length() - 1));
@@ -5214,6 +5502,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				if(yCord == 700)
 				{
 					lowerTimer.stop();
+					questionsAnswered[3] = true;
 					drawBox = false;
 				}
 
@@ -5741,7 +6030,6 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				cp.add(Box.createVerticalStrut(120));   // spacing below
 				cp.add(Box.createHorizontalStrut(20));
 			}
-
 		}
 	}
 }
