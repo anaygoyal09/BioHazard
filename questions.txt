@@ -2,24 +2,49 @@
 
 Choice 1: What is the function of the kidneys?
 3
+
+1. To produce oxygen for the lower body
+2. To help with brain development
+3. To filter blood and manage blood pressure
+4. To aid with the birth of a child
 -
 Choice 2: What is the function of the heart?
 1
+
+1. To pump blood to the rest of the body
+2. To hold the rest of your body parts in place
+3. To help with the function of thinking
+4. To filter your blood and manage blood PH
 -
 Choice 3: How is an ischemic stroke caused?
 4
+
+1. By your brain interpreting signals incorrectly
+2. By your brain muscles malfunctioning
+3. Your heart stops the flow of blood to the brain
+4. A blood clot forms in your cerebral artery
 -
 Choice 4: What is the function of the lungs?
 2
+
+1. To deoxygenate blood
+2. To move oxygen into blood in capillaries
+3. They control the secretion of insulin
+4. They pump blood to the rest of the body
 -
 Choice 5: What does the superior vena cava do?
 3
+
+1. Carries oxygenated blood to the left atrium
+2. Carries deoxygenated blood to the rest of the body
+3. Carries deoxygenated blod to the right atrium
+4. Carries oxygenated blood to the right ventricle
 -
 Image Names:
 
-Questions: question1Questions.png
+Questions: questionPaper.png
 -
-Options: question1Options.png
+Options: optionsPaper.png
 -
 Boxes: question1Boxes.png
 -----
@@ -191,4 +216,55 @@ Questions: questionPaper.png
 Options: optionsPaper.png
 -
 Boxes: question1Boxes.png
+-----
+Killer Descriptions:
+
+Killer 1: Carlos Mendez
+Age: 42
+Profession: Scrap yard manager
+Known Possessions: Basic Android flip phone
+&Money Status: Lives modestly, no known debts.
+Background: Has access to car parts, including mufflers. Owns a black truck, but it’s a newer model. Once served time for illegal arms trading. Recently seen drunk and rowdy at a bar fight.
+*
+Killer 2: James Price
+Age: 35
+Profession: Real estate agent
+Known Possessions: iPhone 14
+&Gun Knowledge: None confirmed.
+Background: Keeps up a clean image, but is facing major debt after bad property deals. Investigated for shady business with gang-connected clients. Was caught on CCTV buying beer the day of the murder.
+*
+Killer 3: Mia Gutierrez
+Age: 23
+Profession: Street artist
+Known Possessions: Uses a flip phone, not foldable
+&Gun Knowledge: No known background
+Background: Works odd hours, often crashes in her friend’s Ford Truck. Was arrested last year for vandalism near a gang house. Keeps to herself. Doesn’t drink due to past family issues.
+*
+Killer 4: Devon Marshall
+Age: 29
+Profession: Former Marine, now a gym trainer
+Known Possessions: Foldable Samsung, cracked
+&Money Status: Claims he’s fine, but was seen arguing over loan payments.
+Background: Known for his strength, firearms skills, and temper. Fired recently for smashing a client’s phone — rumored to be his own Samsung Flip. Lives out of a black pickup that may match the murder vehicle.
+*
+Killer 5: Jaylen Ward
+Age: 38
+Profession: Nightclub bouncer
+Known Possessions: Cracked Samsung Z Fold
+&Money Status: Owes cash to local loan sharks.
+Background: Known to drink on the job. Was let go after losing his temper with patrons. Has been seen carrying a handgun off-duty. Spotted leaving a party in a black truck that was later reported stolen.
+*
+Killer 6: Maverick Trist
+Age: 27
+Profession: Bartender / underground poker dealer
+Known Possessions: Cracked black Samsung Z Flip, missing truck muffler
+&Behavior: Avoided police questioning for days. Recently paid all debts
+Background: Took ownership of a black '67 Ford Truck after his ex disappeared. Known to drink while working. Deep in debt from gambling, owes several gangs. Rumored to have once helped with an illegal gun ring.
+*
+Killer 7: Eric Moss
+Age: 31
+Profession: Musician
+Known Possessions: Foldable Samsung, cracked screen
+&Gun Knowledge: None, openly afraid of guns.
+Background: Known alcoholic. Gig money barely pays rent. Caught stealing from venues before. Borrowed a friend’s truck the night of the murder. No criminal record involving weapons.
 -----
