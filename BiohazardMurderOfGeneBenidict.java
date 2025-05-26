@@ -572,8 +572,8 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 				playerName = nameField.getText();
 				cards.show(panelCards, "report");
 			}
-			if(x >= 0 && x <= 10 && y >= 0 && y <= 10)
-				cards.show(panelCards, "correct"); //top left for debug
+			if(x>=0&&x<=10&&y>=0&&y<=10)
+				cards.show(panelCards, "wrong");
 		}
 		public void mouseExited(MouseEvent e)
 		{
@@ -7269,10 +7269,13 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			panelCards = panelCardsIn;
 			cards = cardsIn;
+			
 			addMouseListener(this);
 			addMouseMotionListener(this);
 			setBackground(Color.BLACK);
+			
 			retreiveImage();
+			
 			ImageIcon storeGif = new ImageIcon("loseGame.gif");  
 			stopClipTimerHandler scth = new stopClipTimerHandler();
 			clueClip = storeGif.getImage();
@@ -7323,6 +7326,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 		{
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g.create(); // Create a copy for safe alpha manipulation
+			naviWidth = navigation.getWidth(this) / 2;
 			naviHeight = navigation.getHeight(this);
 			if(repeats == 0)
 			{
@@ -7377,7 +7381,7 @@ class BiohazardMurderOfGeneBenidictHolder extends JPanel
 			
 			else if(x >= 400 && x <= 400 + naviWidth && y >= 400 && y <= 400 + naviHeight)
 				System.exit(1);
-			}
+		}
 		public void mouseMoved(MouseEvent e)
 		{
 			int x = e.getX();
