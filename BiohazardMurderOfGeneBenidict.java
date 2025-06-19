@@ -80,6 +80,7 @@ public class BiohazardMurderOfGeneBenidict	//main class
 	{
 		BiohazardMurderOfGeneBenidict bmogb = new BiohazardMurderOfGeneBenidict();
 		bmogb.createFrame();
+		
 	}
 	public void createFrame()	//creates the frame
 	{
